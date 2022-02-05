@@ -4,25 +4,19 @@ import 'package:flutter_svg/svg.dart';
 
 class CarouselPage extends StatelessWidget {
   final String image;
-  final firstSizeHeight;
-  final firstSizeWidth;
-  final secondSizeHeight;
-  final secondSizeWidth;
   final String firstText;
   final String secondText;
   final String thirdText;
-  final String fourthText;
-  final Widget nextScreen;
 
-  const CarouselPage({Key? key, required this.image,required this.firstSizeHeight, required this.firstSizeWidth, required this.secondSizeHeight, required this.secondSizeWidth,
-    required this.firstText, required this.secondText, required this.thirdText, required this.fourthText, required this.nextScreen
+
+  const CarouselPage({Key? key, required this.image,
+    required this.firstText, required this.secondText, required this.thirdText
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: Column(
+    return Container(
+      child: Column(
         children:[
             Container(
               margin: const  EdgeInsets.only( top:99),
@@ -64,29 +58,7 @@ class CarouselPage extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.bold
               ))),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children:[
-              Container(
-                margin: const EdgeInsets.only(top:33,left:33),
-                  child: Text(fourthText,style:const TextStyle(
-                      color: Color(0xffFFFFFF),
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold
-                  ))),
-              InkWell(
-                onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => nextScreen));
-                },
-                child: Container(
-                  margin:const  EdgeInsets.only(top:12,right:33),
-                  child: SvgPicture.asset(
-                    'assets/images/Group 12716.svg'
-                  ),
-                )
-              )
-            ]
-          )
+
         ]
       )
     );
