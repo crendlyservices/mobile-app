@@ -1,50 +1,28 @@
-import 'package:crendly/screens/onboarding_screen1.dart';
-import 'package:crendly/widgets/carousel.dart';
+import 'package:crendly/views/Onboarding/carousel.dart';
+import 'package:crendly/views/Onboarding/carousel_start.dart';
+import 'package:crendly/views/Onboarding/carousel_start2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MaterialApp(
+      home: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: OnboardingScreen1(),
-    );
-  }
-}
+    final height = MediaQuery.of(context).size.height;
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  final logo = 'assets/images/Layer 1.svg';
-  final image = 'assets/images/Layer 2.svg';
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-         children: [
-           SvgPicture.asset(
-             logo
-           ),
-           SvgPicture.asset(
-             image
-           )
-         ]
-       )
-
+    return MaterialApp(
+      home: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 8.0),
+        child: Container(child: CarouselTwo()),
+      ),
+      color: Colors.black,
     );
   }
 }
