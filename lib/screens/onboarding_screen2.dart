@@ -1,8 +1,5 @@
 import 'package:crendly/widgets/carousel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
-import 'onboarding_screen3.dart';
 
 class OnboardingScreen2 extends StatelessWidget {
   const OnboardingScreen2({Key? key}) : super(key: key);

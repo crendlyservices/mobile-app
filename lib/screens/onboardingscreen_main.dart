@@ -40,7 +40,7 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
             Expanded(
               child: PageView(
                 controller: _controller,
-                children: [
+                children: const [
                   OnboardingScreen1(),
                   OnboardingScreen2(),
                   OnboardingScreen3(),
@@ -53,10 +53,10 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
                 GestureDetector(
                   onTap: previous,
                   child: Container(
-                    margin: const EdgeInsets.only(left: 33, bottom: 90),
-                    child: Text(
+                    margin: const EdgeInsets.only(left: 33, bottom: 40),
+                    child: const Text(
                       'later',
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Color(0xffFFFFFF),
                           fontSize: 14,
                           fontWeight: FontWeight.bold),
@@ -66,7 +66,7 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
                 GestureDetector(
                   onTap: next,
                   child: Container(
-                    margin: const EdgeInsets.only(right: 33, bottom: 80),
+                    margin: const EdgeInsets.only(right: 33, bottom: 40),
                     child: SvgPicture.asset('assets/images/Group 12716.svg'),
                   ),
                 )
