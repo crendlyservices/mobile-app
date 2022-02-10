@@ -13,10 +13,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: MainOnboardingScreen(),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        home: MainOnboardingScreen());
   }
 }
 
@@ -33,17 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-         children: [
-           SvgPicture.asset(
-             logo
-           ),
-           SvgPicture.asset(
-             image
-           )
-         ]
-       )
-
-    );
+        body: Column(
+            children: [SvgPicture.asset(logo), SvgPicture.asset(image)]));
   }
 }

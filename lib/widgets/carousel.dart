@@ -1,3 +1,4 @@
+import 'package:crendly/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -33,10 +34,7 @@ class CarouselPage extends StatelessWidget {
         child: RichText(
           text: TextSpan(
               text: firstText,
-              style: const TextStyle(
-                  fontSize: 27,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: -0.078),
+              style: mainTextStyle,
               children: [TextSpan(text: secondText)]),
         ),
       ),
@@ -44,12 +42,7 @@ class CarouselPage extends StatelessWidget {
           width: 257,
           height: 53,
           margin: const EdgeInsets.only(top: 8, left: 30, right: 103),
-          child: Text(thirdText,
-              style: const TextStyle(
-                  color: Color(0xffFFFFFF),
-                  letterSpacing: -0.078,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold))),
+          child: Text(thirdText, style: subTextStyle)),
     ]);
   }
 }
