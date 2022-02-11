@@ -1,4 +1,4 @@
-import 'package:crendly/screens/onboardingscreen_main.dart';
+import 'package:crendly/screens/auth_screen/crendly_business.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        home: MainOnboardingScreen());
+        home: CrendlyBusiness());
   }
 }
 

@@ -22,3 +22,8 @@ final elevatedButtonStyle = ButtonStyle(
   )),
   minimumSize: MaterialStateProperty.all<Size>(const Size.fromHeight(50)),
 );
+
+final inputBorder = OutlineInputBorder(
+  borderSide: const BorderSide(color: Color(0xffFFFFFF)),
+  borderRadius: BorderRadius.circular(10),
+);

@@ -15,7 +15,7 @@ class MainOnboardingScreen extends StatefulWidget {
 
 class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
   final _controller = PageController();
-
+  final text = 'back';
   void next() {
     if (_controller.page == 2) {
     } else {
@@ -25,6 +25,11 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
   }
 
   void previous() {
+    if (_controller.page == 0) {
+      setState(() {
+        text == 'later';
+      });
+    }
     _controller.previousPage(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeIn,
@@ -54,9 +59,9 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
                   onTap: previous,
                   child: Container(
                     margin: const EdgeInsets.only(left: 33, bottom: 40),
-                    child: const Text(
-                      'later',
-                      style: TextStyle(
+                    child: Text(
+                      text,
+                      style: const TextStyle(
                           color: Color(0xffFFFFFF),
                           fontSize: 14,
                           fontWeight: FontWeight.bold),
