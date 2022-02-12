@@ -21,7 +21,7 @@ class _CrendlyBusinessState extends State<CrendlyBusiness> {
         child: Column(
           children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              IconButton(
+              const IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: Color(0xffB4DDC5),
@@ -32,7 +32,7 @@ class _CrendlyBusinessState extends State<CrendlyBusiness> {
             ]),
             Container(
                 margin: const EdgeInsets.only(right: 100, top: 32),
-                child: Text(
+                child: const Text(
                   'Crendly for business',
                   style: TextStyle(fontSize: 24, color: Color(0xffFFFFFF)),
                 )),

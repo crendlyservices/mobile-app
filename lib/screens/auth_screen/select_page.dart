@@ -1,3 +1,5 @@
+import 'package:crendly/screens/auth_screen/crendly_business.dart';
+import 'package:crendly/screens/bvn.dart';
 import 'package:crendly/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -65,13 +67,19 @@ class SelectPage extends StatelessWidget {
                     width: 164,
                     child: Column(
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(top: 22, right: 88),
-                          child: CircleAvatar(
-                            backgroundColor: backgroundColor,
-                            radius: 25,
-                            child: SvgPicture.asset(
-                              'assets/images/orange.svg',
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const BvnScreen()));
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 22, right: 88),
+                            child: CircleAvatar(
+                              backgroundColor: backgroundColor,
+                              radius: 25,
+                              child: SvgPicture.asset(
+                                'assets/images/orange.svg',
+                              ),
                             ),
                           ),
                         ),
@@ -111,13 +119,19 @@ class SelectPage extends StatelessWidget {
                     width: 164,
                     child: Column(
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(top: 22, right: 88),
-                          child: CircleAvatar(
-                            radius: 25,
-                            backgroundColor: backgroundColor,
-                            child: SvgPicture.asset(
-                              'assets/images/melon-head 1.svg',
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => CrendlyBusiness()));
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 22, right: 88),
+                            child: CircleAvatar(
+                              radius: 25,
+                              backgroundColor: backgroundColor,
+                              child: SvgPicture.asset(
+                                'assets/images/melon-head 1.svg',
+                              ),
                             ),
                           ),
                         ),

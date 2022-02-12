@@ -5,6 +5,8 @@ const Color backgroundColor = Color(0xff00071F);
 const mainTextStyle =
     TextStyle(fontSize: 27, fontWeight: FontWeight.bold, letterSpacing: -0.078);
 
+const subMainTextStyle = TextStyle(color: Color(0xffFED0B7), fontSize: 24);
+
 const subTextStyle = TextStyle(
     color: Color(0xffFFFFFF),
     letterSpacing: -0.078,

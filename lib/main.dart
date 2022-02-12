@@ -1,6 +1,8 @@
-import 'package:crendly/screens/auth_screen/crendly_business.dart';
+import 'dart:async';
+
+import 'package:crendly/screens/onboarding_screen/onboardingscreen_main.dart';
+import 'package:crendly/style/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        home: CrendlyBusiness());
+        home: SplashScreen());
   }
 }
 
@@ -27,12 +29,32 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final logo = 'assets/images/Layer 1.svg';
-  final image = 'assets/images/Layer 2.svg';
+  final logo = 'assets/images/logo.png';
+  final image = 'assets/images/Layer 2.png';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Timer(
+        const Duration(seconds: 3),
+        () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const MainOnboardingScreen())));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-            children: [SvgPicture.asset(logo), SvgPicture.asset(image)]));
+        backgroundColor: backgroundColor,
+        body: Column(children: [
+          const SizedBox(
+            height: 140,
+          ),
+          Image.asset(logo),
+          const SizedBox(height: 30),
+          Image.asset(image)
+        ]));
   }
 }

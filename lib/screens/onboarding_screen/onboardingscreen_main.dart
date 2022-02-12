@@ -1,3 +1,4 @@
+import 'package:crendly/screens/onboarding_screen/ready_screen.dart';
 import 'package:crendly/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,9 +16,11 @@ class MainOnboardingScreen extends StatefulWidget {
 
 class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
   final _controller = PageController();
-  final text = 'back';
+  String text = 'later';
   void next() {
     if (_controller.page == 2) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => ReadyScreen()));
     } else {
       _controller.nextPage(
           duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
@@ -25,9 +28,9 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
   }
 
   void previous() {
-    if (_controller.page == 0) {
+    if (_controller.page != 0) {
       setState(() {
-        text == 'later';
+        text = 'back';
       });
     }
     _controller.previousPage(

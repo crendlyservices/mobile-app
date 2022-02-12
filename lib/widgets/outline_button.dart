@@ -15,8 +15,8 @@ class CustomOutlineButton extends StatefulWidget {
 class _CustomOutlineButtonState extends State<CustomOutlineButton> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ElevatedButton(
+    return Container(
+      child: ElevatedButton(
         onPressed: widget.onPressed,
         child: ShaderMask(
             blendMode: BlendMode.srcIn,

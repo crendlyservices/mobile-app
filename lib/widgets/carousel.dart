@@ -35,7 +35,7 @@ class CarouselPage extends StatelessWidget {
           text: TextSpan(
               text: firstText,
               style: mainTextStyle,
-              children: [TextSpan(text: secondText)]),
+              children: [TextSpan(text: secondText, style: subMainTextStyle)]),
         ),
       ),
       Container(
