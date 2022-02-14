@@ -7,6 +7,6 @@ class OnboardingScreen1 extends StatelessWidget {
   final image = 'assets/images/Layer_1-2.svg';
   @override
   Widget build(BuildContext context) {
-    return const CarouselPage( image: 'assets/images/Layer_1-2.svg', firstSizeHeight: , firstSizeWidth: ,firstText: 'A place for ', secondText: 'social lending', thirdText: 'A Platform where real people can lend money to real people', fourthText:'later', nextScreen: OnboardingScreen2());
+    return const CarouselPage( image: 'assets/images/Layer_1-2.svg', firstSizeHeight: 2, firstSizeWidth:2 ,firstText: 'A place for ', secondText: 'social lending', thirdText: 'A Platform where real people can lend money to real people', fourthText:'later', nextScreen: OnboardingScreen2(), secondSizeHeight: null, secondSizeWidth: null,);
   }
 }
