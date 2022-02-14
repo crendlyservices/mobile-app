@@ -1,4 +1,4 @@
-import 'package:crendly/screens/date_of_birth.dart';
+import 'package:crendly/screens/individual/date_of_birth.dart';
 import 'package:crendly/style/style.dart';
 import 'package:crendly/widgets/custom_elevated_button.dart';
 import 'package:crendly/widgets/textfield_input.dart';
