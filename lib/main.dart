@@ -1,28 +1,60 @@
-import 'package:crendly/views/Onboarding/carousel.dart';
-import 'package:crendly/views/Onboarding/carousel_start.dart';
-import 'package:crendly/views/Onboarding/carousel_start2.dart';
+import 'dart:async';
+
+import 'package:crendly/screens/onboarding_screen/onboardingscreen_main.dart';
+import 'package:crendly/style/style.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
-      home: MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    return const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        home: SplashScreen());
+  }
+}
 
-    return MaterialApp(
-      home: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 8.0),
-        child: Container(child: CarouselTwo()),
-      ),
-      color: Colors.black,
-    );
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  final logo = 'assets/images/logo.png';
+  final image = 'assets/images/Layer 2.png';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Timer(
+        const Duration(seconds: 3),
+        () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const MainOnboardingScreen())));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: backgroundColor,
+        body: Column(children: [
+          const SizedBox(
+            height: 140,
+          ),
+          Image.asset(logo),
+          const SizedBox(height: 30),
+          Image.asset(image)
+        ]));
   }
 }
