@@ -43,74 +43,82 @@ class _CarouselTwoState extends State<CarouselTwo> {
       body: CarouselSlider(
         options: CarouselOptions(height: 700, viewportFraction: 10),
         items: myList.map((i) {
-          return Builder(
-            builder: (BuildContext context) {
-              return SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: GestureDetector(
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        i[0],
-                        fit: BoxFit.fill,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            i[1],
-                            style: TextStyle(fontSize: 27, color: Colors.white),
-                          ),
-                          Text(
-                            i[2],
-                            style: const TextStyle(
-                                fontSize: 27, color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      Text(i[3],
-                          style: const TextStyle(
-                              fontSize: 16, color: Colors.white),
-                          textAlign: TextAlign.center),
-                      if (i[0] == 'assets/images/la3.png')
-                        Container(
-                          padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                          child: Expanded(
-                              child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              TextButton(
-                                onPressed: () {},
-                                child: const Text('Sign up'),
-                                style: TextButton.styleFrom(
-                                  backgroundColor: Colors.teal[200],
-                                  primary: Colors.white,
-                                ),
-                              ),
-                              OutlinedButton(
-                                child: const Text('Sign In'),
-                                style: TextButton.styleFrom(
-                                  primary: Colors.white,
-                                  backgroundColor: Colors.transparent,
-                                  side: const BorderSide(
-                                      color: Colors.teal, width: 1),
-                                  onSurface: Colors.grey,
-                                ),
-                                onPressed: () {
-                                  print('Pressed');
-                                },
-                              )
-                            ],
-                          )),
-                        )
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
+          return buildListMap(i);
         }).toList(),
       ),
     );
+  }
+
+  Builder buildListMap(i) {
+    return Builder(
+          builder: (BuildContext context) {
+            return SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: GestureDetector(
+                child: columnImages(i),
+              ),
+            );
+          },
+        );
+  }
+
+  Column columnImages(i) {
+    return Column(
+                children: [
+                  Image.asset(
+                    i[0],
+                    fit: BoxFit.fill,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        i[1],
+                        style: TextStyle(fontSize: 27, color: Colors.white),
+                      ),
+                      Text(
+                        i[2],
+                        style: const TextStyle(
+                            fontSize: 27, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                  Text(i[3],
+                      style: const TextStyle(
+                          fontSize: 16, color: Colors.white),
+                      textAlign: TextAlign.center),
+                  if (i[0] == 'assets/images/la3.png')
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                      child: Expanded(
+                          child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text('Sign up'),
+                            style: TextButton.styleFrom(
+                              backgroundColor: Colors.teal[200],
+                              primary: Colors.white,
+                            ),
+                          ),
+                          OutlinedButton(
+                            child: const Text('Sign In'),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Colors.transparent,
+                              side: const BorderSide(
+                                  color: Colors.teal, width: 1),
+                              onSurface: Colors.grey,
+                            ),
+                            onPressed: () {
+                              print('Pressed');
+                            },
+                          )
+                        ],
+                      )),
+                    )
+                ],
+              );
   }
 }
