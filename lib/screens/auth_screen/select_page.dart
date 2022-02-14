@@ -1,5 +1,5 @@
-import 'package:crendly/screens/auth_screen/crendly_business.dart';
-import 'package:crendly/screens/bvn.dart';
+import 'package:crendly/screens/business/crendly_business.dart';
+import 'package:crendly/screens/individual/bvn.dart';
 import 'package:crendly/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

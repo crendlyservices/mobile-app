@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const Color backgroundColor = Color(0xff00071F);
+const Color iconColor = Color.fromRGBO(254, 208, 183, 1);
 
 const mainTextStyle =
     TextStyle(fontSize: 27, fontWeight: FontWeight.bold, letterSpacing: -0.078);

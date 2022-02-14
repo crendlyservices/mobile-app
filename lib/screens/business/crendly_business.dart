@@ -1,6 +1,7 @@
 import 'package:crendly/style/style.dart';
 import 'package:crendly/widgets/custom_elevated_button.dart';
 import 'package:crendly/widgets/textfield_input.dart';
+import 'package:crendly/widgets/top_navigation.dart';
 import 'package:flutter/material.dart';
 
 class CrendlyBusiness extends StatefulWidget {
@@ -17,19 +18,10 @@ class _CrendlyBusinessState extends State<CrendlyBusiness> {
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Padding(
-        padding: EdgeInsets.only(top: 88.5, left: 24, right: 24),
+        padding: const EdgeInsets.only(top: 88.5, left: 24, right: 24),
         child: Column(
           children: [
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              const IconButton(
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: Color(0xffB4DDC5),
-                ),
-                onPressed: null,
-              ),
-              Image.asset('assets/images/Vector.png')
-            ]),
+            const TopNavigation(),
             Container(
                 margin: const EdgeInsets.only(right: 100, top: 32),
                 child: const Text(

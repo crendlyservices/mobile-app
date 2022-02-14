@@ -16,11 +16,24 @@ class MainOnboardingScreen extends StatefulWidget {
 
 class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
   final _controller = PageController();
-  String text = 'later';
+  String text = 'Back';
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controller.addListener(() {
+      if (_controller.page == 0) {
+        setState(() {
+          text = 'later';
+        });
+      }
+    });
+  }
+
   void next() {
     if (_controller.page == 2) {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => ReadyScreen()));
+          .push(MaterialPageRoute(builder: (context) => const ReadyScreen()));
     } else {
       _controller.nextPage(
           duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
@@ -28,11 +41,7 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
   }
 
   void previous() {
-    if (_controller.page != 0) {
-      setState(() {
-        text = 'back';
-      });
-    }
+    if (_controller.page != 0) {}
     _controller.previousPage(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeIn,
