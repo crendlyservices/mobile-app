@@ -15,16 +15,16 @@ class MainOnboardingScreen extends StatefulWidget {
 }
 
 class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
-  final _controller = PageController();
-  String text = 'Back';
+  final _controller = PageController(initialPage: 0);
+  String text = 'Later';
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
     _controller.addListener(() {
-      if (_controller.page == 0) {
+      if (_controller.page != 0) {
         setState(() {
-          text = 'later';
+          text = 'Back';
         });
       }
     });

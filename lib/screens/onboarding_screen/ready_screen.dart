@@ -17,11 +17,21 @@ class ReadyScreen extends StatelessWidget {
         child: Column(
           children: [
             const CarouselPage(
-                image: 'assets/images/ready.svg',
-                firstText: 'Ready?',
-                secondText: 'let\'s go!',
-                thirdText:
-                    'Just a few details from you to give you the experience ever'),
+              image: 'assets/images/ready.svg',
+              firstText: 'Ready? ',
+              secondText: 'let\'s go!',
+              thirdText:
+                  'Just a few details from you to give you the experience ever',
+              fontSize1: 27,
+              fontFamily1: 'StiepaSerif',
+              textColor1: Color(0xffFFFFFF),
+              fontFamily2: 'StiepaSerif',
+              fontSize2: 27,
+              textColor2: Color(0xffFED0B7),
+              fontFamily3: 'Sansation',
+              fontSize3: 15,
+              textColor3: Color(0xffFFFFFF),
+            ),
             const SizedBox(
               height: 4,
             ),

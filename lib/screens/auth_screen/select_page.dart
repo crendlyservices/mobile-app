@@ -1,6 +1,7 @@
 import 'package:crendly/screens/business/crendly_business.dart';
 import 'package:crendly/screens/individual/bvn.dart';
 import 'package:crendly/style/style.dart';
+import 'package:crendly/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -22,12 +23,12 @@ class SelectPage extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(top: 45),
-              child: const Text(
-                'Which one of these options best describes you?',
-                style: TextStyle(
-                  fontSize: 40,
-                  color: Color(0xffFED0B7),
-                ),
+              child: const CustomText(
+                text: 'Which one of these options best describes you?',
+                fontSize: 40,
+                fontFamily: 'Stiepa',
+                textColor: Color.fromRGBO(254, 208, 183, 1),
+                fontWeight: FontWeight.w400,
               ),
             ),
             const SizedBox(
@@ -35,13 +36,11 @@ class SelectPage extends StatelessWidget {
             ),
             const Padding(
               padding: EdgeInsets.only(right: 150.0),
-              child: Text(
-                'Either way welcome to crendly',
-                style: TextStyle(
-                  color: Color(0xffFFFFFF),
-                  letterSpacing: -0.078,
-                  fontSize: 15,
-                ),
+              child: CustomText(
+                text: 'Either way welcome to crendly',
+                textColor: Color(0xffFFFFFF),
+                fontFamily: 'Sansation',
+                fontSize: 15,
               ),
             ),
             const SizedBox(
@@ -85,10 +84,11 @@ class SelectPage extends StatelessWidget {
                         ),
                         Container(
                           margin: const EdgeInsets.only(top: 43, right: 31),
-                          child: const Text(
-                            'Individual',
-                            style: TextStyle(
-                                color: Color(0xff131176), fontSize: 26),
+                          child: const CustomText(
+                            text: 'Individual',
+                            fontSize: 26,
+                            textColor: Color.fromRGBO(19, 17, 118, 1),
+                            fontFamily: 'Stiepa',
                           ),
                         ),
                         const Padding(
@@ -122,7 +122,7 @@ class SelectPage extends StatelessWidget {
                         InkWell(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => CrendlyBusiness()));
+                                builder: (context) => const CrendlyBusiness()));
                           },
                           child: Container(
                             margin: const EdgeInsets.only(top: 22, right: 88),
@@ -136,13 +136,13 @@ class SelectPage extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(top: 43, right: 31),
-                          child: const Text(
-                            'Business',
-                            style: TextStyle(
-                                color: Color(0xff131176), fontSize: 26),
-                          ),
-                        ),
+                            margin: const EdgeInsets.only(top: 43, right: 31),
+                            child: const CustomText(
+                              text: 'Business',
+                              fontSize: 26,
+                              textColor: Color.fromRGBO(19, 17, 118, 1),
+                              fontFamily: 'Stiepa',
+                            )),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(
