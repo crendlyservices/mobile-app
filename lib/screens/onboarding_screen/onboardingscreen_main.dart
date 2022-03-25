@@ -19,7 +19,6 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
   String text = 'Later';
   @override
   void initState() {
-
     super.initState();
     _controller.addListener(() {
       if (_controller.page != 0) {
@@ -56,6 +55,7 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
           children: [
             Expanded(
               child: PageView(
+                physics: const NeverScrollableScrollPhysics(),
                 controller: _controller,
                 children: const [
                   OnboardingScreen1(),

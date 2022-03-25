@@ -22,20 +22,27 @@ class TextFieldInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 150.0, bottom: 8.0),
-          child: Text(
-            label,
-            style: const TextStyle(color: Color(0xffFFFFFF)),
-          ),
+        Text(
+          label,
+          style: const TextStyle(
+              fontSize: 16, fontFamily: 'KumbhSans', color: Colors.white),
+        ),
+        const SizedBox(
+          height: 6,
         ),
         TextField(
           controller: textEditingController,
           decoration: InputDecoration(
+              enabledBorder: inputBorder,
+              hintStyle: const TextStyle(
+                color: Color(0xff797979),
+                fontSize: 14,
+                fontFamily: 'KumbhSans',
+              ),
               suffixIcon: icon,
               hintText: hintText,
-              border: inputBorder,
               contentPadding: const EdgeInsets.all(8)),
           keyboardType: textInputType,
           obscureText: isPassword,

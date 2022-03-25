@@ -42,7 +42,7 @@ class CarouselPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
-        margin: const EdgeInsets.only(top: 90),
+        margin: const EdgeInsets.only(top: 50),
         child: SvgPicture.asset(
           image,
           width: 281.85,
@@ -50,7 +50,7 @@ class CarouselPage extends StatelessWidget {
         ),
       ),
       Container(
-        margin: const EdgeInsets.only(top: 80, left: 30, right: 162),
+        margin: const EdgeInsets.only(top: 50, left: 30, right: 100),
         width: 250,
         height: 60,
         child: RichText(

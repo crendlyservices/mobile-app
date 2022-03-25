@@ -15,35 +15,39 @@ class CustomOutlineButton extends StatefulWidget {
 class _CustomOutlineButtonState extends State<CustomOutlineButton> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ElevatedButton(
-        onPressed: widget.onPressed,
-        child: ShaderMask(
-            blendMode: BlendMode.srcIn,
-            shaderCallback: (rect) => const LinearGradient(
-                    begin: Alignment.bottomRight,
-                    end: Alignment.topLeft,
-                    colors: [
-                      Color(0xff63BEDB),
-                      Color(0xff56E77E),
-                      Color(0xff6DE7B4),
-                      Color(0xffE2FCC2),
-                    ]).createShader(rect),
-            child: Text(widget.text)),
-        style: ButtonStyle(
-            minimumSize:
-                MaterialStateProperty.all<Size>(const Size.fromHeight(50)),
-            shape: MaterialStateProperty.all<OutlinedBorder>(
-                const RoundedRectangleBorder(
-              side: BorderSide(
-                color: Color(0xff6DE7B4),
-              ),
-              borderRadius: BorderRadius.all(
-                Radius.circular(10.0),
-              ),
-            )),
-            backgroundColor: MaterialStateProperty.all<Color>(backgroundColor)),
-      ),
+    return ElevatedButton(
+      onPressed: widget.onPressed,
+      child: ShaderMask(
+          blendMode: BlendMode.srcIn,
+          shaderCallback: (rect) => const LinearGradient(
+                  begin: Alignment.bottomRight,
+                  end: Alignment.topLeft,
+                  colors: [
+                    Color(0xff63BEDB),
+                    Color(0xff56E77E),
+                    Color(0xff6DE7B4),
+                    Color(0xffE2FCC2),
+                  ]).createShader(rect),
+          child: Text(
+            widget.text,
+            style: const TextStyle(
+                fontSize: 16,
+                fontFamily: 'KumbhSans',
+                fontWeight: FontWeight.bold),
+          )),
+      style: ButtonStyle(
+          minimumSize:
+              MaterialStateProperty.all<Size>(const Size.fromHeight(50)),
+          shape: MaterialStateProperty.all<OutlinedBorder>(
+              const RoundedRectangleBorder(
+            side: BorderSide(
+              color: Color(0xff6DE7B4),
+            ),
+            borderRadius: BorderRadius.all(
+              Radius.circular(10.0),
+            ),
+          )),
+          backgroundColor: MaterialStateProperty.all<Color>(backgroundColor)),
     );
   }
 }

@@ -88,6 +88,17 @@ flutter:
          - asset: fonts/Stiepa Serif.otf
          - asset: fonts/Stiepa Serif Outline.otf
   #         weight: 700
+    - family: KumbhSans
+      fonts:
+        - asset: fonts/KumbhSans-Black.ttf
+        - asset: fonts/KumbhSans-Bold.ttf
+        - asset: fonts/KumbhSans-ExtraBold.ttf
+        - asset: fonts/KumbhSans-ExtraLight.ttf
+        - asset: fonts/KumbhSans-Light.ttf
+        - asset: fonts/KumbhSans-Medium.ttf
+        - asset: fonts/KumbhSans-Regular.ttf
+        - asset: fonts/KumbhSans-SemiBold.ttf
+        - asset: fonts/KumbhSans-Thin.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

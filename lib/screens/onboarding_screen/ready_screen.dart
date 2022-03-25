@@ -5,6 +5,9 @@ import 'package:crendly/widgets/custom_elevated_button.dart';
 import 'package:crendly/widgets/outline_button.dart';
 import 'package:flutter/material.dart';
 
+import '../auth_screen/sign_in.dart';
+import '../playground/playground_home.dart';
+
 class ReadyScreen extends StatelessWidget {
   const ReadyScreen({Key? key}) : super(key: key);
 
@@ -44,7 +47,25 @@ class ReadyScreen extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            CustomOutlineButton(text: 'Sign in', onPressed: () {})
+            CustomOutlineButton(
+                text: 'Sign in',
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const SignIn()));
+                }),
+            const SizedBox(
+              height: 49,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const PlaygroundHome()));
+              },
+              child: const Text(
+                'Do this later',
+                style: skipText,
+              ),
+            )
           ],
         ),
       ),
