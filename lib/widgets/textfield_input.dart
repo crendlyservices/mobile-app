@@ -6,7 +6,8 @@ class TextFieldInput extends StatelessWidget {
   final bool isPassword;
   final String label;
   final String hintText;
-  final Widget? icon;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final TextInputType textInputType;
 
   const TextFieldInput(
@@ -16,7 +17,8 @@ class TextFieldInput extends StatelessWidget {
       required this.label,
       required this.hintText,
       required this.textInputType,
-      this.icon})
+      this.suffixIcon,
+      this.prefixIcon})
       : super(key: key);
 
   @override
@@ -41,7 +43,8 @@ class TextFieldInput extends StatelessWidget {
                 fontSize: 14,
                 fontFamily: 'KumbhSans',
               ),
-              suffixIcon: icon,
+              prefixIcon: prefixIcon,
+              suffixIcon: suffixIcon,
               hintText: hintText,
               contentPadding: const EdgeInsets.all(8)),
           keyboardType: textInputType,

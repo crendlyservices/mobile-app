@@ -38,32 +38,17 @@ class CustomTextFieldInput extends StatelessWidget {
         TextField(
           controller: textEditingController,
           decoration: InputDecoration(
-              prefixIcon: IntrinsicHeight(
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                      child: prefixIcon,
-                    ),
-                    const SizedBox(
-                      height: 30,
-                      child: VerticalDivider(
-                        thickness: 1,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              border: inputBorder,
-              hintStyle: const TextStyle(
-                color: Color(0xff797979),
-                fontSize: 14,
-                fontFamily: 'KumbhSans',
-              ),
-              hintText: hintText,
-              //  enabledBorder: inputBorder,
-              contentPadding: const EdgeInsets.all(8)),
+            prefixIcon: prefixIcon,
+            border: inputBorder,
+            hintStyle: const TextStyle(
+              color: Color(0xff797979),
+              fontSize: 14,
+              fontFamily: 'KumbhSans',
+            ),
+            hintText: hintText,
+            //  enabledBorder: inputBorder,
+            //contentPadding: const EdgeInsets.all(8)
+          ),
           keyboardType: textInputType,
           obscureText: isPassword,
         ),

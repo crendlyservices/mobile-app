@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 const Color backgroundColor = Color(0xff00071F);
 const Color iconColor = Color.fromRGBO(254, 208, 183, 1);
 
-// background color for the header in the onboarding/signuo screens
+// background color for the header in the onboarding/signup screens
 const headerColor = Color(0xff4701E0);
 // back  button color for the header in the onboarding/signuo screens
 const headerBackColor = Color(0xffB4DDC5);
-
-const backgroundColorLinearProgress = Color(0xff);
 
 const colorLinearProgress = Color(0xff6DE7B4);
 // bold subtitle
@@ -100,6 +98,6 @@ final elevatedButtonStyle = ButtonStyle(
 );
 
 final inputBorder = OutlineInputBorder(
-  borderSide: BorderSide(color: Colors.white),
+  borderSide: const BorderSide(color: Colors.white),
   borderRadius: BorderRadius.circular(10),
 );

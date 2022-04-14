@@ -52,7 +52,7 @@ class CarouselPage extends StatelessWidget {
       Container(
         margin: const EdgeInsets.only(top: 50, left: 30, right: 100),
         width: 250,
-        height: 60,
+        height: 70,
         child: RichText(
           text: TextSpan(
               text: firstText,
