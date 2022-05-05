@@ -29,7 +29,10 @@ class _CrendlyBusinessState extends State<CrendlyBusiness> {
                       margin: const EdgeInsets.only(right: 90, top: 32),
                       child: const Text(
                         'Crendly for business',
-                        style: headerTextStyle,
+                        style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white,
+                            fontFamily: 'KumbhSans'),
                       )),
                   const SizedBox(
                     height: 25,

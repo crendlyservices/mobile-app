@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
 
-abstract class HttpService {
-  Future<Response> verifyUserBvn(
-      String url, Map<String, dynamic> headers, Map body);
+abstract class IHttpService {
+  Future<Response> verifyUserBvn(String url, Map body);
 
-  void init(Map<String, dynamic> headers);
+  Future<Response> otpVerification(String url, Map body);
+
+  Future<Response> updateUserProfile(String url, Map body);
+
+  Future<Response> updateUserRegulatoryId(String url, Map body);
 }

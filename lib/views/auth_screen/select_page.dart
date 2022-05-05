@@ -1,8 +1,9 @@
 import 'package:crendly/style/style.dart';
 import 'package:crendly/views/business/crendly_business.dart';
-import 'package:crendly/views/individual/bvn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class SelectPage extends StatelessWidget {
   const SelectPage({Key? key}) : super(key: key);
@@ -25,8 +26,8 @@ class SelectPage extends StatelessWidget {
               child: const Text(
                 'Which one of these options best describes you?',
                 style: TextStyle(
-                  fontSize: 40,
-                  fontFamily: 'Stiepa',
+                  fontSize: 32,
+                  fontFamily: 'KumbhSans',
                   color: Color.fromRGBO(254, 208, 183, 1),
                   fontWeight: FontWeight.w400,
                 ),
@@ -39,7 +40,7 @@ class SelectPage extends StatelessWidget {
               padding: EdgeInsets.only(right: 150.0),
               child: Text(
                 'Either way welcome to crendly',
-                style: subTextStyle,
+                style: smallText,
               ),
             ),
             const SizedBox(
@@ -49,8 +50,7 @@ class SelectPage extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const BVNView()));
+                    Get.toNamed('/bvn');
                   },
                   child: Container(
                       decoration: BoxDecoration(
@@ -87,9 +87,9 @@ class SelectPage extends StatelessWidget {
                               child: Text(
                                 'Individual',
                                 style: TextStyle(
-                                  fontSize: 26,
+                                  fontSize: 24,
                                   color: Color.fromRGBO(19, 17, 118, 1),
-                                  fontFamily: 'Stiepa',
+                                  fontFamily: 'KumbhSans',
                                 ),
                               ),
                             ),
@@ -143,9 +143,9 @@ class SelectPage extends StatelessWidget {
                               child: const Text(
                                 'Business',
                                 style: TextStyle(
-                                  fontSize: 26,
+                                  fontSize: 24,
                                   color: Color.fromRGBO(19, 17, 118, 1),
-                                  fontFamily: 'Stiepa',
+                                  fontFamily: 'KumbhSans',
                                 ),
                               )),
                           const Padding(

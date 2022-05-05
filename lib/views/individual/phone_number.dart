@@ -1,22 +1,20 @@
+import 'package:crendly/controller/update_user_profile.dart';
 import 'package:crendly/style/style.dart';
-import 'package:crendly/views/individual/personal_information.dart';
 import 'package:crendly/widgets/onboarding_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
+import '../../controller/verify_bvn.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/textfield_input.dart';
 
-class PhoneNumberView extends StatefulWidget {
-  const PhoneNumberView({Key? key}) : super(key: key);
+class PhoneNumberView extends StatelessWidget {
+  PhoneNumberView({Key? key}) : super(key: key);
 
-  @override
-  _PhoneNumberViewState createState() => _PhoneNumberViewState();
-}
-
-class _PhoneNumberViewState extends State<PhoneNumberView> {
-  final TextEditingController _phoneNumberController = TextEditingController();
-
+  final _updateUserProfileController = Get.find<UpdateUserProfileController>();
+  final _verifyBvnController = Get.find<VerifyBvnController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,18 +34,23 @@ class _PhoneNumberViewState extends State<PhoneNumberView> {
                     height: 16,
                   ),
                   TextFieldInput(
-                      textEditingController: _phoneNumberController,
-                      label: 'Phone number',
-                      hintText: 'Phone number',
-                      textInputType: TextInputType.number,
-                      prefixIcon: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: SvgPicture.asset(
-                          'assets/images/flag-for-flag-nigeria-svgrepo-com 1.svg',
-                          height: 5,
-                          width: 5,
-                        ),
-                      )),
+                    textEditingController:
+                        _updateUserProfileController.phoneNumberController,
+                    label: 'Phone number',
+                    hintText: 'Phone number',
+                    textInputType: TextInputType.number,
+                    prefixIcon: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: SvgPicture.asset(
+                        'assets/images/flag-for-flag-nigeria-svgrepo-com 1.svg',
+                        height: 5,
+                        width: 5,
+                      ),
+                    ),
+                    onChanged: (value) {
+                      _updateUserProfileController.phoneNumber = value;
+                    },
+                  ),
                   Row(
                     children: const [
                       CircleAvatar(
@@ -71,9 +74,8 @@ class _PhoneNumberViewState extends State<PhoneNumberView> {
                   CustomELevatedButton(
                       text: 'Next',
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                const PersonalInformationView()));
+                        _verifyBvnController.verifyUserBvn();
+                        Get.toNamed('/otp');
                       })
                 ],
               ),

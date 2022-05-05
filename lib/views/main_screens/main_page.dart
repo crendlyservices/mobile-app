@@ -1,6 +1,6 @@
 import 'package:crendly/style/style.dart';
 import 'package:crendly/views/main_screens/Transactions/transactions.dart';
-import 'package:crendly/views/main_screens/home.dart';
+import 'package:crendly/views/main_screens/home/home.dart';
 import 'package:crendly/views/main_screens/loans/loans_and_portfolio.dart';
 import 'package:crendly/views/main_screens/profile/profile.dart';
 import 'package:flutter/material.dart';

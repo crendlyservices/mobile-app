@@ -1,6 +1,8 @@
 import 'package:crendly/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class OnboardingNavigation extends StatelessWidget {
   final String? text;
@@ -29,19 +31,21 @@ class OnboardingNavigation extends StatelessWidget {
             height: 24,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.back();
+                  },
                   icon: const Icon(
                     Icons.arrow_back_ios,
                     color: headerBackColor,
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(right: 60),
-                  width: 184,
+                  margin: const EdgeInsets.only(right: 50),
+                  width: 200,
                   child: Text(
                     '$text',
                     style: boldSubtitle,

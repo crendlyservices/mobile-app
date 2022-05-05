@@ -1,17 +1,12 @@
 import 'package:crendly/service/http_service.dart';
 import 'package:dio/dio.dart';
-import 'package:dio/src/response.dart';
 
-const BASE_URL = 'https://trustbreed-auth-service.azurewebsites.net';
+const AUTH_BASE_URL = 'https://trustbreed-auth-service.azurewebsites.net';
 
-class HttpServiceImpl implements HttpService {
+const IDENTITY_BASE_URL = 'https://trustbreed.azurewebsites.net';
+
+class HttpServiceImpl implements IHttpService {
   late Dio _dio;
-  @override
-  void init(Map<String, dynamic> headers) {
-    // TODO: implement init
-    _dio = Dio(BaseOptions(baseUrl: BASE_URL, headers: headers));
-    initializeInterceptors;
-  }
 
   initializeInterceptors() {
     _dio.interceptors.add(InterceptorsWrapper(onError: (error, _) {
@@ -25,19 +20,81 @@ class HttpServiceImpl implements HttpService {
   }
 
   @override
-  Future<Response> verifyUserBvn(
-      String url, Map<String, dynamic> headers, Map body) async {
-    init(headers);
+  Future<Response> verifyUserBvn(String url, Map body) async {
+    _dio = Dio(BaseOptions(
+        baseUrl: AUTH_BASE_URL,
+        method: 'POST',
+        headers: {"Content-Type": "application/json"}));
+
     Response response;
     try {
-      response = await _dio.post(url, data: body);
+      response = await _dio.post(
+        url,
+        data: body,
+      );
+
       print('Response: $response');
+      return response;
     } on DioError catch (e) {
       print(e.message);
       throw Exception(e.message);
     }
-    return response;
-    // TODO: implement verifyUserBvn
-    throw UnimplementedError();
+  }
+
+  @override
+  Future<Response> otpVerification(String url, Map body) async {
+    _dio = Dio(BaseOptions(
+        baseUrl: AUTH_BASE_URL,
+        method: 'POST',
+        headers: {"Content-Type": "application/json"}));
+
+    Response response;
+    try {
+      response = await _dio.post(
+        url,
+        data: body,
+      );
+      print('Response: $response');
+      return response;
+    } on DioError catch (e) {
+      print(e.message);
+      throw Exception(e.message);
+    }
+  }
+
+  @override
+  Future<Response> updateUserProfile(String url, Map body) async {
+    _dio = Dio(BaseOptions(
+        baseUrl: IDENTITY_BASE_URL,
+        method: 'POST',
+        headers: {"Content-Type": "application/json"}));
+
+    Response response;
+    try {
+      response = await _dio.post(url);
+      print('Response: $response');
+      return response;
+    } on DioError catch (e) {
+      print(e.message);
+      throw Exception(e.message);
+    }
+  }
+
+  @override
+  Future<Response> updateUserRegulatoryId(String url, Map body) async {
+    _dio = Dio(BaseOptions(
+        baseUrl: IDENTITY_BASE_URL,
+        method: 'POST',
+        headers: {"Content-Type": "application/json"}));
+
+    Response response;
+    try {
+      response = await _dio.post(url);
+      print('Response: $response');
+      return response;
+    } on DioError catch (e) {
+      print(e.message);
+      throw Exception(e.message);
+    }
   }
 }

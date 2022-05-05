@@ -1,9 +1,12 @@
+import 'package:crendly/controller/update_user_profile.dart';
 import 'package:crendly/style/style.dart';
 import 'package:crendly/views/individual/marital_status.dart';
 import 'package:crendly/widgets/custom_elevated_button.dart';
 import 'package:crendly/widgets/onboarding_navigation.dart';
 import 'package:crendly/widgets/textfield_input.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class EmailAddressView extends StatefulWidget {
   const EmailAddressView({Key? key}) : super(key: key);
@@ -13,7 +16,7 @@ class EmailAddressView extends StatefulWidget {
 }
 
 class _EmailAddressViewState extends State<EmailAddressView> {
-  final _dobController = TextEditingController();
+  final _updateUserProfileController = Get.find<UpdateUserProfileController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,14 +36,19 @@ class _EmailAddressViewState extends State<EmailAddressView> {
                     height: 16,
                   ),
                   TextFieldInput(
-                      textEditingController: _dobController,
-                      label: 'Email address',
-                      hintText: 'newmail@email.com',
-                      suffixIcon: const Icon(
-                        Icons.calendar_today_outlined,
-                        color: Color(0xffFFFFFF),
-                      ),
-                      textInputType: TextInputType.number),
+                    textEditingController:
+                        _updateUserProfileController.emailController,
+                    label: 'Email address',
+                    hintText: 'newmail@email.com',
+                    suffixIcon: const Icon(
+                      Icons.calendar_today_outlined,
+                      color: Color(0xffFFFFFF),
+                    ),
+                    textInputType: TextInputType.emailAddress,
+                    onChanged: (value) {
+                      _updateUserProfileController.email = value;
+                    },
+                  ),
                   Row(
                     children: const [
                       CircleAvatar(

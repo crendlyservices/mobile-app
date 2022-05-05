@@ -7,13 +7,16 @@ part of 'verify_bvn.dart';
 // **************************************************************************
 
 VerifyBvn _$VerifyBvnFromJson(Map<String, dynamic> json) => VerifyBvn(
-      statusResponse:
-          Status.fromJson(json['statusResponse'] as Map<String, dynamic>),
-      verifyUserData: VerifyUserData.fromJson(
-          json['verifyUserData'] as Map<String, dynamic>),
+      statusRes: json['status'] as bool,
+      code: json['code'] as String,
+      message: json['message'] as String,
+      verifyUserData:
+          VerifyUserData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$VerifyBvnToJson(VerifyBvn instance) => <String, dynamic>{
-      'statusResponse': instance.statusResponse.toJson(),
-      'verifyUserData': instance.verifyUserData.toJson(),
+      'status': instance.statusRes,
+      'code': instance.code,
+      'message': instance.message,
+      'data': instance.verifyUserData.toJson(),
     };

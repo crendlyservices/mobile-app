@@ -54,7 +54,7 @@ class ReadyView extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => const SignIn()));
                 }),
             const SizedBox(
-              height: 49,
+              height: 40,
             ),
             TextButton(
               onPressed: () {

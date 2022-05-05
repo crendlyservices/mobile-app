@@ -9,14 +9,16 @@ class TextFieldInput extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final TextInputType textInputType;
+  void Function(String)? onChanged;
 
-  const TextFieldInput(
+  TextFieldInput(
       {Key? key,
       required this.textEditingController,
       this.isPassword = false,
       required this.label,
       required this.hintText,
       required this.textInputType,
+      this.onChanged,
       this.suffixIcon,
       this.prefixIcon})
       : super(key: key);
@@ -35,6 +37,12 @@ class TextFieldInput extends StatelessWidget {
           height: 6,
         ),
         TextField(
+          style: const TextStyle(
+            color: Color(0xff797979),
+            fontSize: 14,
+            fontFamily: 'KumbhSans',
+          ),
+          onChanged: onChanged,
           controller: textEditingController,
           decoration: InputDecoration(
               enabledBorder: inputBorder,

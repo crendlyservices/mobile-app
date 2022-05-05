@@ -16,11 +16,9 @@ class TransactionsView extends StatelessWidget {
           children: [
             const Text(
               'Transactions',
-              style: headerTextStyle,
             ),
             const Text(
               'See all your transactions activities',
-              style: subSmallTextStyle,
             ),
             const SizedBox(
               height: 42,
@@ -49,7 +47,6 @@ class TransactionsView extends StatelessWidget {
                     ),
                     title: const Text(
                       'Loan Disbursed',
-                      style: subTextStyle,
                     ),
                     subtitle: const Text('20 Jan 2022, 3:33 pm',
                         style: TextStyle(
@@ -60,7 +57,6 @@ class TransactionsView extends StatelessWidget {
                         )),
                     trailing: Text(
                       'N50,000',
-                      style: subTextStyle,
                     ),
                   ),
                   ListTile(
@@ -81,7 +77,6 @@ class TransactionsView extends StatelessWidget {
                     ),
                     title: const Text(
                       'Funds Withdrawal',
-                      style: subTextStyle,
                     ),
                     subtitle: const Text('20 Jan 2022, 3:33 pm',
                         style: TextStyle(
@@ -92,7 +87,6 @@ class TransactionsView extends StatelessWidget {
                         )),
                     trailing: const Text(
                       'N50,000',
-                      style: subTextStyle,
                     ),
                   ),
                   ListTile(
@@ -112,7 +106,6 @@ class TransactionsView extends StatelessWidget {
                     ),
                     title: const Text(
                       'Funded Wallet',
-                      style: subTextStyle,
                     ),
                     subtitle: const Text('20 Jan 2022, 3:33 pm',
                         style: TextStyle(
@@ -123,7 +116,6 @@ class TransactionsView extends StatelessWidget {
                         )),
                     trailing: const Text(
                       'N50,000',
-                      style: subTextStyle,
                     ),
                   ),
                   ListTile(
@@ -143,7 +135,6 @@ class TransactionsView extends StatelessWidget {
                     ),
                     title: const Text(
                       'Loan Collected',
-                      style: subTextStyle,
                     ),
                     subtitle: const Text('20 Jan 2022, 3:33 pm',
                         style: TextStyle(
@@ -154,7 +145,6 @@ class TransactionsView extends StatelessWidget {
                         )),
                     trailing: Text(
                       'N50,000',
-                      style: subTextStyle,
                     ),
                   ),
                   // const SizedBox(

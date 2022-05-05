@@ -18,6 +18,9 @@ const boldSubtitle = TextStyle(
     color: Colors.white);
 
 const regularFont = TextStyle(fontFamily: 'KumbhSans', color: Colors.white);
+
+const regularBoldFont = TextStyle(
+    fontFamily: 'KumbhSans', fontWeight: FontWeight.bold, color: Colors.white);
 // for large numbers
 const bigNumbers = TextStyle(
     fontWeight: FontWeight.bold,
@@ -48,44 +51,6 @@ const skipText = TextStyle(
     fontFamily: 'KumbhSans',
     fontWeight: FontWeight.bold,
     decoration: TextDecoration.underline);
-// TODO: Remove stiepa and sansation fonts
-// white color stiepa
-const mainTextStyle = TextStyle(
-    fontSize: 27,
-    fontWeight: FontWeight.bold,
-    letterSpacing: -0.078,
-    fontFamily: 'Stiepa');
-
-//  white header sansation
-const headerTextStyle = TextStyle(
-    color: Color(0xffFFFFFF),
-    fontSize: 24,
-    fontWeight: FontWeight.bold,
-    letterSpacing: -0.078,
-    fontFamily: 'Sansation');
-
-// The colored text stiepa
-const subMainTextStyle =
-    TextStyle(color: Color(0xffFED0B7), fontSize: 24, fontFamily: 'Stiepa');
-
-// The colored text sansation
-const sansationTextStyle =
-    TextStyle(color: Color(0xffFED0B7), fontSize: 16, fontFamily: 'Sansation');
-
-// for the small text with bold font
-const subTextStyle = TextStyle(
-    color: Color(0xffFFFFFF),
-    letterSpacing: -0.078,
-    fontSize: 15,
-    fontWeight: FontWeight.bold,
-    fontFamily: 'Sansation');
-
-// for the small text without bold font
-const subSmallTextStyle = TextStyle(
-    color: Color.fromRGBO(213, 213, 213, 1),
-    letterSpacing: -0.078,
-    fontSize: 15,
-    fontFamily: 'Sansation');
 
 final elevatedButtonStyle = ButtonStyle(
   backgroundColor: MaterialStateProperty.all<Color>(const Color(0xff6DE7B4)),

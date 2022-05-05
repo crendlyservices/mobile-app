@@ -27,7 +27,6 @@ class _ProfileState extends State<Profile> {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               const Text(
                 'Profile',
-                style: headerTextStyle,
               ),
               Image.asset('assets/images/Vector.png')
             ]),
@@ -69,14 +68,12 @@ class _ProfileState extends State<Profile> {
                                     EdgeInsets.only(right: 12.0, bottom: 8.0),
                                 child: Text(
                                   'Danny Rand',
-                                  style: subTextStyle,
                                 ),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: 12.0),
                                 child: Text(
                                   'FCMB - 21999B7626',
-                                  style: subSmallTextStyle,
                                 ),
                               ),
                             ],
@@ -92,11 +89,9 @@ class _ProfileState extends State<Profile> {
                         children: const [
                           Text(
                             'Total Loan Requested',
-                            style: subSmallTextStyle,
                           ),
                           Text(
                             '7 (N2,300,000)',
-                            style: subTextStyle,
                           )
                         ],
                       ),
@@ -108,11 +103,9 @@ class _ProfileState extends State<Profile> {
                         children: const [
                           Text(
                             'Total Loan Granted',
-                            style: subSmallTextStyle,
                           ),
                           Text(
                             '8 (N3,100,000)',
-                            style: subTextStyle,
                           )
                         ],
                       ),
@@ -136,12 +129,10 @@ class _ProfileState extends State<Profile> {
                 ),
                 title: Text(
                   'My Account',
-                  style: subTextStyle,
                 ),
                 style: ListTileStyle.list,
                 subtitle: Text(
                   'Account',
-                  style: subSmallTextStyle,
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
@@ -156,12 +147,10 @@ class _ProfileState extends State<Profile> {
               ),
               title: Text(
                 'Transaction Pin',
-                style: subTextStyle,
               ),
               style: ListTileStyle.list,
               subtitle: Text(
                 'Account',
-                style: subSmallTextStyle,
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,
@@ -175,12 +164,10 @@ class _ProfileState extends State<Profile> {
                 ),
                 title: const Text(
                   'Biometric Login',
-                  style: subTextStyle,
                 ),
                 style: ListTileStyle.list,
                 subtitle: const Text(
                   'Account',
-                  style: subSmallTextStyle,
                 ),
                 trailing: Transform.scale(
                   scale: 2,
@@ -202,12 +189,10 @@ class _ProfileState extends State<Profile> {
                 ),
                 title: const Text(
                   'Biometric Transaction',
-                  style: subTextStyle,
                 ),
                 style: ListTileStyle.list,
                 subtitle: const Text(
                   'Account',
-                  style: subSmallTextStyle,
                 ),
                 trailing: Transform.scale(
                   scale: 2,
@@ -229,12 +214,10 @@ class _ProfileState extends State<Profile> {
                 ),
                 title: const Text(
                   'Hide my visibility',
-                  style: subTextStyle,
                 ),
                 style: ListTileStyle.list,
                 subtitle: const Text(
                   'Account',
-                  style: subSmallTextStyle,
                 ),
                 trailing: Transform.scale(
                   scale: 2,
@@ -256,12 +239,10 @@ class _ProfileState extends State<Profile> {
               ),
               title: Text(
                 'Support',
-                style: subTextStyle,
               ),
               style: ListTileStyle.list,
               subtitle: Text(
                 'Account',
-                style: subSmallTextStyle,
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,
@@ -275,12 +256,10 @@ class _ProfileState extends State<Profile> {
               ),
               title: Text(
                 'Rate our app',
-                style: subTextStyle,
               ),
               style: ListTileStyle.list,
               subtitle: Text(
                 'Account',
-                style: subSmallTextStyle,
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,
@@ -294,12 +273,10 @@ class _ProfileState extends State<Profile> {
                 ),
                 title: const Text(
                   'Light mode',
-                  style: subTextStyle,
                 ),
                 style: ListTileStyle.list,
                 subtitle: const Text(
                   'Account',
-                  style: subSmallTextStyle,
                 ),
                 trailing: Transform.scale(
                   scale: 2,
@@ -321,12 +298,10 @@ class _ProfileState extends State<Profile> {
               ),
               title: Text(
                 'Privacy Policy',
-                style: subTextStyle,
               ),
               style: ListTileStyle.list,
               subtitle: Text(
                 'Account',
-                style: subSmallTextStyle,
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,
@@ -340,12 +315,10 @@ class _ProfileState extends State<Profile> {
               ),
               title: Text(
                 'Terms & Conditions',
-                style: subTextStyle,
               ),
               style: ListTileStyle.list,
               subtitle: Text(
                 'Account',
-                style: subSmallTextStyle,
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,

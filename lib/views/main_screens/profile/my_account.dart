@@ -31,12 +31,10 @@ class MyAccount extends StatelessWidget {
                 ),
                 title: Text(
                   'Personal Information',
-                  style: subTextStyle,
                 ),
                 style: ListTileStyle.list,
                 subtitle: Text(
                   'Account',
-                  style: subSmallTextStyle,
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
@@ -56,12 +54,10 @@ class MyAccount extends StatelessWidget {
                 ),
                 title: Text(
                   'Password',
-                  style: subTextStyle,
                 ),
                 style: ListTileStyle.list,
                 subtitle: Text(
                   'Account',
-                  style: subSmallTextStyle,
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
@@ -81,12 +77,10 @@ class MyAccount extends StatelessWidget {
                 ),
                 title: Text(
                   'Bank Accounts',
-                  style: subTextStyle,
                 ),
                 style: ListTileStyle.list,
                 subtitle: Text(
                   'Account',
-                  style: subSmallTextStyle,
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
@@ -106,12 +100,10 @@ class MyAccount extends StatelessWidget {
                 ),
                 title: Text(
                   'Cards',
-                  style: subTextStyle,
                 ),
                 style: ListTileStyle.list,
                 subtitle: Text(
                   'Account',
-                  style: subSmallTextStyle,
                 ),
                 trailing: Icon(
                   Icons.arrow_forward_ios,

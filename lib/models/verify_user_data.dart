@@ -4,7 +4,7 @@ import 'bvn_data.dart';
 
 part 'verify_user_data.g.dart';
 
-@JsonSerializable(explicitToJson: true, includeIfNull: false)
+@JsonSerializable(explicitToJson: true)
 class VerifyUserData {
   @JsonKey(name: "userId")
   String userId;

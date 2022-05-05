@@ -41,11 +41,11 @@ class _SignInState extends State<SignIn> {
                     ),
                     const Text(
                       'Welcome back Damilare',
-                      style: subTextStyle,
+                      style: subtitle,
                     ),
                     const Text(
                       'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum',
-                      style: subSmallTextStyle,
+                      style: smallText,
                     ),
                     const SizedBox(
                       height: 67,
