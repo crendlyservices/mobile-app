@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:crendly/screens/onboarding_screen/onboardingscreen_main.dart';
+import 'package:crendly/screens/auth_screen/sign_in.dart';
 import 'package:crendly/style/style.dart';
 import 'package:flutter/material.dart';
 
@@ -39,9 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const MainOnboardingScreen())));
+            context, MaterialPageRoute(builder: (context) => const SignIn())));
   }
 
   @override

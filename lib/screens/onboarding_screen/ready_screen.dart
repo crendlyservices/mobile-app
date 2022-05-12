@@ -23,7 +23,7 @@ class ReadyScreen extends StatelessWidget {
                 thirdText:
                     'Just a few details from you to give you the experience ever'),
             const SizedBox(
-              height: 8,
+              height: 4,
             ),
             CustomELevatedButton(
                 text: 'Sign up',
