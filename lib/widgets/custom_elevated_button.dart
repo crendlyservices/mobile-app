@@ -35,7 +35,13 @@ class _CustomELevatedButtonState extends State<CustomELevatedButton> {
               ])),
       child: ElevatedButton(
         onPressed: widget.onPressed,
-        child: Text(widget.text),
+        child: Text(widget.text, style: const TextStyle(
+          fontFamily: "Kumbh Sans",
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
+          color: textButtonColor
+
+        ),),
         style: elevatedButtonStyle,
       ),
     );

@@ -1,5 +1,6 @@
-import 'package:crendly/style/style.dart';
 import 'package:flutter/material.dart';
+
+import '../style/style.dart';
 
 class CustomTextFieldInput extends StatelessWidget {
   final TextEditingController textEditingController;
@@ -24,38 +25,30 @@ class CustomTextFieldInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 250.0, bottom: 8.0),
-          child: Text(
-            label,
-            style: const TextStyle(color: Color(0xffFFFFFF)),
-          ),
+        Text(
+          label,
+          style: const TextStyle(
+              fontSize: 16, fontFamily: 'KumbhSans', color: Colors.white),
+        ),
+        const SizedBox(
+          height: 8,
         ),
         TextField(
           controller: textEditingController,
           decoration: InputDecoration(
-              prefixIcon: IntrinsicHeight(
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                      child: prefixIcon,
-                    ),
-                    const SizedBox(
-                      height: 30,
-                      child: VerticalDivider(
-                        thickness: 1,
-                        color: Color.fromRGBO(254, 208, 183, 1),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              suffixIcon: suffixIcon,
-              hintText: hintText,
-              border: inputBorder,
-              contentPadding: const EdgeInsets.all(8)),
+            prefixIcon: prefixIcon,
+            border: inputBorder,
+            hintStyle: const TextStyle(
+              color: Color(0xff797979),
+              fontSize: 14,
+              fontFamily: 'KumbhSans',
+            ),
+            hintText: hintText,
+            //  enabledBorder: inputBorder,
+            //contentPadding: const EdgeInsets.all(8)
+          ),
           keyboardType: textInputType,
           obscureText: isPassword,
         ),

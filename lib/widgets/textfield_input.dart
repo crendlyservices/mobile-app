@@ -2,29 +2,35 @@ import 'package:crendly/style/style.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldInput extends StatelessWidget {
-  final TextEditingController textEditingController;
+  final TextEditingController? textEditingController;
   final bool isPassword;
+  final bool enabled;
   final String label;
   final String hintText;
-  final Widget? icon;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final TextInputType textInputType;
-
-  const TextFieldInput(
+  void Function(String)? onChanged;
+  TextFieldInput(
       {Key? key,
-      required this.textEditingController,
+      this.textEditingController,
       this.isPassword = false,
+      this.enabled = true,
       required this.label,
       required this.hintText,
       required this.textInputType,
-      this.icon})
+      this.suffixIcon,
+      this.prefixIcon,
+      this.onChanged})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(right: 150.0, bottom: 8.0),
+          padding: const EdgeInsets.only(bottom: 8.0),
           child: Text(
             label,
             style: const TextStyle(color: Color(0xffFFFFFF)),
@@ -32,13 +38,21 @@ class TextFieldInput extends StatelessWidget {
         ),
         TextField(
           controller: textEditingController,
+          style: regularFont,
           decoration: InputDecoration(
-              suffixIcon: icon,
+              suffixIcon: suffixIcon,
+              prefixIcon: prefixIcon,
+              hintStyle: smallText,
+              enabled: enabled,
+              disabledBorder: inputBorder,
               hintText: hintText,
+              enabledBorder: inputBorder,
+              focusedBorder: inputBorder,
               border: inputBorder,
               contentPadding: const EdgeInsets.all(8)),
           keyboardType: textInputType,
           obscureText: isPassword,
+          onChanged: onChanged,
         ),
       ],
     );

@@ -20,29 +20,42 @@ class CarouselPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
-        margin: const EdgeInsets.only(top: 90),
+        margin: const EdgeInsets.only(top: 99),
         child: SvgPicture.asset(
           image,
           width: 281.85,
-          height: 350,
+          height: 300,
         ),
       ),
       Container(
-        margin: const EdgeInsets.only(top: 80, left: 30, right: 162),
-        width: 250,
-        height: 60,
+        margin: const EdgeInsets.only(top: 99, left: 30, right: 162),
+        width: 198,
+        height: 65,
         child: RichText(
           text: TextSpan(
               text: firstText,
-              style: mainTextStyle,
-              children: [TextSpan(text: secondText, style: subMainTextStyle)]),
+              style: const TextStyle(
+                  fontFamily: "Kumbh Sans",
+                  fontSize: 27,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+              children: [
+                TextSpan(
+                  text: secondText,
+                  style: const TextStyle(
+                      fontFamily: "Kumbh Sans",
+                      fontSize: 27,
+                      color: lightOrange,
+                      fontWeight: FontWeight.bold),
+                )
+              ]),
         ),
       ),
       Container(
           width: 257,
           height: 53,
           margin: const EdgeInsets.only(top: 8, left: 30, right: 103),
-          child: Text(thirdText, style: subTextStyle)),
+          child: Text(thirdText, style: regularBoldFont)),
     ]);
   }
 }
