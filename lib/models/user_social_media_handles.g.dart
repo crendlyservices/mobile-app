@@ -9,8 +9,8 @@ part of 'user_social_media_handles.dart';
 UserSocialMediaHandle _$UserSocialMediaHandleFromJson(
         Map<String, dynamic> json) =>
     UserSocialMediaHandle(
-      name: json['name'] as String,
-      handle: json['handle'] as String,
+      json['name'] as String?,
+      json['handle'] as String?,
     );
 
 Map<String, dynamic> _$UserSocialMediaHandleToJson(

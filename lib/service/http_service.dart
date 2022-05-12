@@ -8,4 +8,6 @@ abstract class IHttpService {
   Future<Response> updateUserProfile(String url, Map body);
 
   Future<Response> updateUserRegulatoryId(String url, Map body);
+
+  Future<Response> updateEmploymentDetails(String url, Map body);
 }

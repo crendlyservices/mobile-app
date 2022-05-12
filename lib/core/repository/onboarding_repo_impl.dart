@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:crendly/models/employment_details.dart';
 import 'package:crendly/models/otp_verification.dart';
 import 'package:crendly/models/update_regulatory_id.dart';
 import 'package:crendly/models/user_profile.dart';
@@ -108,40 +109,68 @@ class OnboardingRepoImpl extends OnboardingRepo {
 
   @override
   Future<UpdateUserProfile> updateUserProfile(
-    String userId,
-    String picture,
-    String phoneNumber,
-    String firstName,
-    String? middleName,
-    String lastName,
-    String email,
-    String gender,
-    String maritalStatus,
-    String educationalQualification,
-  ) async {
+      String userId,
+      String phoneNumber,
+      String firstName,
+      String? middleName,
+      String lastName,
+      String email,
+      String gender,
+      String maritalStatus,
+      String educationalQualification,
+      String dependents) async {
     deviceDetails();
     Future<String?> deviceInfo = deviceDetails();
     String? deviceName = await deviceInfo;
     print("device Name: $deviceName");
     try {
       String url = "/api/profilemanagement/update_profile/$userId";
+      print(url);
       Map body = {
-        "picture": picture,
         "phoneNumber": phoneNumber,
-        "firstName": firstName,
-        "middleName": middleName,
-        "lastName": lastName,
         "gender": gender,
-        "state": "Lagos",
-        "lga": "Lekki",
         "email": email,
         "maritalStatus": maritalStatus,
         "educationalQualification": educationalQualification,
-        "deviceType": deviceName.toString()
+        "deviceType": deviceName.toString(),
+        "dependents": dependents
       };
       final response = await _httpService.updateUserProfile(url, body);
+      print(response.statusMessage);
       final parsedResponse = UpdateUserProfile.fromJson(response.data);
       print("update user profile: $parsedResponse");
+      return parsedResponse;
+    } on Exception catch (e) {
+      print(e.toString());
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<EmploymentDetails> updateEmploymentDetails(
+      String userId,
+      String employer,
+      String occupation,
+      String salaryOrIncomeRange,
+      bool politicallyExposed,
+      String position,
+      String employmentType,
+      String employmentStatus) async {
+    try {
+      String url = "/api/Identity/update-employment_details";
+      Map body = {
+        "userId": userId,
+        "employer": employer,
+        "salaryOrIncomeRange": salaryOrIncomeRange,
+        "politicallyExposed": politicallyExposed,
+        "position": position,
+        "employmentType": employmentType,
+        "employmentStatus": employmentStatus
+      };
+      final response = await _httpService.updateEmploymentDetails(url, body);
+      print(response.statusMessage);
+      final parsedResponse = EmploymentDetails.fromJson(response.data);
+      print("Employment Status: $parsedResponse");
       return parsedResponse;
     } on Exception catch (e) {
       print(e.toString());

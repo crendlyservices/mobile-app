@@ -7,19 +7,9 @@ class OnboardingView3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CarouselPage(
-      image: 'assets/images/onboard3.svg',
-      firstText: 'You\'re in ',
-      secondText: 'control',
-      thirdText: 'Control your profit on what you lend out',
-      fontSize1: 27,
-      fontFamily1: 'StiepaSerif',
-      textColor1: Color(0xffFFFFFF),
-      fontFamily2: 'StiepaSerif',
-      fontSize2: 27,
-      textColor2: Color(0xffFED0B7),
-      fontFamily3: 'Sansation',
-      fontSize3: 15,
-      textColor3: Color(0xffFFFFFF),
-    );
+        image: 'assets/images/onboard3.svg',
+        firstText: 'You\'re in ',
+        secondText: 'control',
+        thirdText: 'Control your profit on what you lend out');
   }
 }

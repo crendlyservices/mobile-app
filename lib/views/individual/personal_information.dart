@@ -1,26 +1,17 @@
-import 'package:crendly/style/style.dart';
-import 'package:crendly/views/individual/email_address.dart';
+import 'package:crendly/controller/update_user_profile.dart';
+import 'package:crendly/widgets/custom_elevated_button.dart';
 import 'package:crendly/widgets/onboarding_navigation.dart';
 import 'package:crendly/widgets/textfield_input.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
-import '../../widgets/custom_elevated_button.dart';
+import '../../style/style.dart';
 
-class PersonalInformationView extends StatefulWidget {
-  const PersonalInformationView({Key? key}) : super(key: key);
+class PersonalInformationView extends StatelessWidget {
+  PersonalInformationView({Key? key}) : super(key: key);
 
-  @override
-  _PersonalInformationViewState createState() =>
-      _PersonalInformationViewState();
-}
-
-class _PersonalInformationViewState extends State<PersonalInformationView> {
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _genderController = TextEditingController();
-  final TextEditingController _dobController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-
+  final _updateUserProfileController = Get.find<UpdateUserProfileController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,89 +20,80 @@ class _PersonalInformationViewState extends State<PersonalInformationView> {
         child: Column(
           children: [
             const OnboardingNavigation(
-              text: 'Your Personal Information',
-              value: 0.5,
+              text: "Your Personal Information",
+              value: 0.3,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 32),
               child: Column(
+                //crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Please confirm the information filled below is correct',
-                    style: smallText,
+                    'Please confirm your personal information below is correct',
+                    style: regularFont,
                   ),
                   const SizedBox(
-                    height: 46,
+                    height: 16,
                   ),
                   Row(
                     children: [
                       SizedBox(
                         width: 164,
                         child: TextFieldInput(
-                            textEditingController: _firstNameController,
-                            label: 'First Name',
-                            hintText: 'David',
-                            textInputType: TextInputType.name),
+                          label: "First Name",
+                          hintText: _updateUserProfileController.firstName,
+                          textInputType: TextInputType.text,
+                          enabled: false,
+                        ),
                       ),
-                      const SizedBox(
-                        width: 8,
-                      ),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.02),
                       SizedBox(
                         width: 164,
                         child: TextFieldInput(
-                            textEditingController: _lastNameController,
-                            label: 'Last Name',
-                            hintText: 'Emmanuel',
-                            textInputType: TextInputType.name),
-                      ),
+                          label: "Last Name",
+                          hintText: _updateUserProfileController.lastName,
+                          textInputType: TextInputType.text,
+                          enabled: false,
+                        ),
+                      )
                     ],
                   ),
                   const SizedBox(
-                    height: 23,
+                    height: 24,
                   ),
                   TextFieldInput(
-                      textEditingController: _genderController,
-                      label: 'Gender',
-                      hintText: 'Male',
-                      textInputType: TextInputType.name),
+                    label: 'Gender',
+                    hintText: _updateUserProfileController.gender,
+                    textInputType: TextInputType.text,
+                    enabled: false,
+                  ),
                   const SizedBox(
-                    height: 23,
+                    height: 24,
                   ),
                   TextFieldInput(
-                      textEditingController: _dobController,
-                      label: 'Date of birth',
-                      hintText: '05/08/1994',
-                      suffixIcon: const Icon(
-                        Icons.calendar_today_outlined,
-                        color: Colors.white,
-                      ),
-                      textInputType: TextInputType.datetime),
-                  const SizedBox(
-                    height: 23,
+                    label: 'Date of birth',
+                    hintText: _updateUserProfileController.dob,
+                    suffixIcon: const Icon(
+                      Icons.calendar_today_outlined,
+                      color: Color(0xffFFFFFF),
+                    ),
+                    textInputType: TextInputType.number,
+                    enabled: false,
                   ),
-                  TextFieldInput(
-                      textEditingController: _emailController,
-                      label: 'Email',
-                      hintText: 'myemail@email.com',
-                      textInputType: TextInputType.emailAddress),
                   const SizedBox(
-                    height: 74,
+                    height: 32,
                   ),
                   CustomELevatedButton(
                       text: 'My info is correct',
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const EmailAddressView()));
+                        Get.toNamed('/email_address');
                       }),
                   const SizedBox(
                     height: 29,
                   ),
-                  InkWell(
-                    onTap: () {},
-                    child: const Text(
-                      'My info is not correct',
-                      style: skipText,
-                    ),
+                  const Text(
+                    'My info is not correct',
+                    style: skipText,
                   )
                 ],
               ),

@@ -2,25 +2,26 @@ import 'package:crendly/style/style.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldInput extends StatelessWidget {
-  final TextEditingController textEditingController;
+  final TextEditingController? textEditingController;
   final bool isPassword;
+  final bool enabled;
   final String label;
   final String hintText;
-  final Widget? suffixIcon;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final TextInputType textInputType;
   void Function(String)? onChanged;
-
   TextFieldInput(
       {Key? key,
-      required this.textEditingController,
+      this.textEditingController,
       this.isPassword = false,
+      this.enabled = true,
       required this.label,
       required this.hintText,
       required this.textInputType,
-      this.onChanged,
       this.suffixIcon,
-      this.prefixIcon})
+      this.prefixIcon,
+      this.onChanged})
       : super(key: key);
 
   @override
@@ -28,35 +29,30 @@ class TextFieldInput extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: const TextStyle(
-              fontSize: 16, fontFamily: 'KumbhSans', color: Colors.white),
-        ),
-        const SizedBox(
-          height: 6,
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Text(
+            label,
+            style: const TextStyle(color: Color(0xffFFFFFF)),
+          ),
         ),
         TextField(
-          style: const TextStyle(
-            color: Color(0xff797979),
-            fontSize: 14,
-            fontFamily: 'KumbhSans',
-          ),
-          onChanged: onChanged,
           controller: textEditingController,
+          style: regularFont,
           decoration: InputDecoration(
-              enabledBorder: inputBorder,
-              hintStyle: const TextStyle(
-                color: Color(0xff797979),
-                fontSize: 14,
-                fontFamily: 'KumbhSans',
-              ),
-              prefixIcon: prefixIcon,
               suffixIcon: suffixIcon,
+              prefixIcon: prefixIcon,
+              hintStyle: smallText,
+              enabled: enabled,
+              disabledBorder: inputBorder,
               hintText: hintText,
+              enabledBorder: inputBorder,
+              focusedBorder: inputBorder,
+              border: inputBorder,
               contentPadding: const EdgeInsets.all(8)),
           keyboardType: textInputType,
           obscureText: isPassword,
+          onChanged: onChanged,
         ),
       ],
     );

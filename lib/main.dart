@@ -8,18 +8,23 @@ import 'package:crendly/views/individual/bvn.dart';
 import 'package:crendly/views/individual/date_of_birth.dart';
 import 'package:crendly/views/individual/educational_background.dart';
 import 'package:crendly/views/individual/email_address.dart';
+import 'package:crendly/views/individual/employed.dart';
 import 'package:crendly/views/individual/employment_status.dart';
 import 'package:crendly/views/individual/means_of_identification.dart';
 import 'package:crendly/views/individual/otp_verification.dart';
 import 'package:crendly/views/individual/personal_information.dart';
 import 'package:crendly/views/individual/phone_number.dart';
 import 'package:crendly/views/individual/select_id_card.dart';
+import 'package:crendly/views/individual/self_employed.dart';
+import 'package:crendly/views/individual/unemployed.dart';
 import 'package:crendly/views/individual/upload_id_card.dart';
 import 'package:crendly/views/individual/verify_id_card.dart';
 import 'package:crendly/views/main_screens/main_page.dart';
 import 'package:crendly/views/onboarding_screen/onboardingscreen_main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'core/binding/employee_details.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,12 +45,16 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/main_onboarding_view',
-          page: () => const MainOnboardingScreen(),
+          page: () => const MainOnboardingView(),
         ),
         GetPage(
-            name: '/bvn', page: () => BvnView(), binding: VerifyBvnBinding()),
+            name: '/bvn',
+            page: () => const BvnView(),
+            binding: VerifyBvnBinding()),
         GetPage(
-            name: '/dob', page: () => DOBView(), binding: VerifyBvnBinding()),
+            name: '/dob',
+            page: () => const DOBView(),
+            binding: VerifyBvnBinding()),
         GetPage(
             name: '/phoneNumber',
             page: () => PhoneNumberView(),
@@ -60,7 +69,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/personal_info',
-          page: () => const PersonalInformationView(),
+          page: () => PersonalInformationView(),
         ),
         GetPage(
             name: '/email_address',
@@ -74,6 +83,18 @@ class MyApp extends StatelessWidget {
           name: '/employment_status',
           page: () => const EmploymentStatusView(),
         ),
+        GetPage(
+            name: '/employed_view',
+            page: () => const EmployedView(),
+            binding: EmployeeDetailsBinding()),
+        GetPage(
+            name: '/selfemployed_view',
+            page: () => const SelfEmployedView(),
+            binding: EmployeeDetailsBinding()),
+        GetPage(
+            name: '/unemployed_view',
+            page: () => const UnemployedView(),
+            binding: EmployeeDetailsBinding()),
         GetPage(
           name: '/means_of_identification',
           page: () => const MeansOfIdentificationView(),

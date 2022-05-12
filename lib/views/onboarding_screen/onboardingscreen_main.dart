@@ -7,25 +7,22 @@ import 'onboarding_view1.dart';
 import 'onboarding_view2.dart';
 import 'onboarding_view3.dart';
 
-class MainOnboardingScreen extends StatefulWidget {
-  const MainOnboardingScreen({Key? key}) : super(key: key);
+class MainOnboardingView extends StatefulWidget {
+  const MainOnboardingView({Key? key}) : super(key: key);
 
   @override
-  _MainOnboardingScreenState createState() => _MainOnboardingScreenState();
+  _MainOnboardingViewState createState() => _MainOnboardingViewState();
 }
 
-class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
-  final _controller = PageController(initialPage: 0);
+class _MainOnboardingViewState extends State<MainOnboardingView> {
+  final _controller = PageController();
   String text = 'Later';
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
     _controller.addListener(() {
-      if (_controller.page != 0) {
-        setState(() {
-          text = 'Back';
-        });
-      } else {
+      if (_controller.page == 0) {
         setState(() {
           text = 'Later';
         });
@@ -33,17 +30,10 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
     });
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _controller.dispose();
-  }
-
   void next() {
     if (_controller.page == 2) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const ReadyView()));
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const SignUpOrSignInView()));
     } else {
       _controller.nextPage(
           duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
@@ -52,14 +42,13 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
 
   void previous() {
     if (_controller.page == 0) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const ReadyView()));
-    } else {
-      _controller.previousPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeIn,
-      );
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const SignUpOrSignInView()));
     }
+    _controller.previousPage(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeIn,
+    );
   }
 
   @override
@@ -70,7 +59,6 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
           children: [
             Expanded(
               child: PageView(
-                physics: const NeverScrollableScrollPhysics(),
                 controller: _controller,
                 children: const [
                   OnboardingView1(),
@@ -85,7 +73,7 @@ class _MainOnboardingScreenState extends State<MainOnboardingScreen> {
                 GestureDetector(
                   onTap: previous,
                   child: Container(
-                    margin: const EdgeInsets.only(left: 33, bottom: 50),
+                    margin: const EdgeInsets.only(left: 33, bottom: 40),
                     child: Text(
                       text,
                       style: const TextStyle(

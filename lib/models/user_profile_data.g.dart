@@ -8,23 +8,24 @@ part of 'user_profile_data.dart';
 
 UserProfileData _$UserProfileDataFromJson(Map<String, dynamic> json) =>
     UserProfileData(
-      picture: json['picture'] as String,
-      phoneNumber: json['phoneNumber'] as String,
-      firstName: json['firstName'] as String,
-      middleName: json['middleName'] as String,
-      lastName: json['lastName'] as String,
+      picture: json['picture'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
+      firstName: json['firstName'] as String?,
+      middleName: json['middleName'] as String?,
+      lastName: json['lastName'] as String?,
       gender: json['gender'] as String,
-      state: json['state'] as String,
-      lga: json['lga'] as String,
+      state: json['state'] as String?,
+      lga: json['lga'] as String?,
       email: json['email'] as String,
       isRegulatoryIdProvided: json['isRegulatoryIdProvided'] as bool,
       isRegulatoryIdVerified: json['isRegulatoryIdVerified'] as bool,
       isPoliticallyExposed: json['isPoliticallyExposed'] as bool,
-      employmentStatus: json['employmentStatus'] as String,
+      employmentStatus: json['employmentStatus'] as String?,
       educationalQualification: json['educationalQualification'] as String,
       maritalStatus: json['maritalStatus'] as String,
-      socialMediaHandle: (json['socialMediaHandles'] as List<dynamic>)
-          .map((e) => UserSocialMediaHandle.fromJson(e as Map<String, dynamic>))
+      socialMediaHandle: (json['socialMediaHandles'] as List<dynamic>?)
+          ?.map(
+              (e) => UserSocialMediaHandle.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -46,5 +47,5 @@ Map<String, dynamic> _$UserProfileDataToJson(UserProfileData instance) =>
       'educationalQualification': instance.educationalQualification,
       'maritalStatus': instance.maritalStatus,
       'socialMediaHandles':
-          instance.socialMediaHandle.map((e) => e.toJson()).toList(),
+          instance.socialMediaHandle?.map((e) => e.toJson()).toList(),
     };

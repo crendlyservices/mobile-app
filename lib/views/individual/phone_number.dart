@@ -10,11 +10,17 @@ import '../../controller/verify_bvn.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/textfield_input.dart';
 
-class PhoneNumberView extends StatelessWidget {
-  PhoneNumberView({Key? key}) : super(key: key);
+class PhoneNumberView extends StatefulWidget {
+  const PhoneNumberView({Key? key}) : super(key: key);
 
+  @override
+  _PhoneNumberViewState createState() => _PhoneNumberViewState();
+}
+
+class _PhoneNumberViewState extends State<PhoneNumberView> {
   final _updateUserProfileController = Get.find<UpdateUserProfileController>();
   final _verifyBvnController = Get.find<VerifyBvnController>();
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,60 +32,86 @@ class PhoneNumberView extends StatelessWidget {
               text: 'Phone Number',
               value: 0.3,
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 32, left: 24, right: 24),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  TextFieldInput(
-                    textEditingController:
-                        _updateUserProfileController.phoneNumberController,
-                    label: 'Phone number',
-                    hintText: 'Phone number',
-                    textInputType: TextInputType.number,
-                    prefixIcon: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: SvgPicture.asset(
-                        'assets/images/flag-for-flag-nigeria-svgrepo-com 1.svg',
-                        height: 5,
-                        width: 5,
-                      ),
-                    ),
-                    onChanged: (value) {
-                      _updateUserProfileController.phoneNumber = value;
-                    },
-                  ),
-                  Row(
-                    children: const [
-                      CircleAvatar(
-                        radius: 5,
-                        backgroundColor: Color(0xffFED0B7),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 9.0, left: 6),
-                          child: Text(
-                            'It\'s adviced that you input your phone number as it is on your BVN',
-                            style: smallText,
-                          ),
+            isLoading
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          'This would take a second',
+                          style: smallText,
                         ),
-                      )
-                    ],
+                        CircularProgressIndicator(
+                          color: lightOrange,
+                          strokeWidth: 10,
+                        ),
+                      ],
+                    ),
+                  )
+                : Padding(
+                    padding:
+                        const EdgeInsets.only(top: 32, left: 24, right: 24),
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        TextFieldInput(
+                          textEditingController: _updateUserProfileController
+                              .phoneNumberController,
+                          label: 'Phone number',
+                          hintText: 'Phone number',
+                          textInputType: TextInputType.number,
+                          prefixIcon: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: SvgPicture.asset(
+                              'assets/images/flag-for-flag-nigeria-svgrepo-com 1.svg',
+                              height: 5,
+                              width: 5,
+                            ),
+                          ),
+                          onChanged: (value) {
+                            _updateUserProfileController.phoneNumber = value;
+                          },
+                        ),
+                        Row(
+                          children: const [
+                            CircleAvatar(
+                              radius: 5,
+                              backgroundColor: Color(0xffFED0B7),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 9.0, left: 6),
+                                child: Text(
+                                  'It\'s adviced that you input your phone number as it is on your BVN',
+                                  style: smallText,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 74,
+                        ),
+                        CustomELevatedButton(
+                            text: 'Next',
+                            onPressed: () {
+                              setState(() {
+                                isLoading = true;
+                                _verifyBvnController.verifyUserBvn();
+                              });
+
+                              Future.delayed(const Duration(seconds: 7), () {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                                Get.toNamed('/otp');
+                              });
+                            })
+                      ],
+                    ),
                   ),
-                  const SizedBox(
-                    height: 74,
-                  ),
-                  CustomELevatedButton(
-                      text: 'Next',
-                      onPressed: () {
-                        _verifyBvnController.verifyUserBvn();
-                        Get.toNamed('/otp');
-                      })
-                ],
-              ),
-            ),
           ],
         ),
       ),

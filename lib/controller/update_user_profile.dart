@@ -22,7 +22,8 @@ class UpdateUserProfileController extends GetxController {
   String gender = "";
   String maritalStatus = "";
   String educationalQualification = "";
-
+  String dob = "";
+  String dependents = "";
   @override
   void onInit() {
     emailController = TextEditingController();
@@ -43,9 +44,9 @@ class UpdateUserProfileController extends GetxController {
     print('email: $email');
     print('marital_status: $maritalStatus');
     print('educational qualifiation: $educationalQualification');
+    print('dependent: $dependents');
     final result = await OnboardingRepoImpl().updateUserProfile(
         userId,
-        picture,
         phoneNumber,
         firstName,
         middleName,
@@ -53,7 +54,8 @@ class UpdateUserProfileController extends GetxController {
         email,
         gender,
         maritalStatus,
-        educationalQualification);
+        educationalQualification,
+        dependents);
     print("Update user profile result: ${result.message}");
   }
 }

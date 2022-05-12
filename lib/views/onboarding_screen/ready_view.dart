@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import '../auth_screen/sign_in.dart';
 import '../playground/playground_home.dart';
 
-class ReadyView extends StatelessWidget {
-  const ReadyView({Key? key}) : super(key: key);
+class SignUpOrSignInView extends StatelessWidget {
+  const SignUpOrSignInView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +25,6 @@ class ReadyView extends StatelessWidget {
               secondText: 'let\'s go!',
               thirdText:
                   'Just a few details from you to give you the experience ever',
-              fontSize1: 27,
-              fontFamily1: 'StiepaSerif',
-              textColor1: Color(0xffFFFFFF),
-              fontFamily2: 'StiepaSerif',
-              fontSize2: 27,
-              textColor2: Color(0xffFED0B7),
-              fontFamily3: 'Sansation',
-              fontSize3: 15,
-              textColor3: Color(0xffFFFFFF),
             ),
             const SizedBox(
               height: 4,

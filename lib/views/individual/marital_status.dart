@@ -16,6 +16,17 @@ class MaritalStatusView extends StatefulWidget {
 
 class _MaritalStatusViewState extends State<MaritalStatusView> {
   final _controller = Get.find<UpdateUserProfileController>();
+  String maritalStatus = "";
+  String dependent = "";
+  bool dependents = false;
+  void setMaritalStatus() {
+    _controller.maritalStatus = maritalStatus;
+  }
+
+  void setDependents() {
+    _controller.dependents = dependent;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,13 +54,18 @@ class _MaritalStatusViewState extends State<MaritalStatusView> {
                   children: [
                     InkWell(
                       onTap: () {
-                        String single = 'Single';
-                        _controller.maritalStatus = single;
+                        setState(() {
+                          maritalStatus = 'Single';
+                        });
+                        setMaritalStatus();
                       },
                       child: Container(
                         width: 100,
                         height: 40,
                         decoration: BoxDecoration(
+                            color: maritalStatus == "Single"
+                                ? highlightedButton
+                                : null,
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: const Color(0xff4701E0))),
                         child: const Center(
@@ -65,13 +81,18 @@ class _MaritalStatusViewState extends State<MaritalStatusView> {
                     ),
                     InkWell(
                       onTap: () {
-                        String married = 'Married';
-                        _controller.maritalStatus = married;
+                        setState(() {
+                          maritalStatus = 'Married';
+                        });
+                        setMaritalStatus();
                       },
                       child: Container(
                         width: 100,
                         height: 40,
                         decoration: BoxDecoration(
+                            color: maritalStatus == "Married"
+                                ? highlightedButton
+                                : null,
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: const Color(0xff4701E0))),
                         child: const Center(
@@ -87,13 +108,18 @@ class _MaritalStatusViewState extends State<MaritalStatusView> {
                     ),
                     InkWell(
                       onTap: () {
-                        String divorced = 'Divorced';
-                        _controller.maritalStatus = divorced;
+                        setState(() {
+                          maritalStatus = 'Divorced';
+                        });
+                        setMaritalStatus();
                       },
                       child: Container(
                         width: 100,
                         height: 40,
                         decoration: BoxDecoration(
+                            color: maritalStatus == "Divorced"
+                                ? highlightedButton
+                                : null,
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: const Color(0xff4701E0))),
                         child: const Center(
@@ -114,13 +140,18 @@ class _MaritalStatusViewState extends State<MaritalStatusView> {
                   children: [
                     InkWell(
                       onTap: () {
-                        String seperated = 'Seperated';
-                        _controller.maritalStatus = seperated;
+                        setState(() {
+                          maritalStatus = 'Seperated';
+                        });
+                        setMaritalStatus();
                       },
                       child: Container(
                         width: 100,
                         height: 40,
                         decoration: BoxDecoration(
+                            color: maritalStatus == "Seperated"
+                                ? highlightedButton
+                                : null,
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: const Color(0xff4701E0))),
                         child: const Center(
@@ -136,13 +167,18 @@ class _MaritalStatusViewState extends State<MaritalStatusView> {
                     ),
                     InkWell(
                       onTap: () {
-                        String widowed = 'Widowed';
-                        _controller.maritalStatus = widowed;
+                        setState(() {
+                          maritalStatus = 'Widowed';
+                        });
+                        setMaritalStatus();
                       },
                       child: Container(
                         width: 100,
                         height: 40,
                         decoration: BoxDecoration(
+                            color: maritalStatus == "Widowed"
+                                ? highlightedButton
+                                : null,
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: const Color(0xff4701E0))),
                         child: const Center(
@@ -155,6 +191,164 @@ class _MaritalStatusViewState extends State<MaritalStatusView> {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 50,
+                ),
+                const Text(
+                  "Do you have dependents?",
+                  style: regularBoldFont,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          dependents = true;
+                        });
+                      },
+                      child: Container(
+                        width: 150,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            color: dependents ? highlightedButton : null,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: const Color(0xff4701E0))),
+                        child: const Center(
+                          child: Text(
+                            'Yes, I do',
+                            style: regularFont,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          dependents = false;
+                          dependent = "None";
+                        });
+                        setDependents();
+                      },
+                      child: Container(
+                        width: 150,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            color: !dependents ? highlightedButton : null,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: const Color(0xff4701E0))),
+                        child: const Center(
+                          child: Text(
+                            'No, I don\'t',
+                            style: regularFont,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Divider(color: Color(0xff081952), thickness: 2),
+                dependents
+                    ? const Text(
+                        'How many dependents?',
+                        style: regularBoldFont,
+                      )
+                    : Container(),
+                const SizedBox(
+                  height: 10,
+                ),
+                dependents
+                    ? Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                dependent = "1-2";
+                              });
+                              setDependents();
+                            },
+                            child: Container(
+                              width: 150,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: dependent == "1-2"
+                                      ? highlightedButton
+                                      : null,
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                      color: const Color(0xff4701E0))),
+                              child: const Center(
+                                child: Text(
+                                  '1 to 2',
+                                  style: regularFont,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                dependent = "3-4";
+                              });
+                              setDependents();
+                            },
+                            child: Container(
+                              width: 150,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: dependent == "3-4"
+                                      ? highlightedButton
+                                      : null,
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                      color: const Color(0xff4701E0))),
+                              child: const Center(
+                                child: Text(
+                                  '3 to 4',
+                                  style: regularFont,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Container(),
+                const SizedBox(
+                  height: 10,
+                ),
+                dependents
+                    ? InkWell(
+                        onTap: () {},
+                        child: Container(
+                          width: 150,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              color: dependent == "5 and above"
+                                  ? highlightedButton
+                                  : null,
+                              borderRadius: BorderRadius.circular(20),
+                              border:
+                                  Border.all(color: const Color(0xff4701E0))),
+                          child: const Center(
+                            child: Text(
+                              '5 & above',
+                              style: regularFont,
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container(),
                 const SizedBox(
                   height: 50,
                 ),

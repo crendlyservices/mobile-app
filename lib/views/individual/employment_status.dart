@@ -36,44 +36,59 @@ class _EmploymentStatusViewState extends State<EmploymentStatusView> {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  width: 400,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: const Color(0xff4701E0)),
-                      borderRadius: BorderRadius.circular(20)),
-                  child: const Center(
-                    child: Text(
-                      'Employed',
-                      style: smallText,
+                InkWell(
+                  onTap: () {
+                    Get.toNamed('/employed_view');
+                  },
+                  child: Container(
+                    width: 400,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: const Color(0xff4701E0)),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: const Center(
+                      child: Text(
+                        'Employed',
+                        style: smallText,
+                      ),
                     ),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  width: 400,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: const Color(0xff4701E0)),
-                      borderRadius: BorderRadius.circular(20)),
-                  child: const Center(
-                    child: Text(
-                      'Self-Employed',
-                      style: smallText,
+                InkWell(
+                  onTap: () {
+                    Get.toNamed('/selfemployed_view');
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    width: 400,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: const Color(0xff4701E0)),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: const Center(
+                      child: Text(
+                        'Self-Employed',
+                        style: smallText,
+                      ),
                     ),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  width: 400,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: const Color(0xff4701E0)),
-                      borderRadius: BorderRadius.circular(20)),
-                  child: const Center(
-                    child: Text(
-                      'Unemployed',
-                      style: smallText,
+                InkWell(
+                  onTap: () {
+                    Get.toNamed('/unemployed_view');
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    width: 400,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: const Color(0xff4701E0)),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: const Center(
+                      child: Text(
+                        'Unemployed',
+                        style: smallText,
+                      ),
                     ),
                   ),
                 ),

@@ -15,17 +15,35 @@ class CustomELevatedButton extends StatefulWidget {
 class _CustomELevatedButtonState extends State<CustomELevatedButton> {
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: widget.onPressed,
-      child: Text(
-        widget.text,
-        style: const TextStyle(
-            fontFamily: 'kumbhSans',
-            color: backgroundColor,
-            fontSize: 16,
-            fontWeight: FontWeight.bold),
+    return Container(
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+          gradient: LinearGradient(
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+              stops: [
+                0.0,
+                0.5,
+                0.75,
+                1.0
+              ],
+              colors: [
+                Color(0xff63BEDB),
+                Color(0xff56E77E),
+                Color(0xff6DE7B4),
+                Color(0xffE2FCC2),
+              ])),
+      child: ElevatedButton(
+        onPressed: widget.onPressed,
+        child: Text(widget.text, style: const TextStyle(
+          fontFamily: "Kumbh Sans",
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
+          color: textButtonColor
+
+        ),),
+        style: elevatedButtonStyle,
       ),
-      style: elevatedButtonStyle,
     );
   }
 }

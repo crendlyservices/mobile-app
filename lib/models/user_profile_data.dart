@@ -6,28 +6,28 @@ part 'user_profile_data.g.dart';
 @JsonSerializable(explicitToJson: true)
 class UserProfileData {
   @JsonKey(name: "picture")
-  String picture;
+  String? picture;
 
   @JsonKey(name: "phoneNumber")
-  String phoneNumber;
+  String? phoneNumber;
 
   @JsonKey(name: "firstName")
-  String firstName;
+  String? firstName;
 
   @JsonKey(name: "middleName")
-  String middleName;
+  String? middleName;
 
   @JsonKey(name: "lastName")
-  String lastName;
+  String? lastName;
 
   @JsonKey(name: "gender")
   String gender;
 
   @JsonKey(name: "state")
-  String state;
+  String? state;
 
   @JsonKey(name: "lga")
-  String lga;
+  String? lga;
 
   @JsonKey(name: "email")
   String email;
@@ -42,7 +42,7 @@ class UserProfileData {
   bool isPoliticallyExposed;
 
   @JsonKey(name: "employmentStatus")
-  String employmentStatus;
+  String? employmentStatus;
 
   @JsonKey(name: "educationalQualification")
   String educationalQualification;
@@ -51,25 +51,25 @@ class UserProfileData {
   String maritalStatus;
 
   @JsonKey(name: "socialMediaHandles")
-  List<UserSocialMediaHandle> socialMediaHandle;
+  List<UserSocialMediaHandle>? socialMediaHandle;
 
   UserProfileData(
-      {required this.picture,
-      required this.phoneNumber,
-      required this.firstName,
-      required this.middleName,
-      required this.lastName,
+      {this.picture,
+      this.phoneNumber,
+      this.firstName,
+      this.middleName,
+      this.lastName,
       required this.gender,
-      required this.state,
-      required this.lga,
+      this.state,
+      this.lga,
       required this.email,
       required this.isRegulatoryIdProvided,
       required this.isRegulatoryIdVerified,
       required this.isPoliticallyExposed,
-      required this.employmentStatus,
+      this.employmentStatus,
       required this.educationalQualification,
       required this.maritalStatus,
-      required this.socialMediaHandle});
+      this.socialMediaHandle});
 
   factory UserProfileData.fromJson(Map<String, dynamic> json) =>
       _$UserProfileDataFromJson(json);

@@ -32,8 +32,8 @@ class _CustomOutlineButtonState extends State<CustomOutlineButton> {
             widget.text,
             style: const TextStyle(
                 fontSize: 16,
-                fontFamily: 'KumbhSans',
-                fontWeight: FontWeight.bold),
+                fontWeight: FontWeight.bold,
+                fontFamily: "Kumbh Sans"),
           )),
       style: ButtonStyle(
           minimumSize:

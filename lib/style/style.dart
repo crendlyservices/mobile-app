@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 // color for the entire app body
 const Color backgroundColor = Color(0xff00071F);
 const Color iconColor = Color.fromRGBO(254, 208, 183, 1);
+const Color backgroundIconColor = Color(0xff2E4DBD);
+
+const Color highlightedButton = Color(0xff2E4DBD);
 
 // background color for the header in the onboarding/signup screens
 const headerColor = Color(0xff4701E0);
 // back  button color for the header in the onboarding/signuo screens
 const headerBackColor = Color(0xffB4DDC5);
 
+const textButtonColor = Color(0xff00071F);
+const lightOrange = Color(0xffFED0B7);
 const colorLinearProgress = Color(0xff6DE7B4);
 // bold subtitle
 const boldSubtitle = TextStyle(

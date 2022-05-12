@@ -84,7 +84,7 @@ class _DOBViewState extends State<DOBView> {
                     height: 6,
                   ),
                   SizedBox(
-                    width: 150,
+                    width: 300,
                     child: DropdownButton(
                       dropdownColor: backgroundColor,
                       hint: const Text(

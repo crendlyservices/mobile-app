@@ -5,12 +5,12 @@ part 'user_social_media_handles.g.dart';
 @JsonSerializable()
 class UserSocialMediaHandle {
   @JsonKey(name: "name")
-  String name;
+  String? name;
 
   @JsonKey(name: "handle")
-  String handle;
+  String? handle;
 
-  UserSocialMediaHandle({required this.name, required this.handle});
+  UserSocialMediaHandle(this.name, this.handle);
 
   factory UserSocialMediaHandle.fromJson(Map<String, dynamic> json) =>
       _$UserSocialMediaHandleFromJson(json);

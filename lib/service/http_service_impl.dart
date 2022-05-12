@@ -71,7 +71,7 @@ class HttpServiceImpl implements IHttpService {
 
     Response response;
     try {
-      response = await _dio.post(url);
+      response = await _dio.post(url, data: body);
       print('Response: $response');
       return response;
     } on DioError catch (e) {
@@ -82,6 +82,24 @@ class HttpServiceImpl implements IHttpService {
 
   @override
   Future<Response> updateUserRegulatoryId(String url, Map body) async {
+    _dio = Dio(BaseOptions(
+        baseUrl: IDENTITY_BASE_URL,
+        method: 'POST',
+        headers: {"Content-Type": "application/json"}));
+
+    Response response;
+    try {
+      response = await _dio.post(url);
+      print('Response: $response');
+      return response;
+    } on DioError catch (e) {
+      print(e.message);
+      throw Exception(e.message);
+    }
+  }
+
+  @override
+  Future<Response> updateEmploymentDetails(String url, Map body) async {
     _dio = Dio(BaseOptions(
         baseUrl: IDENTITY_BASE_URL,
         method: 'POST',
