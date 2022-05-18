@@ -115,7 +115,7 @@ class _EmployedViewState extends State<EmployedView> {
                       onChanged: (String? newValue) {
                         setState(() {
                           employmentDropdownValue = newValue!;
-                          _employeeDetailsController.employmentType;
+                          _employeeDetailsController.employmentType = newValue;
                         });
                       },
                     ),
@@ -167,7 +167,7 @@ class _EmployedViewState extends State<EmployedView> {
                       InkWell(
                         onTap: () {
                           setState(() {
-                            politicallyExposed = false;
+                            politicallyExposed = true;
                           });
                           setPoliticallyExposed();
                         },
@@ -224,6 +224,9 @@ class _EmployedViewState extends State<EmployedView> {
                   CustomELevatedButton(
                       text: "Next",
                       onPressed: () {
+                        _employeeDetailsController.employmentStatus =
+                            "Employed";
+                        _employeeDetailsController.employeeDetails();
                         Get.toNamed('/means_of_identification');
                       })
                 ],

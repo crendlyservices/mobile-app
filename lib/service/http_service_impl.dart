@@ -89,7 +89,7 @@ class HttpServiceImpl implements IHttpService {
 
     Response response;
     try {
-      response = await _dio.post(url);
+      response = await _dio.post(url, data: body);
       print('Response: $response');
       return response;
     } on DioError catch (e) {
@@ -107,7 +107,7 @@ class HttpServiceImpl implements IHttpService {
 
     Response response;
     try {
-      response = await _dio.post(url);
+      response = await _dio.post(url, data: body);
       print('Response: $response');
       return response;
     } on DioError catch (e) {

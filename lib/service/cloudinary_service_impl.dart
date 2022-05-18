@@ -10,7 +10,7 @@ class CloudinaryServiceImpl implements CloudinaryService {
     CloudinaryResponse response;
     try {
       var cloudinary =
-          CloudinaryPublic('trustbreed', 'client-upload', cache: false);
+          CloudinaryPublic("trustbreed", "client-upload", cache: false);
       response = await cloudinary.uploadFile(
         CloudinaryFile.fromFile(filePath, resourceType: resourceType),
       );

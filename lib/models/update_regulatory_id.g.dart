@@ -9,7 +9,7 @@ part of 'update_regulatory_id.dart';
 UpdateRegulatoryId _$UpdateRegulatoryIdFromJson(Map<String, dynamic> json) =>
     UpdateRegulatoryId(
       status: json['status'] as bool,
-      code: json['code'] as String,
+      code: json['code'] as String?,
       message: json['message'] as String,
       userRegulatoryidData:
           RegulatoryIdData.fromJson(json['data'] as Map<String, dynamic>),

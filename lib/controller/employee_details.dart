@@ -17,7 +17,7 @@ class EmployeeDetailsController extends GetxController {
   String employer = "";
   String occupation = "";
   String salaryOrIncomeRange = "";
-  late bool politicallyExposed;
+  bool politicallyExposed = false;
   String position = "";
   String employmentType = "";
   String employmentStatus = "";
@@ -43,6 +43,8 @@ class EmployeeDetailsController extends GetxController {
 
   employeeDetails() async {
     String userId = _updateUserProfileController.userId;
+    print("User Id: $userId");
+    print("employment Status: $employmentStatus");
     final result = await _onboardingRepo.updateEmploymentDetails(
         userId,
         employer,

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:crendly/core/binding/otp_verification.dart';
+import 'package:crendly/core/binding/select_id_card.dart';
 import 'package:crendly/core/binding/update_user_profile.dart';
 import 'package:crendly/core/binding/verify_bvn.dart';
 import 'package:crendly/style/style.dart';
@@ -104,9 +105,9 @@ class MyApp extends StatelessWidget {
           page: () => const SelectIdCardView(),
         ),
         GetPage(
-          name: '/upload_id_card',
-          page: () => const UploadIdCardView(),
-        ),
+            name: '/upload_id_card',
+            page: () => const UploadIdCardView(),
+            binding: SelectIdCardBinding()),
         GetPage(
           name: '/verify_id_card',
           page: () => const VerifyIdCardView(),

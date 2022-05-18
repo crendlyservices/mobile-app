@@ -21,8 +21,8 @@ UserProfileData _$UserProfileDataFromJson(Map<String, dynamic> json) =>
       isRegulatoryIdVerified: json['isRegulatoryIdVerified'] as bool,
       isPoliticallyExposed: json['isPoliticallyExposed'] as bool,
       employmentStatus: json['employmentStatus'] as String?,
-      educationalQualification: json['educationalQualification'] as String,
-      maritalStatus: json['maritalStatus'] as String,
+      educationalQualification: json['educationalQualification'] as String?,
+      maritalStatus: json['maritalStatus'] as String?,
       socialMediaHandle: (json['socialMediaHandles'] as List<dynamic>?)
           ?.map(
               (e) => UserSocialMediaHandle.fromJson(e as Map<String, dynamic>))

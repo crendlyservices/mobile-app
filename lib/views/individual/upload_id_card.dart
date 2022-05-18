@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloudinary_public/cloudinary_public.dart';
+import 'package:crendly/controller/select_id_card.dart';
 import 'package:crendly/service/cloudinary_service.dart';
 import 'package:crendly/service/cloudinary_service_impl.dart';
 import 'package:crendly/style/style.dart';
@@ -10,7 +11,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../widgets/custom_elevated_button.dart';
+import '../../widgets/textfield_input.dart';
 
 class UploadIdCardView extends StatefulWidget {
   const UploadIdCardView({Key? key}) : super(key: key);
@@ -20,10 +26,11 @@ class UploadIdCardView extends StatefulWidget {
 }
 
 class _UploadIdCardViewState extends State<UploadIdCardView> {
+  final _selectIdCardController = Get.find<SelectIdCardController>();
   final CloudinaryService _cloudinaryService = CloudinaryServiceImpl();
   File? image;
   final ImagePicker _imagePicker = ImagePicker();
-  Future<CloudinaryResponse> selectImageFromGallery() async {
+  Future<String> selectImageFromGallery() async {
     CloudinaryResponse response;
     try {
       final image = await _imagePicker.pickImage(source: ImageSource.gallery);
@@ -35,7 +42,7 @@ class _UploadIdCardViewState extends State<UploadIdCardView> {
           this.image = imageTemporary;
         });
         print("Cloudinary response ${response.url}");
-        return response;
+        return Future.value(response.secureUrl);
       } else {
         throw Exception();
       }
@@ -73,9 +80,13 @@ class _UploadIdCardViewState extends State<UploadIdCardView> {
             child: DottedBorder(
                 child: Column(
               children: [
-                image != null
-                    ? Image.file(image!)
-                    : SvgPicture.asset('assets/images/id.svg'),
+                SizedBox(
+                  width: 290,
+                  height: 161,
+                  child: image != null
+                      ? Image.file(image!)
+                      : SvgPicture.asset('assets/images/id.svg'),
+                ),
                 const SizedBox(
                   height: 35,
                 ),
@@ -130,8 +141,12 @@ class _UploadIdCardViewState extends State<UploadIdCardView> {
                                       height: 84,
                                       width: 84,
                                       child: IconButton(
-                                          onPressed: () {
-                                            selectImageFromGallery();
+                                          onPressed: () async {
+                                            Future<String> imagePath =
+                                                selectImageFromGallery();
+
+                                            _selectIdCardController.imagePath =
+                                                await imagePath;
                                           },
                                           icon: const Icon(
                                             Icons.upload_outlined,
@@ -150,7 +165,87 @@ class _UploadIdCardViewState extends State<UploadIdCardView> {
                 )
               ],
             )),
-          )
+          ),
+          const SizedBox(
+            height: 37,
+          ),
+          image != null
+              ? Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 21),
+                      child: Column(
+                        children: [
+                          TextFieldInput(
+                            textEditingController:
+                                _selectIdCardController.idNumberController,
+                            label: 'ID Number',
+                            hintText: '43245678912',
+                            textInputType: TextInputType.text,
+                            onChanged: (val) {
+                              _selectIdCardController.idNumber = val;
+                            },
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 164,
+                                child: TextFieldInput(
+                                  textEditingController: _selectIdCardController
+                                      .issuanceDateController,
+                                  label: 'Issue Date',
+                                  hintText: 'DD/MM/YY',
+                                  textInputType: TextInputType.text,
+                                  onChanged: (val) {
+                                    _selectIdCardController.issuanceDate = val;
+                                  },
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Expanded(
+                                child: SizedBox(
+                                  width: 164,
+                                  child: TextFieldInput(
+                                    textEditingController:
+                                        _selectIdCardController
+                                            .expiryDateController,
+                                    label: 'Expiry Date',
+                                    hintText: 'DD/MM/YY',
+                                    textInputType: TextInputType.text,
+                                    onChanged: (val) {
+                                      _selectIdCardController.expiryDate = val;
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 50,
+                          ),
+                          CustomELevatedButton(
+                              text: 'Continue',
+                              onPressed: () {
+                                _selectIdCardController.uploadIdCard();
+                              }),
+                          const SizedBox(
+                            height: 34,
+                          ),
+                          const Text(
+                            'Provide another ID card',
+                            style: skipText,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              : Container()
         ],
       ),
     );
