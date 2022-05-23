@@ -70,24 +70,24 @@ class VerifyBvnController extends GetxController {
     final responseresult = api.apiRequest<VerifyBvn>("/api/auth/platform/signupv2", "post",(json) => VerifyBvn.fromJson(json),body: body);
     //end generic api test
     return responseresult;
-    final result =
-        await OnboardingRepoImpl().verifyBvn(bvn, dob, phoneNumber, gender);
-    String statusCode = result.code;
-    hideLoading();
-    if (statusCode == "200") {
-      updateUserProfileController.userId = result.verifyUserData.userId;
-      updateUserProfileController.picture = result.verifyUserData.bvnData.image;
-      updateUserProfileController.firstName =
-          result.verifyUserData.bvnData.firstName;
-      updateUserProfileController.middleName =
-          result.verifyUserData.bvnData.middleName;
-      updateUserProfileController.lastName =
-          result.verifyUserData.bvnData.lastName;
-
-      updateUserProfileController.dob = result.verifyUserData.bvnData.dob;
-      return result;
-    } else {
-      throw Exception();
-    }
+    // final result =
+    //     await OnboardingRepoImpl().verifyBvn(bvn, dob, phoneNumber, gender);
+    // String statusCode = result.code;
+    // hideLoading();
+    // if (statusCode == "200") {
+    //   updateUserProfileController.userId = result.verifyUserData.userId;
+    //   updateUserProfileController.picture = result.verifyUserData.bvnData.image;
+    //   updateUserProfileController.firstName =
+    //       result.verifyUserData.bvnData.firstName;
+    //   updateUserProfileController.middleName =
+    //       result.verifyUserData.bvnData.middleName;
+    //   updateUserProfileController.lastName =
+    //       result.verifyUserData.bvnData.lastName;
+    //
+    //   updateUserProfileController.dob = result.verifyUserData.bvnData.dob;
+    //   return result;
+    // } else {
+    //   throw Exception();
+    // }
   }
 }

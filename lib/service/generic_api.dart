@@ -11,7 +11,7 @@ class ApiService {
   Future<T> apiRequest<T>(
     String endPoint,
     String method,
-    T Function(Map<String,dynamic> json) fromJson, {
+    T Function(Map<String,dynamic> json) fromJson,{
     required Map body,
     String token = '',
   }) async {
@@ -56,7 +56,19 @@ class ApiService {
 
         return json.decode(resp.body);
       } else {
-        return fromJson(json.decode(resp.body));
+        var finalResp = (json.decode(resp.body)) as Map<String, dynamic>;
+        var respMsg = finalResp['message'] as String;
+        var respCode = finalResp['code'] as String;
+        var respStatus = finalResp['status'] as bool;
+        var respData = finalResp['data'] as T;
+        Map<String, dynamic> responseBody = {
+          "message": respMsg,
+          "code": respCode,
+          "status": respStatus,
+          "data": respData,
+
+        };
+        return fromJson(responseBody);
       }
 
       // else {
