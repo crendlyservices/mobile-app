@@ -2,6 +2,7 @@ import 'package:crendly/controller/update_user_profile.dart';
 import 'package:crendly/core/repository/onboarding_repo.dart';
 import 'package:crendly/core/repository/onboarding_repo_impl.dart';
 import 'package:crendly/models/verify_bvn.dart';
+import 'package:crendly/service/generic_api.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -58,17 +59,17 @@ class VerifyBvnController extends GetxController {
 
     //testing generic api
 
-    // ApiService api = ApiService();
-    //   Map<String, dynamic> body = {
-    //     "bvn": bvn.trim().toString(),
-    //     "dateOfBirth": dob.trim().toString(),
-    //     "phoneNumber": phoneNumber.trim().toString(),
-    //     "gender": gender.trim().toString(),
-    //     "profileType": "individual",
-    //   };
-    // final responseresult = api.apiRequest<VerifyBvn>(phoneNumber, phoneNumber,(json) => VerifyBvn.fromJson(json),body: body);
-    // //end generic api test
-
+    ApiService api = ApiService();
+      Map<String, dynamic> body = {
+        "bvn": bvn.trim().toString(),
+        "dateOfBirth": dob.trim().toString(),
+        "phoneNumber": phoneNumber.trim().toString(),
+        "gender": gender.trim().toString(),
+        "profileType": "individual",
+      };
+    final responseresult = api.apiRequest<VerifyBvn>("/api/auth/platform/signupv2", "post",(json) => VerifyBvn.fromJson(json),body: body);
+    //end generic api test
+    return responseresult;
     final result =
         await OnboardingRepoImpl().verifyBvn(bvn, dob, phoneNumber, gender);
     String statusCode = result.code;

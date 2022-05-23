@@ -15,7 +15,7 @@ class ApiService {
     required Map body,
     String token = '',
   }) async {
-    late http.Response resp;
+    http.Response resp = http.Response("",200);
     final String url = AUTH_BASE_URL + endPoint;
     final Map<String, String> headers = new Map<String, String>();
     headers.putIfAbsent(
@@ -25,6 +25,8 @@ class ApiService {
           HttpHeaders.authorizationHeader, () => 'Bearer ' + token);
     }
     Uri apiUri = Uri.parse(url);
+    final msg = jsonEncode(body);
+
     try {
       if (method == "get") {
         resp = await http.get(
@@ -40,8 +42,8 @@ class ApiService {
       } else if (method == "post") {
         resp = await http.post(
           apiUri,
-          headers: headers,
-          body: body,
+          headers: {"Content-Type": "application/json"},
+          body: msg,
         );
       } else if (method == "delete") {
         resp = await http.delete(
@@ -54,7 +56,7 @@ class ApiService {
 
         return json.decode(resp.body);
       } else {
-        return json.decode(resp.body);
+        return fromJson(json.decode(resp.body));
       }
 
       // else {
