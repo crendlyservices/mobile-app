@@ -23,10 +23,7 @@ UserProfileData _$UserProfileDataFromJson(Map<String, dynamic> json) =>
       employmentStatus: json['employmentStatus'] as String?,
       educationalQualification: json['educationalQualification'] as String?,
       maritalStatus: json['maritalStatus'] as String?,
-      socialMediaHandle: (json['socialMediaHandles'] as List<dynamic>?)
-          ?.map(
-              (e) => UserSocialMediaHandle.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      socialMediaHandle: json['socialMediaHandles'] as List<dynamic>?,
     );
 
 Map<String, dynamic> _$UserProfileDataToJson(UserProfileData instance) =>
@@ -46,6 +43,5 @@ Map<String, dynamic> _$UserProfileDataToJson(UserProfileData instance) =>
       'employmentStatus': instance.employmentStatus,
       'educationalQualification': instance.educationalQualification,
       'maritalStatus': instance.maritalStatus,
-      'socialMediaHandles':
-          instance.socialMediaHandle?.map((e) => e.toJson()).toList(),
+      'socialMediaHandles': instance.socialMediaHandle,
     };

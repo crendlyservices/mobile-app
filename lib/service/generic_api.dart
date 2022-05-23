@@ -52,9 +52,8 @@ class ApiService {
         );
       }
       if (resp.statusCode == 200) {
-        fromJson(json.decode(resp.body));
+        return fromJson(json.decode(resp.body));
 
-        return json.decode(resp.body);
       } else {
         var finalResp = (json.decode(resp.body)) as Map<String, dynamic>;
         var respMsg = finalResp['message'] as String;
@@ -68,7 +67,7 @@ class ApiService {
           "data": respData,
 
         };
-        return fromJson(responseBody);
+        return fromJson(json.decode(resp.body));
       }
 
       // else {
@@ -88,7 +87,7 @@ class ApiService {
     } on Error catch (e) {
       print('General Error: $e');
       //showError();
-      return json.decode(resp.body);
+      throw Exception();
     }
   }
 }

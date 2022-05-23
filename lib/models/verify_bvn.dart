@@ -14,8 +14,8 @@ class VerifyBvn {
   @JsonKey(name: "message")
   String message;
 
-  @JsonKey(name: "data",defaultValue : null)
-  VerifyUserData verifyUserData;
+  @JsonKey(name: "data")
+  VerifyUserData? verifyUserData;
 
   VerifyBvn(
       {required this.statusRes,
