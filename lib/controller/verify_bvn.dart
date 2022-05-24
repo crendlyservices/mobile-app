@@ -5,6 +5,8 @@ import 'package:crendly/models/verify_bvn.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../service/generic_api.dart';
+
 class VerifyBvnController extends GetxController {
   late OnboardingRepo onboardingRepo;
   late UpdateUserProfileController updateUserProfileController;
@@ -47,7 +49,7 @@ class VerifyBvnController extends GetxController {
     isLoading.toggle();
   }
 
-  Future<VerifyBvn> verifyUserBvn() async {
+  verifyUserBvn() async {
     String phoneNumber = updateUserProfileController.phoneNumber;
     print("phoneNumber: $phoneNumber");
 
@@ -57,36 +59,41 @@ class VerifyBvnController extends GetxController {
     showLoading();
 
     //testing generic api
+    String url = "/api/auth/platform/signupv2";
+    String method = "post";
+    ApiService api = ApiService();
+    Map<String, dynamic> body = {
+      "bvn": bvn.trim().toString(),
+      "dateOfBirth": dob.trim().toString(),
+      "phoneNumber": phoneNumber.trim().toString(),
+      "gender": gender.trim().toString(),
+      "profileType": "individual",
+    };
+    final responseResult = api.apiRequest<VerifyBvn>(
+        url, method, (json) => VerifyBvn.fromJson(json),
+        body: body);
 
-    // ApiService api = ApiService();
-    //   Map<String, dynamic> body = {
-    //     "bvn": bvn.trim().toString(),
-    //     "dateOfBirth": dob.trim().toString(),
-    //     "phoneNumber": phoneNumber.trim().toString(),
-    //     "gender": gender.trim().toString(),
-    //     "profileType": "individual",
-    //   };
-    // final responseresult = api.apiRequest<VerifyBvn>(phoneNumber, phoneNumber,(json) => VerifyBvn.fromJson(json),body: body);
-    // //end generic api test
+    print('Verify Bvn: $responseResult');
+    //end generic api test
 
-    final result =
-        await OnboardingRepoImpl().verifyBvn(bvn, dob, phoneNumber, gender);
-    String statusCode = result.code;
-    hideLoading();
-    if (statusCode == "200") {
-      updateUserProfileController.userId = result.verifyUserData.userId;
-      updateUserProfileController.picture = result.verifyUserData.bvnData.image;
-      updateUserProfileController.firstName =
-          result.verifyUserData.bvnData.firstName;
-      updateUserProfileController.middleName =
-          result.verifyUserData.bvnData.middleName;
-      updateUserProfileController.lastName =
-          result.verifyUserData.bvnData.lastName;
-
-      updateUserProfileController.dob = result.verifyUserData.bvnData.dob;
-      return result;
-    } else {
-      throw Exception();
-    }
+    // final result =
+    //     await OnboardingRepoImpl().verifyBvn(bvn, dob, phoneNumber, gender);
+    // String statusCode = result.code;
+    // hideLoading();
+    // if (statusCode == "200") {
+    //   updateUserProfileController.userId = result.verifyUserData.userId;
+    //   updateUserProfileController.picture = result.verifyUserData.bvnData.image;
+    //   updateUserProfileController.firstName =
+    //       result.verifyUserData.bvnData.firstName;
+    //   updateUserProfileController.middleName =
+    //       result.verifyUserData.bvnData.middleName;
+    //   updateUserProfileController.lastName =
+    //       result.verifyUserData.bvnData.lastName;
+    //
+    //   updateUserProfileController.dob = result.verifyUserData.bvnData.dob;
+    //   return result;
+    // } else {
+    //   throw Exception();
+    // }
   }
 }
