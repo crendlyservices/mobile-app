@@ -11,7 +11,7 @@ OtpVerification _$OtpVerificationFromJson(Map<String, dynamic> json) =>
       statusRes: json['status'] as bool,
       code: json['code'] as String,
       message: json['message'] as String,
-      data: json['data'],
+      data: OtpData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$OtpVerificationToJson(OtpVerification instance) =>
@@ -19,5 +19,5 @@ Map<String, dynamic> _$OtpVerificationToJson(OtpVerification instance) =>
       'status': instance.statusRes,
       'code': instance.code,
       'message': instance.message,
-      'data': instance.data,
+      'data': instance.data.toJson(),
     };

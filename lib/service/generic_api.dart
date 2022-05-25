@@ -1,21 +1,22 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:dartz/dartz.dart';
 import 'package:http/io_client.dart';
 import 'package:http/http.dart' as http;
 
 import 'http_service_impl.dart';
 
 class ApiService {
-  Future<T> apiRequest<T>(
+  Future<Either<T,F>> apiRequest<T,F>(
     String endPoint,
     String method,
-    T Function(Map<String,dynamic> json) fromJson,{
+    T Function(Map<String, dynamic> json) fromJson,
+    F Function(Map<String, dynamic> json) fromJsonError, {
     required Map body,
     String token = '',
   }) async {
-    http.Response resp = http.Response("",200);
+    http.Response resp = http.Response("", 200);
     final String url = AUTH_BASE_URL + endPoint;
     final Map<String, String> headers = new Map<String, String>();
     headers.putIfAbsent(
@@ -52,22 +53,9 @@ class ApiService {
         );
       }
       if (resp.statusCode == 200) {
-        return fromJson(json.decode(resp.body));
-
+        return left(fromJson(json.decode(resp.body)));
       } else {
-        var finalResp = (json.decode(resp.body)) as Map<String, dynamic>;
-        var respMsg = finalResp['message'] as String;
-        var respCode = finalResp['code'] as String;
-        var respStatus = finalResp['status'] as bool;
-        var respData = finalResp['data'] as T;
-        Map<String, dynamic> responseBody = {
-          "message": respMsg,
-          "code": respCode,
-          "status": respStatus,
-          "data": respData,
-
-        };
-        return fromJson(json.decode(resp.body));
+        return right(fromJsonError(json.decode(resp.body)));
       }
 
       // else {
