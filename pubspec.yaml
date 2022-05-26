@@ -73,6 +73,7 @@ flutter:
 
 
   assets:
+    - assets/states-and-cities.json
     - assets/images/
   # To add assets to your application, add an assets section, like this:
 
@@ -88,17 +89,6 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Sansation
-      fonts:
-         - asset: fonts/Sansation_Bold.woff
-         - asset: fonts/Sansation_Light.woff
-         - asset: fonts/Sansation_Regular.woff
- #          style: italic
-    - family: Stiepa
-      fonts:
-         - asset: fonts/Stiepa Serif.otf
-         - asset: fonts/Stiepa Serif Outline.otf
-  #         weight: 700
     - family: KumbhSans
       fonts:
         - asset: fonts/KumbhSans-Black.ttf

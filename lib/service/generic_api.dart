@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:dartz/dartz.dart';
-import 'package:http/io_client.dart';
 import 'package:http/http.dart' as http;
 
 import 'http_service_impl.dart';
 
 class ApiService {
-  Future<Either<T,F>> apiRequest<T,F>(
+  Future<Either<T, F>> apiRequest<T, F>(
     String endPoint,
     String method,
     T Function(Map<String, dynamic> json) fromJson,
@@ -18,10 +18,10 @@ class ApiService {
   }) async {
     http.Response resp = http.Response("", 200);
     final String url = AUTH_BASE_URL + endPoint;
-    final Map<String, String> headers = new Map<String, String>();
+    final Map<String, String> headers = <String, String>{};
     headers.putIfAbsent(
         HttpHeaders.contentTypeHeader, () => 'application/json');
-    if (token != null && token.isNotEmpty) {
+    if (token.isNotEmpty) {
       headers.putIfAbsent(
           HttpHeaders.authorizationHeader, () => 'Bearer ' + token);
     }

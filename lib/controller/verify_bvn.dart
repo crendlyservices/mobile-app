@@ -1,4 +1,3 @@
-
 import 'package:crendly/controller/update_user_profile.dart';
 import 'package:crendly/core/repository/onboarding_repo.dart';
 import 'package:crendly/core/repository/onboarding_repo_impl.dart';
@@ -7,7 +6,6 @@ import 'package:crendly/models/verify_bvn.dart';
 import 'package:crendly/service/generic_api.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class VerifyBvnController extends GetxController {
   late OnboardingRepo onboardingRepo;
@@ -51,7 +49,7 @@ class VerifyBvnController extends GetxController {
     isLoading.toggle();
   }
 
-  Future<VerifyBvn> verifyUserBvn() async {
+  verifyUserBvn() async {
     String phoneNumber = updateUserProfileController.phoneNumber;
     print("phoneNumber: $phoneNumber");
 
@@ -103,6 +101,5 @@ class VerifyBvnController extends GetxController {
             verifyUserData: null);
       },
     );
-    throw Exception();
   }
 }
