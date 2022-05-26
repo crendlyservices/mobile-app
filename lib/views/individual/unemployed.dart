@@ -47,7 +47,12 @@ class _UnemployedViewState extends State<UnemployedView> {
                 Row(
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        setState(() {
+                          politicallyExposed = true;
+                        });
+                        setPoliticallyExposed();
+                      },
                       child: Container(
                         width: 150,
                         height: 50,
@@ -68,7 +73,12 @@ class _UnemployedViewState extends State<UnemployedView> {
                       width: 10,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        setState(() {
+                          politicallyExposed = false;
+                        });
+                        setPoliticallyExposed();
+                      },
                       child: Container(
                         width: 150,
                         height: 50,
@@ -93,6 +103,9 @@ class _UnemployedViewState extends State<UnemployedView> {
                 CustomELevatedButton(
                     text: "Next",
                     onPressed: () {
+                      _employeeDetailsController.employmentStatus =
+                          "Unemployed";
+                      _employeeDetailsController.employeeDetails();
                       Get.toNamed('/means_of_identification');
                     })
               ],

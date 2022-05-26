@@ -45,6 +45,8 @@ dependencies:
   image_picker: ^0.8.5
   cloudinary_public: ^0.11.0
   dotted_border: ^2.0.0+2
+  http: ^0.13.3
+  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +73,7 @@ flutter:
 
 
   assets:
+    - assets/states-and-cities.json
     - assets/images/
   # To add assets to your application, add an assets section, like this:
 
@@ -86,17 +89,6 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Sansation
-      fonts:
-         - asset: fonts/Sansation_Bold.woff
-         - asset: fonts/Sansation_Light.woff
-         - asset: fonts/Sansation_Regular.woff
- #          style: italic
-    - family: Stiepa
-      fonts:
-         - asset: fonts/Stiepa Serif.otf
-         - asset: fonts/Stiepa Serif Outline.otf
-  #         weight: 700
     - family: KumbhSans
       fonts:
         - asset: fonts/KumbhSans-Black.ttf

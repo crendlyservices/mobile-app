@@ -1,7 +1,9 @@
 import 'package:crendly/controller/update_user_profile.dart';
 import 'package:crendly/core/repository/onboarding_repo.dart';
 import 'package:crendly/core/repository/onboarding_repo_impl.dart';
+import 'package:crendly/models/failed_api_response.dart';
 import 'package:crendly/models/verify_bvn.dart';
+import 'package:crendly/service/generic_api.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -47,7 +49,7 @@ class VerifyBvnController extends GetxController {
     isLoading.toggle();
   }
 
-  Future<VerifyBvn> verifyUserBvn() async {
+  verifyUserBvn() async {
     String phoneNumber = updateUserProfileController.phoneNumber;
     print("phoneNumber: $phoneNumber");
 
@@ -55,24 +57,49 @@ class VerifyBvnController extends GetxController {
     print("Gender: $gender");
 
     showLoading();
-    final result =
-        await OnboardingRepoImpl().verifyBvn(bvn, dob, phoneNumber, gender);
-    String statusCode = result.code;
-    hideLoading();
-    if (statusCode == "200") {
-      updateUserProfileController.userId = result.verifyUserData.userId;
-      updateUserProfileController.picture = result.verifyUserData.bvnData.image;
-      updateUserProfileController.firstName =
-          result.verifyUserData.bvnData.firstName;
-      updateUserProfileController.middleName =
-          result.verifyUserData.bvnData.middleName;
-      updateUserProfileController.lastName =
-          result.verifyUserData.bvnData.lastName;
 
-      updateUserProfileController.dob = result.verifyUserData.bvnData.dob;
-      return result;
-    } else {
-      throw Exception();
-    }
+    ApiService api = ApiService();
+    Map<String, dynamic> body = {
+      "bvn": bvn.trim().toString(),
+      "dateOfBirth": dob.trim().toString(),
+      "phoneNumber": phoneNumber.trim().toString(),
+      "gender": gender.trim().toString(),
+      "profileType": "individual",
+    };
+    final responseResult = await api.apiRequest<VerifyBvn, FailedApiResponse>(
+        "/api/auth/platform/signupv2",
+        "post",
+        (json) => VerifyBvn.fromJson(json),
+        (json) => FailedApiResponse.fromJson(json),
+        body: body);
+
+    responseResult.fold(
+      (success) {
+        /// Handle left
+        /// For example: show dialog or alert
+        var result = success;
+        updateUserProfileController.userId = result.verifyUserData!.userId;
+        updateUserProfileController.picture =
+            result.verifyUserData!.bvnData.image;
+        updateUserProfileController.firstName =
+            result.verifyUserData!.bvnData.firstName;
+        updateUserProfileController.middleName =
+            result.verifyUserData!.bvnData.middleName;
+        updateUserProfileController.lastName =
+            result.verifyUserData!.bvnData.lastName;
+
+        updateUserProfileController.dob = result.verifyUserData!.bvnData.dob;
+        return result;
+      },
+      (error) {
+        /// Handle right
+        /// For example: navigate to home page
+        return VerifyBvn(
+            statusRes: false,
+            message: error.message,
+            code: error.code,
+            verifyUserData: null);
+      },
+    );
   }
 }

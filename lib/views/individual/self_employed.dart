@@ -105,7 +105,7 @@ class _SelfEmployedViewState extends State<SelfEmployedView> {
                     InkWell(
                       onTap: () {
                         setState(() {
-                          politicallyExposed = false;
+                          politicallyExposed = true;
                         });
                         setPoliticallyExposed();
                       },
@@ -159,6 +159,9 @@ class _SelfEmployedViewState extends State<SelfEmployedView> {
                 CustomELevatedButton(
                     text: "Next",
                     onPressed: () {
+                      _employeeDetailsController.employmentStatus =
+                          "Self-Employed";
+                      _employeeDetailsController.employeeDetails();
                       Get.toNamed('/means_of_identification');
                     })
               ],

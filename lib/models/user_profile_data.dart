@@ -45,10 +45,10 @@ class UserProfileData {
   String? employmentStatus;
 
   @JsonKey(name: "educationalQualification")
-  String educationalQualification;
+  String? educationalQualification;
 
   @JsonKey(name: "maritalStatus")
-  String maritalStatus;
+  String? maritalStatus;
 
   @JsonKey(name: "socialMediaHandles")
   List<UserSocialMediaHandle>? socialMediaHandle;
@@ -67,8 +67,8 @@ class UserProfileData {
       required this.isRegulatoryIdVerified,
       required this.isPoliticallyExposed,
       this.employmentStatus,
-      required this.educationalQualification,
-      required this.maritalStatus,
+      this.educationalQualification,
+      this.maritalStatus,
       this.socialMediaHandle});
 
   factory UserProfileData.fromJson(Map<String, dynamic> json) =>

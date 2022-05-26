@@ -9,7 +9,7 @@ class UpdateRegulatoryId {
   bool status;
 
   @JsonKey(name: "code")
-  String code;
+  String? code;
 
   @JsonKey(name: "message")
   String message;
@@ -19,7 +19,7 @@ class UpdateRegulatoryId {
 
   UpdateRegulatoryId(
       {required this.status,
-      required this.code,
+      this.code,
       required this.message,
       required this.userRegulatoryidData});
 

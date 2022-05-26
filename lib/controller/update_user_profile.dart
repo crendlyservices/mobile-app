@@ -23,7 +23,7 @@ class UpdateUserProfileController extends GetxController {
   String maritalStatus = "";
   String educationalQualification = "";
   String dob = "";
-  String dependents = "";
+  String dependents = "None";
   @override
   void onInit() {
     emailController = TextEditingController();

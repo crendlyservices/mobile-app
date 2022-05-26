@@ -64,15 +64,15 @@ class OnboardingRepoImpl extends OnboardingRepo {
 
   @override
   Future<UpdateRegulatoryId> updateRegulatoryId(String userId, String idNumber,
-      String issuanceDate, String expiryDate) async {
+      String issuanceDate, String expiryDate, String imagePath) async {
     try {
       Map<String, dynamic> body = {
-        "userId": "string",
+        "userId": userId,
         "type": 4,
         "idNumber": idNumber,
         "issuanceDate": issuanceDate,
         "expiryDate": expiryDate,
-        "imagePath": "string"
+        "imagePath": imagePath
       };
 
       String url = "/api/Identity/update-regulatory_Id";
