@@ -1,3 +1,4 @@
+import 'package:crendly/controller/select_id_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,13 @@ class SelectIdCardView extends StatefulWidget {
 }
 
 class _SelectIdCardViewState extends State<SelectIdCardView> {
+  final SelectIdCardController _selectIdCardController =
+      Get.find<SelectIdCardController>();
+  int type = 0;
+  void setType() {
+    _selectIdCardController.type = type;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,10 +60,17 @@ class _SelectIdCardViewState extends State<SelectIdCardView> {
                       height: 50,
                     ),
                     GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          type = 4;
+                        });
+                        setType();
+                      },
                       child: Container(
                         width: 400,
                         height: 50,
                         decoration: BoxDecoration(
+                            color: type == 4 ? highlightedButton : null,
                             border: Border.all(color: const Color(0xff4701E0)),
                             borderRadius: BorderRadius.circular(20)),
                         child: const Center(
@@ -70,10 +85,17 @@ class _SelectIdCardViewState extends State<SelectIdCardView> {
                       height: 10,
                     ),
                     GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          type = 2;
+                        });
+                        setType();
+                      },
                       child: Container(
                         width: 400,
                         height: 50,
                         decoration: BoxDecoration(
+                            color: type == 2 ? highlightedButton : null,
                             border: Border.all(color: const Color(0xff4701E0)),
                             borderRadius: BorderRadius.circular(20)),
                         child: const Center(
@@ -88,6 +110,12 @@ class _SelectIdCardViewState extends State<SelectIdCardView> {
                       height: 10,
                     ),
                     GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          type = 1;
+                        });
+                        setType();
+                      },
                       child: Container(
                         width: 400,
                         height: 50,
@@ -106,10 +134,17 @@ class _SelectIdCardViewState extends State<SelectIdCardView> {
                       height: 10,
                     ),
                     GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          type = 3;
+                        });
+                        setType();
+                      },
                       child: Container(
                         width: 400,
                         height: 50,
                         decoration: BoxDecoration(
+                            color: type == 3 ? highlightedButton : null,
                             border: Border.all(color: const Color(0xff4701E0)),
                             borderRadius: BorderRadius.circular(20)),
                         child: const Center(

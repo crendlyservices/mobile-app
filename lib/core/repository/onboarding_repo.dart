@@ -25,8 +25,13 @@ abstract class OnboardingRepo {
       String educationalQualification,
       String dependents);
 
-  Future<UpdateRegulatoryId> updateRegulatoryId(String userId, String idNumber,
-      String issuanceDate, String expiryDate, String imagePath);
+  Future<UpdateRegulatoryId> updateRegulatoryId(
+      String userId,
+      int type,
+      String idNumber,
+      String issuanceDate,
+      String expiryDate,
+      String imagePath);
 
   Future<EmploymentDetails> updateEmploymentDetails(
       String userId,

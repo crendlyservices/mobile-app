@@ -11,7 +11,9 @@ AccountDetails _$AccountDetailsFromJson(Map<String, dynamic> json) =>
       status: json['status'] as bool,
       code: json['code'] as String,
       message: json['message'] as String,
-      accountData: AccountData.fromJson(json['data'] as Map<String, dynamic>),
+      accountData: json['data'] == null
+          ? null
+          : AccountData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AccountDetailsToJson(AccountDetails instance) =>
@@ -19,5 +21,5 @@ Map<String, dynamic> _$AccountDetailsToJson(AccountDetails instance) =>
       'status': instance.status,
       'code': instance.code,
       'message': instance.message,
-      'data': instance.accountData.toJson(),
+      'data': instance.accountData?.toJson(),
     };

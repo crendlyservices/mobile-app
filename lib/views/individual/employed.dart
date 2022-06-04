@@ -227,7 +227,7 @@ class _EmployedViewState extends State<EmployedView> {
                         _employeeDetailsController.employmentStatus =
                             "Employed";
                         _employeeDetailsController.employeeDetails();
-                        Get.toNamed('/means_of_identification');
+                        //Get.toNamed('/means_of_identification');
                       })
                 ],
               ),

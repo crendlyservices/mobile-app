@@ -1,11 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'account_data.dart';
+part 'face_scan_and_signature.g.dart';
 
-part 'account_details.g.dart';
-
-@JsonSerializable(explicitToJson: true)
-class AccountDetails {
+@JsonSerializable()
+class FaceScanAndSignature {
   @JsonKey(name: "status")
   bool status;
 
@@ -16,17 +14,17 @@ class AccountDetails {
   String message;
 
   @JsonKey(name: "data")
-  AccountData? accountData;
+  String? data;
 
-  AccountDetails(
+  FaceScanAndSignature(
       {required this.status,
       required this.code,
       required this.message,
-      required this.accountData});
+      required this.data});
 
-  factory AccountDetails.fromJson(Map<String, dynamic> json) =>
-      _$AccountDetailsFromJson(json);
+  factory FaceScanAndSignature.fromJson(Map<String, dynamic> json) =>
+      _$FaceScanAndSignatureFromJson(json);
 
   /// Connect the generated [_$PersonToJson] function to the `toJson` method.
-  Map<String, dynamic> toJson() => _$AccountDetailsToJson(this);
+  Map<String, dynamic> toJson() => _$FaceScanAndSignatureToJson(this);
 }

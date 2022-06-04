@@ -22,10 +22,14 @@ const boldSubtitle = TextStyle(
     fontSize: 20,
     color: Colors.white);
 
-const regularFont = TextStyle(fontFamily: 'KumbhSans', color: Colors.white);
+const regularFont =
+    TextStyle(fontFamily: 'KumbhSans', fontSize: 14, color: Colors.white);
 
 const regularBoldFont = TextStyle(
-    fontFamily: 'KumbhSans', fontWeight: FontWeight.bold, color: Colors.white);
+    fontFamily: 'KumbhSans',
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    color: Colors.white);
 // for large numbers
 const bigNumbers = TextStyle(
     fontWeight: FontWeight.bold,

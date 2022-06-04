@@ -162,7 +162,7 @@ class _SelfEmployedViewState extends State<SelfEmployedView> {
                       _employeeDetailsController.employmentStatus =
                           "Self-Employed";
                       _employeeDetailsController.employeeDetails();
-                      Get.toNamed('/means_of_identification');
+                     // Get.toNamed('/means_of_identification');
                     })
               ],
             ),

@@ -1,6 +1,8 @@
 import 'package:crendly/style/style.dart';
 import 'package:flutter/material.dart';
 
+import '../resources/color_manager.dart';
+
 class TextFieldInput extends StatelessWidget {
   final TextEditingController? textEditingController;
   final bool isPassword;
@@ -42,7 +44,10 @@ class TextFieldInput extends StatelessWidget {
           decoration: InputDecoration(
               suffixIcon: suffixIcon,
               prefixIcon: prefixIcon,
-              hintStyle: smallText,
+              hintStyle: const TextStyle(
+                  fontSize: 12,
+                  fontFamily: 'KumbhSans',
+                  color: ColorManager.lightWhite),
               enabled: enabled,
               disabledBorder: inputBorder,
               hintText: hintText,

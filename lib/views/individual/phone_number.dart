@@ -106,7 +106,6 @@ class _PhoneNumberViewState extends State<PhoneNumberView> {
                                 setState(() {
                                   isLoading = false;
                                 });
-                                Get.toNamed('/otp');
                               });
                             })
                       ],

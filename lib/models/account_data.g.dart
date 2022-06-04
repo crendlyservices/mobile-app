@@ -7,9 +7,9 @@ part of 'account_data.dart';
 // **************************************************************************
 
 AccountData _$AccountDataFromJson(Map<String, dynamic> json) => AccountData(
-      accountName: json['accountName'] as String,
-      bank: json['bank'] as String,
-      accountNumber: json['accountNumber'] as String,
+      accountName: json['accountName'] as String?,
+      bank: json['bank'] as String?,
+      accountNumber: json['accountNumber'] as String?,
     );
 
 Map<String, dynamic> _$AccountDataToJson(AccountData instance) =>

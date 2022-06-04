@@ -63,12 +63,17 @@ class OnboardingRepoImpl extends OnboardingRepo {
   }
 
   @override
-  Future<UpdateRegulatoryId> updateRegulatoryId(String userId, String idNumber,
-      String issuanceDate, String expiryDate, String imagePath) async {
+  Future<UpdateRegulatoryId> updateRegulatoryId(
+      String userId,
+      int type,
+      String idNumber,
+      String issuanceDate,
+      String expiryDate,
+      String imagePath) async {
     try {
       Map<String, dynamic> body = {
         "userId": userId,
-        "type": 4,
+        "type": type,
         "idNumber": idNumber,
         "issuanceDate": issuanceDate,
         "expiryDate": expiryDate,

@@ -15,7 +15,7 @@ class UpdateRegulatoryId {
   String message;
 
   @JsonKey(name: "data")
-  RegulatoryIdData userRegulatoryidData;
+  RegulatoryIdData? userRegulatoryidData;
 
   UpdateRegulatoryId(
       {required this.status,

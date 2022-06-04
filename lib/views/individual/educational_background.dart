@@ -19,6 +19,7 @@ class _EducationalBackgroundViewState extends State<EducationalBackgroundView> {
   // Initial Selected Value
   String dropdownValue = 'None';
   final _controller = Get.find<UpdateUserProfileController>();
+  bool isLoading = false;
   // List of items in our dropdown menu
   var items = [
     'None',
@@ -39,47 +40,72 @@ class _EducationalBackgroundViewState extends State<EducationalBackgroundView> {
             text: 'Educational Background',
             value: 0.2,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 27, left: 24, right: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'What is your educational background?',
-                  style: regularFont,
-                ),
-                DropdownButton(
-                  dropdownColor: backgroundColor,
-                  hint: const Text(
-                    'Qualification',
-                    style: smallText,
+          isLoading
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'This would take a second',
+                        style: smallText,
+                      ),
+                      CircularProgressIndicator(
+                        color: lightOrange,
+                        strokeWidth: 10,
+                      ),
+                    ],
                   ),
-                  style: regularFont,
-                  borderRadius: BorderRadius.circular(6),
-                  value: dropdownValue,
-                  icon: const Icon(Icons.arrow_drop_down),
-                  items: items.map((String items) {
-                    return DropdownMenuItem(value: items, child: Text(items));
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownValue = newValue!;
-                      _controller.educationalQualification = dropdownValue;
-                    });
-                  },
+                )
+              : Padding(
+                  padding: const EdgeInsets.only(top: 27, left: 24, right: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'What is your educational background?',
+                        style: regularFont,
+                      ),
+                      DropdownButton(
+                        dropdownColor: backgroundColor,
+                        hint: const Text(
+                          'Qualification',
+                          style: smallText,
+                        ),
+                        style: regularFont,
+                        borderRadius: BorderRadius.circular(6),
+                        value: dropdownValue,
+                        icon: const Icon(Icons.arrow_drop_down),
+                        items: items.map((String items) {
+                          return DropdownMenuItem(
+                              value: items, child: Text(items));
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownValue = newValue!;
+                            _controller.educationalQualification =
+                                dropdownValue;
+                          });
+                        },
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      CustomELevatedButton(
+                          text: 'Next',
+                          onPressed: () {
+                            setState(() {
+                              isLoading = true;
+                              _controller.updateUserProfile();
+                            });
+                            Future.delayed(const Duration(seconds: 5), () {
+                              setState(() {
+                                isLoading = false;
+                              });
+                            });
+                          })
+                    ],
+                  ),
                 ),
-                const SizedBox(
-                  height: 50,
-                ),
-                CustomELevatedButton(
-                    text: 'Next',
-                    onPressed: () {
-                      _controller.updateUserProfile();
-                      Get.toNamed('/employment_status');
-                    })
-              ],
-            ),
-          ),
         ],
       ),
     );

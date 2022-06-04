@@ -7,6 +7,8 @@ import 'package:crendly/service/generic_api.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../service/http_service_impl.dart';
+
 class VerifyBvnController extends GetxController {
   late OnboardingRepo onboardingRepo;
   late UpdateUserProfileController updateUserProfileController;
@@ -56,8 +58,6 @@ class VerifyBvnController extends GetxController {
     String gender = updateUserProfileController.gender;
     print("Gender: $gender");
 
-    showLoading();
-
     ApiService api = ApiService();
     Map<String, dynamic> body = {
       "bvn": bvn.trim().toString(),
@@ -67,6 +67,7 @@ class VerifyBvnController extends GetxController {
       "profileType": "individual",
     };
     final responseResult = await api.apiRequest<VerifyBvn, FailedApiResponse>(
+        AUTH_BASE_URL,
         "/api/auth/platform/signupv2",
         "post",
         (json) => VerifyBvn.fromJson(json),
@@ -78,17 +79,23 @@ class VerifyBvnController extends GetxController {
         /// Handle left
         /// For example: show dialog or alert
         var result = success;
-        updateUserProfileController.userId = result.verifyUserData!.userId;
-        updateUserProfileController.picture =
-            result.verifyUserData!.bvnData.image;
-        updateUserProfileController.firstName =
-            result.verifyUserData!.bvnData.firstName;
-        updateUserProfileController.middleName =
-            result.verifyUserData!.bvnData.middleName;
-        updateUserProfileController.lastName =
-            result.verifyUserData!.bvnData.lastName;
 
-        updateUserProfileController.dob = result.verifyUserData!.bvnData.dob;
+        if (result.statusRes) {
+          updateUserProfileController.userId = result.verifyUserData!.userId;
+          updateUserProfileController.picture =
+              result.verifyUserData!.bvnData.image;
+          updateUserProfileController.firstName =
+              result.verifyUserData!.bvnData.firstName;
+          updateUserProfileController.middleName =
+              result.verifyUserData!.bvnData.middleName;
+          updateUserProfileController.lastName =
+              result.verifyUserData!.bvnData.lastName;
+
+          updateUserProfileController.dob = result.verifyUserData!.bvnData.dob;
+
+          Get.toNamed('/otp');
+        }
+
         return result;
       },
       (error) {

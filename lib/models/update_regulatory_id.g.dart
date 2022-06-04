@@ -11,8 +11,9 @@ UpdateRegulatoryId _$UpdateRegulatoryIdFromJson(Map<String, dynamic> json) =>
       status: json['status'] as bool,
       code: json['code'] as String?,
       message: json['message'] as String,
-      userRegulatoryidData:
-          RegulatoryIdData.fromJson(json['data'] as Map<String, dynamic>),
+      userRegulatoryidData: json['data'] == null
+          ? null
+          : RegulatoryIdData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UpdateRegulatoryIdToJson(UpdateRegulatoryId instance) =>
@@ -20,5 +21,5 @@ Map<String, dynamic> _$UpdateRegulatoryIdToJson(UpdateRegulatoryId instance) =>
       'status': instance.status,
       'code': instance.code,
       'message': instance.message,
-      'data': instance.userRegulatoryidData.toJson(),
+      'data': instance.userRegulatoryidData?.toJson(),
     };

@@ -1,33 +1,43 @@
 import 'dart:async';
 
+import 'package:crendly/core/binding/bank_account.dart';
+import 'package:crendly/core/binding/face_scan_and_signature.dart';
 import 'package:crendly/core/binding/otp_verification.dart';
 import 'package:crendly/core/binding/select_id_card.dart';
 import 'package:crendly/core/binding/update_user_profile.dart';
 import 'package:crendly/core/binding/verify_bvn.dart';
 import 'package:crendly/style/style.dart';
+import 'package:crendly/views/individual/address.dart';
+import 'package:crendly/views/individual/bank_account.dart';
 import 'package:crendly/views/individual/bvn.dart';
 import 'package:crendly/views/individual/date_of_birth.dart';
 import 'package:crendly/views/individual/educational_background.dart';
 import 'package:crendly/views/individual/email_address.dart';
 import 'package:crendly/views/individual/employed.dart';
 import 'package:crendly/views/individual/employment_status.dart';
+import 'package:crendly/views/individual/face_scan.dart';
 import 'package:crendly/views/individual/means_of_identification.dart';
 import 'package:crendly/views/individual/otp_verification.dart';
 import 'package:crendly/views/individual/personal_information.dart';
 import 'package:crendly/views/individual/phone_number.dart';
 import 'package:crendly/views/individual/select_id_card.dart';
 import 'package:crendly/views/individual/self_employed.dart';
+import 'package:crendly/views/individual/signature.dart';
 import 'package:crendly/views/individual/unemployed.dart';
 import 'package:crendly/views/individual/upload_id_card.dart';
-import 'package:crendly/views/individual/verify_id_card.dart';
 import 'package:crendly/views/main_screens/main_page.dart';
 import 'package:crendly/views/onboarding_screen/onboardingscreen_main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'core/binding/address.dart';
 import 'core/binding/employee_details.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+// Obtain a list of the available cameras on the device.
+
   runApp(const MyApp());
 }
 
@@ -101,17 +111,29 @@ class MyApp extends StatelessWidget {
           page: () => const MeansOfIdentificationView(),
         ),
         GetPage(
-          name: '/select_id_card',
-          page: () => const SelectIdCardView(),
-        ),
+            name: '/select_id_card',
+            page: () => const SelectIdCardView(),
+            binding: SelectIdCardBinding()),
         GetPage(
             name: '/upload_id_card',
             page: () => const UploadIdCardView(),
             binding: SelectIdCardBinding()),
         GetPage(
-          name: '/verify_id_card',
-          page: () => const VerifyIdCardView(),
-        ),
+            name: '/face_scan',
+            page: () => const FaceScanView(),
+            binding: FaceScanAndSignatureBinding()),
+        GetPage(
+            name: '/address',
+            page: () => const AddressView(),
+            binding: AddressBinding()),
+        GetPage(
+            name: '/bank_account',
+            page: () => const AddBankAccountView(),
+            binding: BankAccountBinding()),
+        GetPage(
+            name: '/signature',
+            page: () => const SignatureView(),
+            binding: FaceScanAndSignatureBinding())
       ],
       initialRoute: '/',
     );
@@ -134,7 +156,9 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Timer(
-        const Duration(seconds: 3), () => Get.toNamed('/main_onboarding_view'));
+        const Duration(seconds: 3),
+        () => // Get.toNamed('/signature')
+            Get.toNamed('/main_onboarding_view'));
   }
 
   @override

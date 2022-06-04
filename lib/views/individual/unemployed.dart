@@ -17,7 +17,7 @@ class UnemployedView extends StatefulWidget {
 class _UnemployedViewState extends State<UnemployedView> {
   final _employeeDetailsController = Get.find<EmployeeDetailsController>();
   bool politicallyExposed = false;
-
+  bool isLoading = false;
   void setPoliticallyExposed() {
     _employeeDetailsController.politicallyExposed = politicallyExposed;
   }
@@ -32,85 +32,113 @@ class _UnemployedViewState extends State<UnemployedView> {
             text: "Employed",
             value: 0.2,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 32),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Are you politically exposed?',
-                  style: regularFont,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          politicallyExposed = true;
-                        });
-                        setPoliticallyExposed();
-                      },
-                      child: Container(
-                        width: 150,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            color:
-                                politicallyExposed ? highlightedButton : null,
-                            border: Border.all(color: const Color(0xff4701E0)),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: const Center(
-                          child: Text(
-                            'Yes, I am',
-                            style: smallText,
-                          ),
-                        ),
+          isLoading
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'This would take a second',
+                        style: smallText,
                       ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          politicallyExposed = false;
-                        });
-                        setPoliticallyExposed();
-                      },
-                      child: Container(
-                        width: 150,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            color:
-                                !politicallyExposed ? highlightedButton : null,
-                            border: Border.all(color: const Color(0xff4701E0)),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: const Center(
-                          child: Text(
-                            'No, I am not',
-                            style: smallText,
-                          ),
-                        ),
+                      CircularProgressIndicator(
+                        color: lightOrange,
+                        strokeWidth: 10,
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 60,
-                ),
-                CustomELevatedButton(
-                    text: "Next",
-                    onPressed: () {
-                      _employeeDetailsController.employmentStatus =
-                          "Unemployed";
-                      _employeeDetailsController.employeeDetails();
-                      Get.toNamed('/means_of_identification');
-                    })
-              ],
-            ),
-          )
+                    ],
+                  ),
+                )
+              : Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 21, vertical: 32),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Are you politically exposed?',
+                        style: regularFont,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                politicallyExposed = true;
+                              });
+                              setPoliticallyExposed();
+                            },
+                            child: Container(
+                              width: 150,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  color: politicallyExposed
+                                      ? highlightedButton
+                                      : null,
+                                  border: Border.all(
+                                      color: const Color(0xff4701E0)),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: const Center(
+                                child: Text(
+                                  'Yes, I am',
+                                  style: smallText,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                politicallyExposed = false;
+                              });
+                              setPoliticallyExposed();
+                            },
+                            child: Container(
+                              width: 150,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  color: !politicallyExposed
+                                      ? highlightedButton
+                                      : null,
+                                  border: Border.all(
+                                      color: const Color(0xff4701E0)),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: const Center(
+                                child: Text(
+                                  'No, I am not',
+                                  style: smallText,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 60,
+                      ),
+                      CustomELevatedButton(
+                          text: "Next",
+                          onPressed: () {
+                            setState(() {
+                              isLoading = true;
+                              _employeeDetailsController.employmentStatus =
+                                  "Unemployed";
+                              _employeeDetailsController.employeeDetails();
+                            });
+                            Future.delayed(const Duration(seconds: 5), () {
+                              setState(() {
+                                isLoading = false;
+                              });
+                            });
+                          })
+                    ],
+                  ),
+                )
         ],
       ),
     );

@@ -55,6 +55,9 @@ class EmployeeDetailsController extends GetxController {
         employmentType,
         employmentStatus);
 
+    if (result.status) {
+      Get.toNamed('/means_of_identification');
+    }
     print('Employment details: $result');
   }
 }

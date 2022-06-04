@@ -56,6 +56,10 @@ class UpdateUserProfileController extends GetxController {
         maritalStatus,
         educationalQualification,
         dependents);
+
+    if(result.code == 200){
+      Get.toNamed('/employment_status');
+    }
     print("Update user profile result: ${result.message}");
   }
 }

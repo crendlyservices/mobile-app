@@ -5,10 +5,9 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 
-import 'http_service_impl.dart';
-
 class ApiService {
   Future<Either<T, F>> apiRequest<T, F>(
+    String uri,
     String endPoint,
     String method,
     T Function(Map<String, dynamic> json) fromJson,
@@ -17,7 +16,7 @@ class ApiService {
     String token = '',
   }) async {
     http.Response resp = http.Response("", 200);
-    final String url = AUTH_BASE_URL + endPoint;
+    final String url = uri + endPoint;
     final Map<String, String> headers = <String, String>{};
     headers.putIfAbsent(
         HttpHeaders.contentTypeHeader, () => 'application/json');
@@ -57,13 +56,6 @@ class ApiService {
       } else {
         return right(fromJsonError(json.decode(resp.body)));
       }
-
-      // else {
-      //   Response resp = new Response();
-      //   resp.respMsg = LocalConstants.genericError;
-      //   resp.respCode = LocalConstants.resp_failure;
-      //   Response.
-      // }
     } on TimeoutException catch (e) {
       //handleTimeout();
       return json.decode(resp.body);
