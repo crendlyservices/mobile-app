@@ -1,4 +1,5 @@
 import 'package:crendly/style/style.dart';
+import 'package:crendly/widgets/loading_screen.dart';
 import 'package:crendly/widgets/onboarding_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,6 @@ class UnemployedView extends StatefulWidget {
 class _UnemployedViewState extends State<UnemployedView> {
   final _employeeDetailsController = Get.find<EmployeeDetailsController>();
   bool politicallyExposed = false;
-  bool isLoading = false;
   void setPoliticallyExposed() {
     _employeeDetailsController.politicallyExposed = politicallyExposed;
   }
@@ -32,22 +32,8 @@ class _UnemployedViewState extends State<UnemployedView> {
             text: "Employed",
             value: 0.2,
           ),
-          isLoading
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'This would take a second',
-                        style: smallText,
-                      ),
-                      CircularProgressIndicator(
-                        color: lightOrange,
-                        strokeWidth: 10,
-                      ),
-                    ],
-                  ),
-                )
+          Obx(() => _employeeDetailsController.isLoading.value
+              ? loadingScreen()
               : Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 21, vertical: 32),
@@ -124,21 +110,13 @@ class _UnemployedViewState extends State<UnemployedView> {
                       CustomELevatedButton(
                           text: "Next",
                           onPressed: () {
-                            setState(() {
-                              isLoading = true;
-                              _employeeDetailsController.employmentStatus =
-                                  "Unemployed";
-                              _employeeDetailsController.employeeDetails();
-                            });
-                            Future.delayed(const Duration(seconds: 5), () {
-                              setState(() {
-                                isLoading = false;
-                              });
-                            });
+                            _employeeDetailsController.employmentStatus =
+                                "Unemployed";
+                            _employeeDetailsController.employeeDetails();
                           })
                     ],
                   ),
-                )
+                ))
         ],
       ),
     );

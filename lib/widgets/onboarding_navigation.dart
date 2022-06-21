@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../resources/color_manager.dart';
+
 class OnboardingNavigation extends StatelessWidget {
   final String? text;
   final double? value;
@@ -15,7 +17,7 @@ class OnboardingNavigation extends StatelessWidget {
     return Container(
       height: 198,
       decoration: BoxDecoration(
-        color: headerColor,
+        color: ColorManager.headerColor,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
@@ -44,8 +46,8 @@ class OnboardingNavigation extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(right: 50),
-                  width: 200,
+                  margin: const EdgeInsets.only(right: 22),
+                  width: 230,
                   child: Text(
                     '$text',
                     style: boldSubtitle,

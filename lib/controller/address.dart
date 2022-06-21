@@ -1,6 +1,10 @@
 import 'package:crendly/controller/update_user_profile.dart';
 import 'package:crendly/service/generic_api.dart';
+import 'package:crendly/service/http_service_impl.dart';
 import 'package:get/get.dart';
+
+import '../models/failed_api_response.dart';
+import '../models/user_address.dart';
 
 class AddressController extends GetxController {
   late ApiService _apiService;
@@ -10,55 +14,83 @@ class AddressController extends GetxController {
     _updateUserProfileController = Get.find<UpdateUserProfileController>();
   }
 
-  // updateAddress() async {
-  //   String userId = _updateUserProfileController.userId;
-  //   print("phoneNumber: $phoneNumber");
-  //
-  //   String gender = updateUserProfileController.gender;
-  //   print("Gender: $gender");
-  //
-  //   ApiService api = ApiService();
-  //   Map<String, dynamic> body = {
-  //     "bvn": bvn.trim().toString(),
-  //     "dateOfBirth": dob.trim().toString(),
-  //     "phoneNumber": phoneNumber.trim().toString(),
-  //     "gender": gender.trim().toString(),
-  //     "profileType": "individual",
-  //   };
-  //   final responseResult = await api.apiRequest<VerifyBvn, FailedApiResponse>(
-  //       "/api/auth/platform/signupv2",
-  //       "post",
-  //       (json) => VerifyBvn.fromJson(json),
-  //       (json) => FailedApiResponse.fromJson(json),
-  //       body: body);
-  //
-  //   responseResult.fold(
-  //     (success) {
-  //       /// Handle left
-  //       /// For example: show dialog or alert
-  //       var result = success;
-  //       updateUserProfileController.userId = result.verifyUserData!.userId;
-  //       updateUserProfileController.picture =
-  //           result.verifyUserData!.bvnData.image;
-  //       updateUserProfileController.firstName =
-  //           result.verifyUserData!.bvnData.firstName;
-  //       updateUserProfileController.middleName =
-  //           result.verifyUserData!.bvnData.middleName;
-  //       updateUserProfileController.lastName =
-  //           result.verifyUserData!.bvnData.lastName;
-  //
-  //       updateUserProfileController.dob = result.verifyUserData!.bvnData.dob;
-  //       return result;
-  //     },
-  //     (error) {
-  //       /// Handle right
-  //       /// For example: navigate to home page
-  //       return VerifyBvn(
-  //           statusRes: false,
-  //           message: error.message,
-  //           code: error.code,
-  //           verifyUserData: null);
-  //     },
-  //   );
-  // }
+  String houseNumber = "";
+  String apartmentNumber = "";
+  String street = "";
+  String area = "";
+  String lga = "";
+  String state = "";
+  String residenceHolding = "";
+  String rentedFor = "";
+  String latitude = "";
+  String longitude = "";
+  String streetName = "";
+
+  RxBool isLoading = false.obs;
+
+  showLoading() {
+    isLoading.value = true;
+  }
+
+  hideLoading() {
+    isLoading.value = false;
+  }
+
+  updateAddress() async {
+    showLoading();
+    String userId = _updateUserProfileController.userId;
+
+    Map<String, dynamic> body = {
+      "userId": userId,
+      "houseNumber": houseNumber.trim().toString(),
+      "apartmentNumber": apartmentNumber.trim().toString(),
+      "street": street.trim().toString(),
+      "area": area.trim().toString(),
+      "lga": lga.trim().toString(),
+      "state": state.trim().toString(),
+      "residenceHolding": residenceHolding.trim().toString(),
+      "rentedFor": rentedFor.trim().toString(),
+      // "locationHistories": [
+      //   {
+      //     "dateTimeLocation": DateTime.now().toString(),
+      //     "directions": "string",
+      //     "latitude": latitude.trim().toString(),
+      //     "longitude": longitude.trim().toString(),
+      //     "propertyName": "string",
+      //     "relatedInformation": "string",
+      //     "streetName": streetName.trim().toString()
+      //   }
+      // ]
+    };
+    final responseResult =
+        await _apiService.apiRequest<Address, FailedApiResponse>(
+            IDENTITY_BASE_URL,
+            "/api/Identity/update-address",
+            "post",
+            (json) => Address.fromJson(json),
+            (json) => FailedApiResponse.fromJson(json),
+            body: body);
+    responseResult.fold(
+      (success) {
+        /// Handle left
+        /// For example: show dialog or alert
+        var result = success;
+        if (result.code == "200") {
+          hideLoading();
+          Get.toNamed('/face_scan');
+        }
+
+        return result;
+      },
+      (error) {
+        /// Handle right
+        /// For example: navigate to home page
+        return Address(
+            status: false,
+            code: error.code ?? "",
+            message: error.message ?? "",
+            addressData: error.data);
+      },
+    );
+  }
 }

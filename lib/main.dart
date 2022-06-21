@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:crendly/core/binding/bank_account.dart';
+import 'package:crendly/core/binding/create_password.dart';
 import 'package:crendly/core/binding/face_scan_and_signature.dart';
 import 'package:crendly/core/binding/otp_verification.dart';
 import 'package:crendly/core/binding/select_id_card.dart';
@@ -10,13 +11,16 @@ import 'package:crendly/style/style.dart';
 import 'package:crendly/views/individual/address.dart';
 import 'package:crendly/views/individual/bank_account.dart';
 import 'package:crendly/views/individual/bvn.dart';
+import 'package:crendly/views/individual/create_password.dart';
 import 'package:crendly/views/individual/date_of_birth.dart';
 import 'package:crendly/views/individual/educational_background.dart';
 import 'package:crendly/views/individual/email_address.dart';
 import 'package:crendly/views/individual/employed.dart';
 import 'package:crendly/views/individual/employment_status.dart';
 import 'package:crendly/views/individual/face_scan.dart';
+import 'package:crendly/views/individual/marital_status.dart';
 import 'package:crendly/views/individual/means_of_identification.dart';
+import 'package:crendly/views/individual/onboarding_select_page.dart';
 import 'package:crendly/views/individual/otp_verification.dart';
 import 'package:crendly/views/individual/personal_information.dart';
 import 'package:crendly/views/individual/phone_number.dart';
@@ -34,8 +38,7 @@ import 'core/binding/address.dart';
 import 'core/binding/employee_details.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-
+  WidgetsFlutterBinding.ensureInitialized(); //Add this
 // Obtain a list of the available cameras on the device.
 
   runApp(const MyApp());
@@ -72,7 +75,7 @@ class MyApp extends StatelessWidget {
             binding: VerifyBvnBinding()),
         GetPage(
             name: '/otp',
-            page: () => OtpVerificationView(),
+            page: () => const OtpVerificationView(),
             binding: OtpVerificationBinding()),
         GetPage(
           name: '/main_page',
@@ -85,6 +88,10 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: '/email_address',
             page: () => const EmailAddressView(),
+            binding: UpdateUserProfileBinding()),
+        GetPage(
+            name: '/marital_status',
+            page: () => const MaritalStatusView(),
             binding: UpdateUserProfileBinding()),
         GetPage(
             name: '/educational_background',
@@ -133,7 +140,15 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: '/signature',
             page: () => const SignatureView(),
-            binding: FaceScanAndSignatureBinding())
+            binding: FaceScanAndSignatureBinding()),
+        GetPage(
+            name: '/create_password',
+            page: () => const CreatePassWordView(),
+            binding: CreatePasswordBinding()),
+        GetPage(
+          name: '/onboarding_select_page',
+          page: () => const OnboardingSelectPage(),
+        )
       ],
       initialRoute: '/',
     );
@@ -157,7 +172,9 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
         const Duration(seconds: 3),
-        () => // Get.toNamed('/signature')
+        () =>
+            // Navigator.pushReplacement(context,
+            // MaterialPageRoute(builder: (builder) => OnboardingSelectPage()))
             Get.toNamed('/main_onboarding_view'));
   }
 

@@ -61,6 +61,13 @@ const skipText = TextStyle(
     fontWeight: FontWeight.bold,
     decoration: TextDecoration.underline);
 
+const skipSmallText = TextStyle(
+    color: Color(0xff56E77E),
+    fontSize: 14,
+    fontFamily: 'KumbhSans',
+    fontWeight: FontWeight.bold,
+    decoration: TextDecoration.underline);
+
 final elevatedButtonStyle = ButtonStyle(
   backgroundColor: MaterialStateProperty.all<Color>(const Color(0xff6DE7B4)),
   shape: MaterialStateProperty.all<OutlinedBorder>(const RoundedRectangleBorder(
@@ -73,5 +80,5 @@ final elevatedButtonStyle = ButtonStyle(
 
 final inputBorder = OutlineInputBorder(
   borderSide: const BorderSide(color: Colors.white),
-  borderRadius: BorderRadius.circular(10),
+  borderRadius: BorderRadius.circular(8.0),
 );

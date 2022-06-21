@@ -26,6 +26,17 @@ class EmployeeDetailsController extends GetxController {
   late TextEditingController occupationController;
   late TextEditingController positionController;
 
+  RxBool isLoading = false.obs;
+
+  showLoading() {
+    isLoading.value = true;
+  }
+
+  hideLoading() {
+    isLoading.value = false;
+  }
+
+  @override
   void onInit() {
     employerNameController = TextEditingController();
     occupationController = TextEditingController();
@@ -42,9 +53,8 @@ class EmployeeDetailsController extends GetxController {
   }
 
   employeeDetails() async {
+    showLoading();
     String userId = _updateUserProfileController.userId;
-    print("User Id: $userId");
-    print("employment Status: $employmentStatus");
     final result = await _onboardingRepo.updateEmploymentDetails(
         userId,
         employer,
@@ -56,6 +66,7 @@ class EmployeeDetailsController extends GetxController {
         employmentStatus);
 
     if (result.status) {
+      hideLoading();
       Get.toNamed('/means_of_identification');
     }
     print('Employment details: $result');

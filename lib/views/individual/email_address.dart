@@ -1,12 +1,13 @@
 import 'package:crendly/controller/update_user_profile.dart';
 import 'package:crendly/style/style.dart';
-import 'package:crendly/views/individual/marital_status.dart';
 import 'package:crendly/widgets/custom_elevated_button.dart';
 import 'package:crendly/widgets/onboarding_navigation.dart';
 import 'package:crendly/widgets/textfield_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+
+import '../../resources/color_manager.dart';
 
 class EmailAddressView extends StatefulWidget {
   const EmailAddressView({Key? key}) : super(key: key);
@@ -40,24 +41,27 @@ class _EmailAddressViewState extends State<EmailAddressView> {
                         _updateUserProfileController.emailController,
                     label: 'Email address',
                     hintText: 'newmail@email.com',
-                    suffixIcon: const Icon(
-                      Icons.calendar_today_outlined,
-                      color: Color(0xffFFFFFF),
-                    ),
                     textInputType: TextInputType.emailAddress,
                     onChanged: (value) {
                       _updateUserProfileController.email = value;
                     },
                   ),
+                  const SizedBox(
+                    height: 23,
+                  ),
                   Row(
                     children: const [
                       CircleAvatar(
-                        radius: 5,
-                        backgroundColor: Color(0xffFED0B7),
+                        backgroundColor: ColorManager.lightOrangeWithOpacity,
+                        radius: 8,
+                        child: CircleAvatar(
+                          radius: 5,
+                          backgroundColor: Color(0xffFED0B7),
+                        ),
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.only(top: 9.0, left: 6),
+                          padding: EdgeInsets.only(left: 6),
                           child: Text(
                             'Please provide a valid email address',
                             style: smallText,
@@ -67,13 +71,12 @@ class _EmailAddressViewState extends State<EmailAddressView> {
                     ],
                   ),
                   const SizedBox(
-                    height: 74,
+                    height: 81,
                   ),
                   CustomELevatedButton(
                       text: 'Next',
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const MaritalStatusView()));
+                        Get.toNamed('/marital_status');
                       })
                 ],
               ),

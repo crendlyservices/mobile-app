@@ -1,8 +1,10 @@
 import 'package:crendly/controller/update_user_profile.dart';
+import 'package:crendly/widgets/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../resources/color_manager.dart';
 import '../../style/style.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/onboarding_navigation.dart';
@@ -17,12 +19,11 @@ class EducationalBackgroundView extends StatefulWidget {
 
 class _EducationalBackgroundViewState extends State<EducationalBackgroundView> {
   // Initial Selected Value
-  String dropdownValue = 'None';
+  String? educationalQualification;
   final _controller = Get.find<UpdateUserProfileController>();
   bool isLoading = false;
   // List of items in our dropdown menu
-  var items = [
-    'None',
+  var qualificationList = [
     'Primary Education',
     'Secondary Education',
     'Bachelor\'s degree',
@@ -40,72 +41,87 @@ class _EducationalBackgroundViewState extends State<EducationalBackgroundView> {
             text: 'Educational Background',
             value: 0.2,
           ),
-          isLoading
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'This would take a second',
-                        style: smallText,
-                      ),
-                      CircularProgressIndicator(
-                        color: lightOrange,
-                        strokeWidth: 10,
-                      ),
-                    ],
-                  ),
-                )
-              : Padding(
-                  padding: const EdgeInsets.only(top: 27, left: 24, right: 24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'What is your educational background?',
-                        style: regularFont,
-                      ),
-                      DropdownButton(
-                        dropdownColor: backgroundColor,
-                        hint: const Text(
-                          'Qualification',
-                          style: smallText,
+          Obx(
+            () => _controller.isLoading.value
+                ? loadingScreen()
+                : Padding(
+                    padding:
+                        const EdgeInsets.only(top: 27, left: 24, right: 24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'What is your educational background?',
+                          style: regularFont,
                         ),
-                        style: regularFont,
-                        borderRadius: BorderRadius.circular(6),
-                        value: dropdownValue,
-                        icon: const Icon(Icons.arrow_drop_down),
-                        items: items.map((String items) {
-                          return DropdownMenuItem(
-                              value: items, child: Text(items));
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            dropdownValue = newValue!;
-                            _controller.educationalQualification =
-                                dropdownValue;
-                          });
-                        },
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      CustomELevatedButton(
-                          text: 'Next',
-                          onPressed: () {
-                            setState(() {
-                              isLoading = true;
-                              _controller.updateUserProfile();
-                            });
-                            Future.delayed(const Duration(seconds: 5), () {
+                        Container(
+                          margin: const EdgeInsets.only(top: 9.0),
+                          padding: const EdgeInsets.only(
+                              left: 15, right: 15, top: 5),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                      value: educationalQualification,
+                                      iconSize: 30,
+                                      dropdownColor:
+                                          ColorManager.backgroundColor,
+                                      iconEnabledColor: Colors.white,
+                                      icon: (null),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                      ),
+                                      hint: const Text(
+                                        'Qualification',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: 'KumbhSans',
+                                            color: ColorManager.lightWhite),
+                                      ),
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          educationalQualification = newValue!;
+                                          _controller.educationalQualification =
+                                              educationalQualification!;
+                                          print(educationalQualification);
+                                        });
+                                      },
+                                      items: qualificationList.map((item) {
+                                        return DropdownMenuItem(
+                                          child: Text(item),
+                                          value: item.toString(),
+                                        );
+                                      }).toList()),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 125,
+                        ),
+                        CustomELevatedButton(
+                            text: 'Next',
+                            onPressed: () {
                               setState(() {
-                                isLoading = false;
+                                isLoading = true;
+                                _controller.updateUserProfile();
                               });
-                            });
-                          })
-                    ],
+                              Future.delayed(const Duration(seconds: 5), () {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                              });
+                            })
+                      ],
+                    ),
                   ),
-                ),
+          )
         ],
       ),
     );

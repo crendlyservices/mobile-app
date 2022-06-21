@@ -1,13 +1,12 @@
-import 'package:crendly/resources/color_manager.dart';
-import 'package:crendly/style/style.dart';
-import 'package:crendly/views/business/crendly_business.dart';
+import 'package:crendly/views/main_screens/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
-class SelectPage extends StatelessWidget {
-  const SelectPage({Key? key}) : super(key: key);
+import '../../resources/color_manager.dart';
+import '../../style/style.dart';
+
+class OnboardingSelectPage extends StatelessWidget {
+  const OnboardingSelectPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +16,7 @@ class SelectPage extends StatelessWidget {
         padding: const EdgeInsets.only(left: 26),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 106, right: 200),
@@ -25,7 +25,7 @@ class SelectPage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 45),
               child: const Text(
-                'Which one of these options best describes you?',
+                'What would you like to do on Crendly?',
                 style: TextStyle(
                   fontSize: 32,
                   fontFamily: 'KumbhSans',
@@ -35,23 +35,16 @@ class SelectPage extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 8,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(right: 150.0),
-              child: Text(
-                'Either way welcome to crendly',
-                style: smallText,
-              ),
-            ),
-            const SizedBox(
               height: 37,
             ),
             Row(
               children: [
                 InkWell(
                   onTap: () {
-                    Get.toNamed('/bvn');
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (builder) => const MainPageView()));
                   },
                   child: Container(
                       decoration: BoxDecoration(
@@ -72,7 +65,7 @@ class SelectPage extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                            margin: const EdgeInsets.only(top: 22, right: 88),
+                            margin: const EdgeInsets.only(top: 22, right: 80),
                             child: CircleAvatar(
                               backgroundColor: backgroundColor,
                               radius: 25,
@@ -82,21 +75,25 @@ class SelectPage extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            margin: const EdgeInsets.only(top: 43, right: 31),
+                            margin: const EdgeInsets.only(top: 20, right: 31),
                             child: const Padding(
-                              padding: EdgeInsets.only(left: 2.0),
+                              padding: EdgeInsets.only(left: 18.0),
                               child: Text(
-                                'Individual',
+                                'Give Loan',
                                 style: TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
                                   color: Color.fromRGBO(19, 17, 118, 1),
                                   fontFamily: 'KumbhSans',
                                 ),
                               ),
                             ),
                           ),
+                          const SizedBox(
+                            height: 8,
+                          ),
                           const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            padding: EdgeInsets.symmetric(horizontal: 18.0),
                             child: Text(
                                 'Invest in the needs of real people and earn interests monthly'),
                           )
@@ -107,10 +104,7 @@ class SelectPage extends StatelessWidget {
                   width: 12,
                 ),
                 InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const CrendlyBusiness()));
-                  },
+                  onTap: () {},
                   child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(24),
@@ -130,7 +124,7 @@ class SelectPage extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                            margin: const EdgeInsets.only(top: 22, right: 88),
+                            margin: const EdgeInsets.only(top: 22, right: 80),
                             child: CircleAvatar(
                               radius: 25,
                               backgroundColor: backgroundColor,
@@ -140,17 +134,24 @@ class SelectPage extends StatelessWidget {
                             ),
                           ),
                           Container(
-                              margin: const EdgeInsets.only(top: 43, right: 31),
-                              child: const Text(
-                                'Business',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  color: Color.fromRGBO(19, 17, 118, 1),
-                                  fontFamily: 'KumbhSans',
+                              margin: const EdgeInsets.only(top: 20, right: 31),
+                              child: const Padding(
+                                padding: EdgeInsets.only(left: 18.0),
+                                child: Text(
+                                  'Collect Loan',
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromRGBO(19, 17, 118, 1),
+                                    fontFamily: 'KumbhSans',
+                                  ),
                                 ),
                               )),
+                          const SizedBox(
+                            height: 8,
+                          ),
                           const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            padding: EdgeInsets.symmetric(horizontal: 18.0),
                             child: Text(
                                 'Get money for what you need at an incredible speed'),
                           )
@@ -158,7 +159,17 @@ class SelectPage extends StatelessWidget {
                       )),
                 )
               ],
-            )
+            ),
+            const SizedBox(
+              height: 31,
+            ),
+            const SizedBox(
+                width: 235,
+                height: 48,
+                child: Text(
+                  'Either way  we\'ll be having a good time together',
+                  style: regularFont,
+                ))
           ],
         ),
       ),
