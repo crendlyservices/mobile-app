@@ -1,26 +1,21 @@
-import 'dart:io';
-
 import 'package:crendly/controller/update_user_profile.dart';
-import 'package:crendly/models/face_scan_and_signature.dart';
-import 'package:crendly/service/generic_api.dart';
-import 'package:crendly/service/http_service_impl.dart';
-import 'package:crendly/widgets/dialog.dart';
 import 'package:get/get.dart';
 
+import '../models/create_password.dart';
 import '../models/failed_api_response.dart';
+import '../service/generic_api.dart';
+import '../service/http_service_impl.dart';
 
-class FaceScanAndSignatureController extends GetxController {
+class CreatePasswordController extends GetxController {
   late ApiService _apiService;
   late UpdateUserProfileController _updateUserProfileController;
 
-  FaceScanAndSignatureController() {
+  CreatePasswordController() {
     _apiService = ApiService();
     _updateUserProfileController = Get.find<UpdateUserProfileController>();
   }
 
-  String faceScanImagePath = "";
-  String signaturePath = "";
-  File? fileImage;
+  String password = "";
 
   RxBool isLoading = false.obs;
 
@@ -32,18 +27,18 @@ class FaceScanAndSignatureController extends GetxController {
     isLoading.value = false;
   }
 
-  updateUserFaceScanAndSignature() async {
+  createPassword() async {
+    showLoading();
     Map body = {
       "userId": _updateUserProfileController.userId,
-      "imagePath": faceScanImagePath,
-      "signaturePath": signaturePath
+      "password": password.trim().toString()
     };
     final responseResult =
-        await _apiService.apiRequest<FaceScanAndSignature, FailedApiResponse>(
-            IDENTITY_BASE_URL,
-            "/api/Identity/update-facescan",
+        await _apiService.apiRequest<CreatePassword, FailedApiResponse>(
+            AUTH_BASE_URL,
+            "/api/auth/create_password",
             "post",
-            (json) => FaceScanAndSignature.fromJson(json),
+            (json) => CreatePassword.fromJson(json),
             (json) => FailedApiResponse.fromJson(json),
             body: body);
 
@@ -53,16 +48,16 @@ class FaceScanAndSignatureController extends GetxController {
         /// For example: show dialog or alert
         var result = success;
         if (result.status) {
-          dialog("assets/images/person.svg", () {
-            Get.toNamed('/bank_account');
-          }, "Your signature has been secured in our database", "Continue");
+          hideLoading();
+          Get.toNamed('/onboarding_select_page');
+        } else {
+          Get.back();
         }
-        return result;
       },
       (error) {
         /// Handle right
         /// For example: navigate to home page
-        return FaceScanAndSignature(
+        return CreatePassword(
             status: false,
             message: error.message!,
             code: error.code!,

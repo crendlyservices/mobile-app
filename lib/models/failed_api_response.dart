@@ -4,7 +4,6 @@
 
 import 'dart:convert';
 
-
 FailedApiResponse failedApiResponseFromJson(String str) =>
     FailedApiResponse.fromJson(json.decode(str));
 
@@ -13,22 +12,21 @@ String failedApiResponseToJson(FailedApiResponse data) =>
 
 class FailedApiResponse {
   FailedApiResponse({
-    required this.code,
-    required this.message,
     required this.status,
+    this.code,
+    this.message,
     required this.data,
   });
-
-  String code;
-  String message;
   bool status;
+  String? code;
+  String? message;
   dynamic data;
 
   factory FailedApiResponse.fromJson(Map<String, dynamic> json) =>
       FailedApiResponse(
+        status: json["status"],
         code: json["code"],
         message: json["message"],
-        status: json["status"],
         data: json["data"],
       );
 

@@ -44,8 +44,8 @@ class BankAccountController extends GetxController {
         /// For example: navigate to home page
         return AccountDetails(
             status: false,
-            message: error.message,
-            code: error.code,
+            message: error.message!,
+            code: error.code!,
             accountData: null);
       },
     );

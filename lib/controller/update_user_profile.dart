@@ -24,6 +24,16 @@ class UpdateUserProfileController extends GetxController {
   String educationalQualification = "";
   String dob = "";
   String dependents = "None";
+  RxBool isLoading = false.obs;
+
+  showLoading() {
+    isLoading.value = true;
+  }
+
+  hideLoading() {
+    isLoading.value = false;
+  }
+
   @override
   void onInit() {
     emailController = TextEditingController();
@@ -39,12 +49,7 @@ class UpdateUserProfileController extends GetxController {
   }
 
   updateUserProfile() async {
-    print('userid: $userId');
-    print('firstName: $firstName');
-    print('email: $email');
-    print('marital_status: $maritalStatus');
-    print('educational qualifiation: $educationalQualification');
-    print('dependent: $dependents');
+    showLoading();
     final result = await OnboardingRepoImpl().updateUserProfile(
         userId,
         phoneNumber,
@@ -57,7 +62,8 @@ class UpdateUserProfileController extends GetxController {
         educationalQualification,
         dependents);
 
-    if(result.code == 200){
+    if (result.code == 200) {
+      hideLoading();
       Get.toNamed('/employment_status');
     }
     print("Update user profile result: ${result.message}");

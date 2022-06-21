@@ -44,14 +44,15 @@ class VerifyBvnController extends GetxController {
   RxBool isLoading = false.obs;
 
   showLoading() {
-    isLoading.toggle();
+    isLoading.value = true;
   }
 
   hideLoading() {
-    isLoading.toggle();
+    isLoading.value = false;
   }
 
   verifyUserBvn() async {
+    showLoading();
     String phoneNumber = updateUserProfileController.phoneNumber;
     print("phoneNumber: $phoneNumber");
 
@@ -81,6 +82,7 @@ class VerifyBvnController extends GetxController {
         var result = success;
 
         if (result.statusRes) {
+          hideLoading();
           updateUserProfileController.userId = result.verifyUserData!.userId;
           updateUserProfileController.picture =
               result.verifyUserData!.bvnData.image;
@@ -103,8 +105,8 @@ class VerifyBvnController extends GetxController {
         /// For example: navigate to home page
         return VerifyBvn(
             statusRes: false,
-            message: error.message,
-            code: error.code,
+            message: error.message ?? "",
+            code: error.code ?? "",
             verifyUserData: null);
       },
     );

@@ -120,6 +120,7 @@ class _SelectIdCardViewState extends State<SelectIdCardView> {
                         width: 400,
                         height: 50,
                         decoration: BoxDecoration(
+                            color: type == 1 ? highlightedButton : null,
                             border: Border.all(color: const Color(0xff4701E0)),
                             borderRadius: BorderRadius.circular(20)),
                         child: const Center(

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:crendly/controller/facial_scan_and_signature.dart';
+import 'package:crendly/widgets/dialog.dart';
 import 'package:crendly/widgets/onboarding_navigation.dart';
 import 'package:crendly/widgets/outline_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,24 +31,83 @@ class _FaceScanViewState extends State<FaceScanView> {
   final CloudinaryService _cloudinaryService = CloudinaryServiceImpl();
   final ImagePicker _imagePicker = ImagePicker();
 
-
-  Future<String> selectImageFromCamera() async {
+  pickImage(ImageSource imageSource, CameraDevice preferredCameraDevice) async {
     final image = await _imagePicker.pickImage(
-        source: ImageSource.camera, preferredCameraDevice: CameraDevice.front);
+        source: imageSource, preferredCameraDevice: preferredCameraDevice);
+    if (image != null) {
+      setState(() {
+        this.image = File(image.path);
+      });
+      Future.delayed(const Duration(seconds: 3), () {
+        dialog("assets/images/fac.svg", () {
+          _faceScanController.fileImage = this.image;
+          Get.toNamed('/signature');
+        }, "Facial Recognition Complete", "continue");
+        // Get.defaultDialog(
+        //     backgroundColor: ColorManager.backgroundColor,
+        //     barrierDismissible: true,
+        //     title: '',
+        //     content: Column(children: [
+        //       SvgPicture.asset('assets/images/phone_android.svg'),
+        //       const SizedBox(
+        //         height: 100,
+        //       ),
+        //       const Text(
+        //         'Facial Recognition Complete',
+        //         style: TextStyle(
+        //           fontWeight: FontWeight.bold,
+        //           fontSize: 20,
+        //           color: ColorManager.lightOrange,
+        //           fontFamily: 'KumbhSans',
+        //         ),
+        //       ),
+        //       const SizedBox(
+        //         height: 114,
+        //       ),
+        //       SizedBox(
+        //         width: 150,
+        //         child: ElevatedButton(
+        //           onPressed: () async {
+        //             Future<String> imagePath = saveImageToCloudinary();
+        //
+        //             _faceScanController.imagePath = await imagePath;
+        //             Get.toNamed('/signature');
+        //           },
+        //           child: const Text(
+        //             'Ok',
+        //             style: TextStyle(color: Colors.white),
+        //           ),
+        //           style: ButtonStyle(
+        //               minimumSize: MaterialStateProperty.all<Size>(
+        //                   const Size.fromHeight(50)),
+        //               shape: MaterialStateProperty.all<OutlinedBorder>(
+        //                   const RoundedRectangleBorder(
+        //                 side: BorderSide(
+        //                   color: Color(0xff6DE7B4),
+        //                 ),
+        //                 borderRadius: BorderRadius.all(
+        //                   Radius.circular(10.0),
+        //                 ),
+        //               )),
+        //               backgroundColor: MaterialStateProperty.all<Color>(
+        //                   ColorManager.backgroundColor)),
+        //         ),
+        //       )
+        //     ]));
+      });
+    } else {
+      throw Exception("Image is null");
+    }
+  }
+
+  Future<String> saveImageToCloudinary() async {
     CloudinaryResponse response;
     try {
-      if (image != null) {
-        final imageTemporary = File(image.path);
-        response = await _cloudinaryService.uploadFileOnCloudinary(
-            image.path, CloudinaryResourceType.Auto);
-        setState(() {
-          this.image = imageTemporary;
-        });
-        print("Cloudinary response ${response.url}");
-        return Future.value(response.secureUrl);
-      } else {
-        throw Exception();
-      }
+      response = await _cloudinaryService.uploadFileOnCloudinary(
+          image!.path, CloudinaryResourceType.Auto);
+
+      print("Cloudinary response ${response.url}");
+      return Future.value(response.secureUrl);
     } on PlatformException catch (e) {
       print("Failed to pick image: $e");
       throw Exception();
@@ -86,71 +146,13 @@ class _FaceScanViewState extends State<FaceScanView> {
                   const SizedBox(
                     height: 102,
                   ),
-                  InkWell(
-                    onTap: () {
-                      Future.delayed(const Duration(seconds: 3), () {
-                        Get.defaultDialog(
-                            backgroundColor: ColorManager.backgroundColor,
-                            barrierDismissible: true,
-                            title: '',
-                            content: Column(children: [
-                              SvgPicture.asset(
-                                  'assets/images/phone_android.svg'),
-                              const SizedBox(
-                                height: 100,
-                              ),
-                              const Text(
-                                'Facial Recognition Complete',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: ColorManager.lightOrange,
-                                  fontFamily: 'KumbhSans',
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 114,
-                              ),
-                              SizedBox(
-                                width: 150,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    Get.toNamed('/signature');
-                                  },
-                                  child: const Text(
-                                    'Ok',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  style: ButtonStyle(
-                                      minimumSize:
-                                          MaterialStateProperty.all<Size>(
-                                              const Size.fromHeight(50)),
-                                      shape: MaterialStateProperty.all<
-                                              OutlinedBorder>(
-                                          const RoundedRectangleBorder(
-                                        side: BorderSide(
-                                          color: Color(0xff6DE7B4),
-                                        ),
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0),
-                                        ),
-                                      )),
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              ColorManager.backgroundColor)),
-                                ),
-                              )
-                            ]));
-                      });
-                    },
-                    child: SizedBox(
-                      height: 348,
-                      width: 348,
-                      child: Center(
-                        child: CircleAvatar(
-                          backgroundImage: FileImage(image!),
-                          radius: 348,
-                        ),
+                  SizedBox(
+                    height: 348,
+                    width: 348,
+                    child: Center(
+                      child: CircleAvatar(
+                        backgroundImage: FileImage(image!),
+                        radius: 348,
                       ),
                     ),
                   ),
@@ -207,9 +209,7 @@ class _FaceScanViewState extends State<FaceScanView> {
                       CustomOutlineButton(
                           text: 'Scan face',
                           onPressed: () async {
-                            Future<String> imagePath = selectImageFromCamera();
-
-                            _faceScanController.imagePath = await imagePath;
+                            pickImage(ImageSource.camera, CameraDevice.front);
                           }),
                       const SizedBox(
                         height: 66,

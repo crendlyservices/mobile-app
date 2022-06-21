@@ -8,6 +8,7 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../../controller/update_user_profile.dart';
 import '../../controller/verify_bvn.dart';
+import '../../resources/color_manager.dart';
 
 class DOBView extends StatefulWidget {
   const DOBView({Key? key}) : super(key: key);
@@ -19,10 +20,10 @@ class DOBView extends StatefulWidget {
 class _DOBViewState extends State<DOBView> {
   final _verifyBvnController = Get.find<VerifyBvnController>();
   final _updateUserProfileController = Get.find<UpdateUserProfileController>();
-  String dropdownValue = 'None';
+  String? gender;
 
   // List of items in our dropdown menu
-  var items = ['None', 'Male', 'Female'];
+  var genderList = ['Male', 'Female'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,7 @@ class _DOBViewState extends State<DOBView> {
         child: Column(
           children: [
             const OnboardingNavigation(
-              text: 'Date of Birth',
+              text: 'Date of Birth & Gender',
               value: 0.2,
             ),
             Padding(
@@ -58,8 +59,12 @@ class _DOBViewState extends State<DOBView> {
                   Row(
                     children: const [
                       CircleAvatar(
-                        radius: 5,
-                        backgroundColor: Color(0xffFED0B7),
+                        backgroundColor: ColorManager.lightOrangeWithOpacity,
+                        radius: 8,
+                        child: CircleAvatar(
+                          radius: 5,
+                          backgroundColor: Color(0xffFED0B7),
+                        ),
                       ),
                       Expanded(
                         child: Padding(
@@ -77,38 +82,59 @@ class _DOBViewState extends State<DOBView> {
                   ),
                   const Text(
                     'Gender',
-                    style: regularBoldFont,
+                    style: regularFont,
                     textAlign: TextAlign.start,
                   ),
                   const SizedBox(
                     height: 6,
                   ),
-                  SizedBox(
-                    width: 300,
-                    child: DropdownButton(
-                      dropdownColor: backgroundColor,
-                      hint: const Text(
-                        'Gender',
-                        style: smallText,
-                      ),
-                      style: regularFont,
-                      borderRadius: BorderRadius.circular(6),
-                      value: dropdownValue,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      items: items.map((String items) {
-                        return DropdownMenuItem(
-                            value: items, child: Text(items));
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValue = newValue!;
-                          _updateUserProfileController.gender = dropdownValue;
-                        });
-                      },
+                  Container(
+                    padding: const EdgeInsets.only(left: 15, right: 15, top: 5),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.circular(8)),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                                value: gender,
+                                iconSize: 30,
+                                dropdownColor: ColorManager.backgroundColor,
+                                iconEnabledColor: Colors.white,
+                                icon: (null),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                                hint: const Text(
+                                  'Select Gender',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: 'KumbhSans',
+                                      color: ColorManager.lightWhite),
+                                ),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    gender = newValue;
+                                    _updateUserProfileController.gender =
+                                        gender!;
+                                    print(gender);
+                                  });
+                                },
+                                items: genderList.map((item) {
+                                  return DropdownMenuItem(
+                                    child: Text(item),
+                                    value: item.toString(),
+                                  );
+                                }).toList()),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(
-                    height: 74,
+                    height: 171,
                   ),
                   CustomELevatedButton(
                       text: 'Next',

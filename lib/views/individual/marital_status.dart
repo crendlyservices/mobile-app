@@ -337,7 +337,12 @@ class _MaritalStatusViewState extends State<MaritalStatusView> {
                   ),
                   dependents
                       ? InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            setState(() {
+                              dependent = "5 and above";
+                            });
+                            setDependents();
+                          },
                           child: Container(
                             width: 150,
                             height: 40,

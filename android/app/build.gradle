@@ -39,6 +39,7 @@ android {
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
+//        jniLibs.srcDirs = ["C:\\Users\\Public\\flutter\\mobile-app\\assets\\lib\\armeabi-v7a\\libfacerec.so"]
     }
 
     defaultConfig {

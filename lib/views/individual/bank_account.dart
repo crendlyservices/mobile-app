@@ -175,7 +175,11 @@ class _AddBankAccountViewState extends State<AddBankAccountView> {
                   const SizedBox(
                     height: 172,
                   ),
-                  CustomELevatedButton(text: "Continue", onPressed: () {})
+                  CustomELevatedButton(
+                      text: "Continue",
+                      onPressed: () {
+                        Get.toNamed('/create_password');
+                      })
                 ],
               ),
             ),
