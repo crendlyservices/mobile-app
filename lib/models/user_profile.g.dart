@@ -10,13 +10,14 @@ UpdateUserProfile _$UpdateUserProfileFromJson(Map<String, dynamic> json) =>
     UpdateUserProfile(
       code: json['code'] as int,
       message: json['message'] as String,
-      userProfileData:
-          UserProfileData.fromJson(json['data'] as Map<String, dynamic>),
+      userProfileData: json['data'] == null
+          ? null
+          : UserProfileData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UpdateUserProfileToJson(UpdateUserProfile instance) =>
     <String, dynamic>{
       'code': instance.code,
       'message': instance.message,
-      'data': instance.userProfileData.toJson(),
+      'data': instance.userProfileData?.toJson(),
     };

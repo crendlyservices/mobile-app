@@ -12,12 +12,10 @@ class UpdateUserProfile {
   String message;
 
   @JsonKey(name: "data")
-  UserProfileData userProfileData;
+  UserProfileData? userProfileData;
 
   UpdateUserProfile(
-      {required this.code,
-      required this.message,
-      required this.userProfileData});
+      {required this.code, required this.message, this.userProfileData});
 
   factory UpdateUserProfile.fromJson(Map<String, dynamic> json) =>
       _$UpdateUserProfileFromJson(json);

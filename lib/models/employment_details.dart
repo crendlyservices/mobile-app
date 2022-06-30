@@ -15,13 +15,13 @@ class EmploymentDetails {
   String message;
 
   @JsonKey(name: "data")
-  EmploymentData data;
+  EmploymentData? data;
 
   EmploymentDetails(
       {required this.status,
       required this.code,
       required this.message,
-      required this.data});
+      this.data});
 
   factory EmploymentDetails.fromJson(Map<String, dynamic> json) =>
       _$EmploymentDetailsFromJson(json);

@@ -124,7 +124,6 @@ class OnboardingRepoImpl extends OnboardingRepo {
       String maritalStatus,
       String educationalQualification,
       String dependents) async {
-    deviceDetails();
     Future<String?> deviceInfo = deviceDetails();
     String? deviceName = await deviceInfo;
     print("device Name: $deviceName");

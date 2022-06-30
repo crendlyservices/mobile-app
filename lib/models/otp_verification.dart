@@ -15,13 +15,13 @@ class OtpVerification {
   String message;
 
   @JsonKey(name: "data")
-  OtpData data;
+  OtpData? data;
 
   OtpVerification(
       {required this.statusRes,
       required this.code,
       required this.message,
-      required this.data});
+      this.data});
 
   factory OtpVerification.fromJson(Map<String, dynamic> json) =>
       _$OtpVerificationFromJson(json);

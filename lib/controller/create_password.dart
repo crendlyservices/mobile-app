@@ -1,10 +1,14 @@
 import 'package:crendly/controller/update_user_profile.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../models/create_password.dart';
 import '../models/failed_api_response.dart';
+import '../resources/color_manager.dart';
 import '../service/generic_api.dart';
 import '../service/http_service_impl.dart';
+import '../widgets/custom_elevated_button.dart';
 
 class CreatePasswordController extends GetxController {
   late ApiService _apiService;
@@ -49,7 +53,53 @@ class CreatePasswordController extends GetxController {
         var result = success;
         if (result.status) {
           hideLoading();
-          Get.toNamed('/onboarding_select_page');
+          Get.defaultDialog(
+              title: '',
+              radius: 24,
+              backgroundColor: ColorManager.dialogBackgroundColor,
+              barrierDismissible: true,
+              content: Column(children: [
+                CircleAvatar(
+                  radius: 36,
+                  backgroundColor: ColorManager.lightGreen,
+                  child: CircleAvatar(
+                      backgroundColor: ColorManager.dialogBackgroundColor,
+                      radius: 32,
+                      child: SvgPicture.asset("assets/images/success.svg")),
+                ),
+                const SizedBox(
+                  height: 51,
+                  child: VerticalDivider(
+                    thickness: 1,
+                    color: ColorManager.lightGreen,
+                  ),
+                ),
+                const SizedBox(
+                  height: 35,
+                ),
+                const Center(
+                  child: Text(
+                    "Welcome to Crendly",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: ColorManager.lightOrange,
+                      fontFamily: 'KumbhSans',
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 102,
+                ),
+                SizedBox(
+                    width: 150,
+                    child: CustomELevatedButton(
+                      onPressed: () {
+                        Get.toNamed('/onboarding_select_page');
+                      },
+                      text: 'Continue',
+                    ))
+              ]));
         } else {
           Get.back();
         }

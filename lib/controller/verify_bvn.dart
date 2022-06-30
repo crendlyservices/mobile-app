@@ -1,6 +1,4 @@
 import 'package:crendly/controller/update_user_profile.dart';
-import 'package:crendly/core/repository/onboarding_repo.dart';
-import 'package:crendly/core/repository/onboarding_repo_impl.dart';
 import 'package:crendly/models/failed_api_response.dart';
 import 'package:crendly/models/verify_bvn.dart';
 import 'package:crendly/service/generic_api.dart';
@@ -10,11 +8,11 @@ import 'package:get/get.dart';
 import '../service/http_service_impl.dart';
 
 class VerifyBvnController extends GetxController {
-  late OnboardingRepo onboardingRepo;
+  late ApiService _apiService;
   late UpdateUserProfileController updateUserProfileController;
 
   VerifyBvnController() {
-    onboardingRepo = Get.find<OnboardingRepoImpl>();
+    _apiService = ApiService();
     updateUserProfileController = Get.find<UpdateUserProfileController>();
   }
 
@@ -59,7 +57,6 @@ class VerifyBvnController extends GetxController {
     String gender = updateUserProfileController.gender;
     print("Gender: $gender");
 
-    ApiService api = ApiService();
     Map<String, dynamic> body = {
       "bvn": bvn.trim().toString(),
       "dateOfBirth": dob.trim().toString(),
@@ -67,13 +64,14 @@ class VerifyBvnController extends GetxController {
       "gender": gender.trim().toString(),
       "profileType": "individual",
     };
-    final responseResult = await api.apiRequest<VerifyBvn, FailedApiResponse>(
-        AUTH_BASE_URL,
-        "/api/auth/platform/signupv2",
-        "post",
-        (json) => VerifyBvn.fromJson(json),
-        (json) => FailedApiResponse.fromJson(json),
-        body: body);
+    final responseResult =
+        await _apiService.apiRequest<VerifyBvn, FailedApiResponse>(
+            AUTH_BASE_URL,
+            "/api/auth/platform/signupv2",
+            "post",
+            (json) => VerifyBvn.fromJson(json),
+            (json) => FailedApiResponse.fromJson(json),
+            body: body);
 
     responseResult.fold(
       (success) {
@@ -96,6 +94,9 @@ class VerifyBvnController extends GetxController {
           updateUserProfileController.dob = result.verifyUserData!.bvnData.dob;
 
           Get.toNamed('/otp');
+        } else {
+          hideLoading();
+          Get.back();
         }
 
         return result;
