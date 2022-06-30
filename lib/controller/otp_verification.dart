@@ -1,15 +1,18 @@
 import 'package:crendly/controller/update_user_profile.dart';
-import 'package:crendly/core/repository/onboarding_repo.dart';
-import 'package:crendly/core/repository/onboarding_repo_impl.dart';
 import 'package:crendly/widgets/dialog.dart';
 import 'package:get/get.dart';
 
+import '../models/failed_api_response.dart';
+import '../models/otp_verification.dart';
+import '../service/generic_api.dart';
+import '../service/http_service_impl.dart';
+
 class OtpVerificationController extends GetxController {
-  late OnboardingRepo _onboardingRepo;
+  late ApiService _apiService;
   late UpdateUserProfileController _updateUserProfileController;
 
   OtpVerificationController() {
-    _onboardingRepo = OnboardingRepoImpl();
+    _apiService = ApiService();
     _updateUserProfileController = Get.find<UpdateUserProfileController>();
   }
 
@@ -27,19 +30,43 @@ class OtpVerificationController extends GetxController {
     showLoading();
     String phoneNumber = _updateUserProfileController.phoneNumber;
 
-    final result = await _onboardingRepo.otpVerificaton(otp, phoneNumber);
-    print(
-        'Otp: $otp, phoneNumber: ${_updateUserProfileController.phoneNumber}');
-    print("Status: ${result.statusRes}");
-    print("Code: ${result.code}");
+    Map<String, dynamic> body = {"otp": otp, "username": phoneNumber};
 
-    if (result.code == "200") {
-      hideLoading();
-      dialog('assets/images/phone_android.svg', () {
-        Get.toNamed('/personal_info');
-      }, 'OTP Verification successful', "ok");
-    }else{
-      Get.back();
-    }
+    final responseResult =
+        await _apiService.apiRequest<OtpVerification, FailedApiResponse>(
+            AUTH_BASE_URL,
+            "/api/auth/verify_emailOrPhone",
+            "post",
+            (json) => OtpVerification.fromJson(json),
+            (json) => FailedApiResponse.fromJson(json),
+            body: body);
+
+    responseResult.fold(
+      (success) {
+        /// Handle left
+        /// For example: show dialog or alert
+        var result = success;
+
+        if (result.statusRes) {
+          hideLoading();
+          dialog('assets/images/phone_android.svg', () {
+            Get.toNamed('/personal_info');
+          }, 'OTP Verification successful', "ok");
+        } else {
+          Get.back();
+        }
+
+        return result;
+      },
+      (error) {
+        /// Handle right
+        /// For example: navigate to home page
+        return OtpVerification(
+            statusRes: false,
+            message: error.message ?? "",
+            code: error.code ?? "",
+            data: null);
+      },
+    );
   }
 }

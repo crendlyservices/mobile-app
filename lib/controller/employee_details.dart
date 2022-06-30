@@ -1,16 +1,18 @@
 import 'package:crendly/controller/update_user_profile.dart';
+import 'package:crendly/service/generic_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../core/repository/onboarding_repo.dart';
-import '../core/repository/onboarding_repo_impl.dart';
+import '../models/employment_details.dart';
+import '../models/failed_api_response.dart';
+import '../service/http_service_impl.dart';
 
 class EmployeeDetailsController extends GetxController {
-  late OnboardingRepo _onboardingRepo;
+  late ApiService _apiService;
   late UpdateUserProfileController _updateUserProfileController;
 
   EmployeeDetailsController() {
-    _onboardingRepo = Get.find<OnboardingRepoImpl>();
+    _apiService = ApiService();
     _updateUserProfileController = Get.find<UpdateUserProfileController>();
   }
 
@@ -55,20 +57,66 @@ class EmployeeDetailsController extends GetxController {
   employeeDetails() async {
     showLoading();
     String userId = _updateUserProfileController.userId;
-    final result = await _onboardingRepo.updateEmploymentDetails(
-        userId,
-        employer,
-        occupation,
-        salaryOrIncomeRange,
-        politicallyExposed,
-        position,
-        employmentType,
-        employmentStatus);
+    Map body = {
+      "userId": userId,
+      "employer": employer,
+      "salaryOrIncomeRange": salaryOrIncomeRange,
+      "politicallyExposed": politicallyExposed,
+      "position": position,
+      "employmentType": employmentType,
+      "employmentStatus": employmentStatus
+    };
+    final responseResult =
+        await _apiService.apiRequest<EmploymentDetails, FailedApiResponse>(
+            IDENTITY_BASE_URL,
+            "/api/Identity/update-employment_details",
+            "post",
+            (json) => EmploymentDetails.fromJson(json),
+            (json) => FailedApiResponse.fromJson(json),
+            body: body);
 
-    if (result.status) {
-      hideLoading();
-      Get.toNamed('/means_of_identification');
-    }
-    print('Employment details: $result');
+    responseResult.fold(
+      (success) {
+        /// Handle left
+        /// For example: show dialog or alert
+        var result = success;
+
+        if (result.status) {
+          hideLoading();
+          Get.toNamed('/means_of_identification');
+        } else {
+          hideLoading();
+          Get.back();
+        }
+
+        return result;
+      },
+      (error) {
+        /// Handle right
+        /// For example: navigate to home page
+        return EmploymentDetails(
+            status: false,
+            message: error.message ?? "",
+            code: error.code ?? "",
+            data: null);
+      },
+    );
+    //   String userId = _updateUserProfileController.userId;
+    //   final result = await _onboardingRepo.updateEmploymentDetails(
+    //       userId,
+    //       employer,
+    //       occupation,
+    //       salaryOrIncomeRange,
+    //       politicallyExposed,
+    //       position,
+    //       employmentType,
+    //       employmentStatus);
+    //
+    //   if (result.status) {
+    //     hideLoading();
+    //     Get.toNamed('/means_of_identification');
+    //   }
+    //   print('Employment details: $result');
+    // }
   }
 }

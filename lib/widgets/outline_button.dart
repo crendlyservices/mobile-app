@@ -1,5 +1,6 @@
-import 'package:crendly/style/style.dart';
 import 'package:flutter/material.dart';
+
+import '../resources/color_manager.dart';
 
 class CustomOutlineButton extends StatefulWidget {
   final String text;
@@ -47,7 +48,8 @@ class _CustomOutlineButtonState extends State<CustomOutlineButton> {
               Radius.circular(10.0),
             ),
           )),
-          backgroundColor: MaterialStateProperty.all<Color>(backgroundColor)),
+          backgroundColor:
+              MaterialStateProperty.all<Color>(ColorManager.backgroundColor)),
     );
   }
 }
